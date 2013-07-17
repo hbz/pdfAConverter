@@ -1,0 +1,24 @@
+<jnlp spec="1.0"
+	codebase="http://nyx.hbz-nrw.de:8080/resources"
+	href="PDFA-client.jnlp">
+
+<information>
+	<title>Web Service Client für das PDFA Tool des hbz</title>
+	<vendor>Hochschulbibliothekszentrum NRW, Köln</vendor>
+	<homepage href="http://nyx.hbz-nrw.de:8080/resource"/>
+	<description>Der PDFA Tool Client als Java Web Start Anwendung</description>
+	<offline-allowed/>
+</information>
+
+<resources>
+	<j2se version="1.6"/>
+	<jar href="PdfAConverter-Client.jar"/>
+</resources>
+
+<security>
+      <all-permissions/>
+  </security>
+
+<application-desc main-class="de.hbz_nrw.www.pdfaconverter.gui.guiStart"/>
+</jnlp>
+ 

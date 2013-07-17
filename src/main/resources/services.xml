@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:35 LKT) -->
+<serviceGroup>
+    <service name="PdfAConverter">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="de.hbz_nrw.www.pdfaconverter.services.PdfAConverterMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">de.hbz_nrw.www.pdfaconverter.ServerImpl.ServicesImpl</parameter>
+        <parameter name="useOriginalwsdl">false</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="convertFromUrl" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.-bz.nrw.de/PdfAConverter/services/">
+            <actionMapping>http://www.hbz-nrw.de/PdfAConverter/services/convertFromUrl</actionMapping>
+            <outputActionMapping>http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromUrlResponse</outputActionMapping>
+            <faultActionMapping faultName="fault">http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromUrl/Fault/fault</faultActionMapping>
+            <faultActionMapping faultName="convertFromUrl_faultMsg">urn:convertFromUrlconvertFromUrl_faultMsg</faultActionMapping>
+        </operation>
+        <operation name="convertFromAttachment" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.hbz-nrw.de/PdfAConverter/services/">
+            <actionMapping>http://www.hbz-nrw.de/PdfAConverter/services/convertFromAttachment</actionMapping>
+            <outputActionMapping>http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromAttachmentResponse</outputActionMapping>
+            <faultActionMapping faultName="fault">http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromAttachment/Fault/fault</faultActionMapping>
+            <faultActionMapping faultName="convertFromAttachment_faultMsg">urn:convertFromAttachmentconvertFromAttachment_faultMsg</faultActionMapping>
+        </operation>
+        <operation name="convertFromStream" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.hbz-nrw.de/PdfAConverter/services/">
+            <actionMapping>http://www.hbz-nrw.de/PdfAConverter/services/convertFromStream</actionMapping>
+            <outputActionMapping>http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromStreamResponse</outputActionMapping>
+            <faultActionMapping faultName="fault">http://www.hbz-nrw.de/PdfAConverter/services/PdfAConverter/convertFromStream/Fault/fault</faultActionMapping>
+            <faultActionMapping faultName="convertFromStream_faultMsg">urn:convertFromStreamconvertFromStream_faultMsg</faultActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

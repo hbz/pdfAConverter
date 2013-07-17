@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PdfAConverter" targetNamespace="http://www.hbz-nrw.de/PdfAConverter/services/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.hbz-nrw.de/PdfAConverter/services/" xmlns:ns0="http://www.hbz-nrw.de/PdfAConverter/types/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.hbz-nrw.de/PdfAConverter/types/">
+      <xsd:element name="convertFromUrl">
+                <xsd:annotation>
+                	<xsd:documentation/>
+                </xsd:annotation>
+                <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element maxOccurs="1" minOccurs="1" name="converterParameters" type="ns0:parameterType"/>
+          	<xsd:element maxOccurs="1" minOccurs="1" name="url" type="xsd:string">
+          	</xsd:element>
+          	<xsd:element maxOccurs="1" minOccurs="0" name="authorization" type="ns0:authorizationType">
+          	</xsd:element>
+          </xsd:sequence>
+                </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="convertFromUrlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+          	<xsd:element name="responseDocumentUrl" type="xsd:anyURI" maxOccurs="1" minOccurs="0"/>
+          	<xsd:element name="reportUrl" type="xsd:anyURI" maxOccurs="1" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="convertFromStream">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="1" minOccurs="1" name="converterParameters" type="ns0:parameterType">
+      			</xsd:element>
+      			<xsd:element maxOccurs="1" minOccurs="1" name="byteStream" type="xsd:string">
+      			</xsd:element>
+      			<xsd:element maxOccurs="1" minOccurs="0" name="authorization" type="ns0:authorizationType">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+      <xsd:element name="convertFromStreamResponse">
+      	<xsd:complexType>
+      		<xsd:sequence>
+      			<xsd:element maxOccurs="1" minOccurs="0" name="responseDocumentStream" type="xsd:string">
+      			</xsd:element>
+      			<xsd:element maxOccurs="unbounded" minOccurs="0" name="reportStream" type="xsd:string">
+      			</xsd:element>
+      		</xsd:sequence>
+      	</xsd:complexType>
+      </xsd:element>
+    
+      <xsd:complexType name="parameterType">
+                <xsd:annotation>
+                	<xsd:documentation/>
+                </xsd:annotation>
+                <xsd:sequence>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="quickProcessing" type="xsd:boolean">
+                	</xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="analyseOnly" type="xsd:boolean">
+                	</xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="returnOnlyValidPDFA" type="xsd:boolean">
+                	</xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="compliancyLevel" type="ns0:compliancyLevelType">
+                	</xsd:element>
+                	<xsd:element maxOccurs="unbounded" minOccurs="0" name="reportFormat" type="ns0:reportFormatType">
+                	</xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="reportLang" type="ns0:reportLangType">
+                		<xsd:annotation>
+                			<xsd:documentation>
+                				Defines the language of report output.
+                				Assigns one Value for all Reports
+                			</xsd:documentation>
+                		</xsd:annotation>
+                	</xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0" name="reportTrigger" type="ns0:reportTriggerType">
+                	</xsd:element>
+                	<xsd:element maxOccurs="unbounded" minOccurs="0" name="htmlReportOptions" type="ns0:htmlOptionType">
+                	</xsd:element>
+                </xsd:sequence>
+      </xsd:complexType>
+    
+
+      <xsd:element name="convertFromAttachment">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element maxOccurs="1" minOccurs="1" name="converterParameters" type="ns0:parameterType">
+            			</xsd:element>
+            			<xsd:element maxOccurs="1" minOccurs="1" name="document" type="ns0:documentType">
+            			</xsd:element>
+            			<xsd:element maxOccurs="1" minOccurs="0" name="authorization" type="ns0:authorizationType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="convertFromAttachmentResponse">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element maxOccurs="1" minOccurs="1" name="responseDocument" type="ns0:documentType">
+            			</xsd:element>
+            			<xsd:element maxOccurs="1" minOccurs="1" name="report" type="ns0:documentType">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+    
+            <xsd:complexType name="documentType">
+            	<xsd:sequence>
+            		<xsd:element maxOccurs="1" minOccurs="1" name="name" type="xsd:string"/>
+            		<xsd:element maxOccurs="1" minOccurs="1" name="data" type="xsd:base64Binary"/>
+            	</xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="authorizationType">
+                <xsd:annotation>
+                	<xsd:documentation>Authorization logic is not implemented yet (09-2009, PdfAConverterWS Version 0.5). Therefore no values are required.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:choice>
+            		<xsd:element maxOccurs="1" minOccurs="1" name="ID" type="xsd:string"/>
+            		<xsd:element maxOccurs="1" minOccurs="1" name="TAN" type="xsd:string"/>
+            	</xsd:choice>
+            </xsd:complexType>
+            <xsd:element name="convertFromUrl_fault">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="convertFromUrl_fault" type="xsd:string"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="convertFromStream_fault">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="convertFromStream_fault" type="xsd:string"/>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+            <xsd:element name="convertFromAttachment_fault">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="convertFromAttachment_fault" type="xsd:string">
+            			</xsd:element>
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+    
+            <xsd:simpleType name="reportTriggerType">
+                <xsd:annotation>
+                	<xsd:documentation>Defines the condition that triggers report creation. In opposite to the PDF A Tool where this Parameter can be set for each report format, this Parameter is set for all reports, for a simplification of Web Service use.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="IFNOPDFA"/>
+            		<xsd:enumeration value="ALWAYS"/>
+            		<xsd:enumeration value="NEVER"/>
+            		<xsd:enumeration value="IFPDFA"/>
+            	</xsd:restriction>
+            </xsd:simpleType>
+    
+            <xsd:simpleType name="reportFormatType">
+                <xsd:annotation>
+                	<xsd:documentation>
+                		Parameter defines one or more formats in which
+                		report output should be written: could be xml, html or mht
+                	</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="HTML"/>
+            		<xsd:enumeration value="XML"/>
+            		<xsd:enumeration value="MHT"/>
+            	</xsd:restriction>
+            </xsd:simpleType>
+    
+            <xsd:simpleType name="reportLangType">
+            	<xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="EN"/>
+            		<xsd:enumeration value="DE"/>
+            		<xsd:enumeration value="IT"/>
+            		<xsd:enumeration value="ES"/>
+            		<xsd:enumeration value="FR"/>
+            		<xsd:enumeration value="JA"/>
+            	</xsd:restriction>
+            </xsd:simpleType>
+    
+            <xsd:simpleType name="htmlOptionType">
+                <xsd:annotation>
+                	<xsd:documentation>Defines the output of a html report</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="NOICONS"/>
+            		<xsd:enumeration value="NODETAILS"/>
+            		<xsd:enumeration value="NOCORRECTION"/>
+            		<xsd:enumeration value="OPENRESULT"/>
+            	</xsd:restriction>
+            </xsd:simpleType>
+    
+            <xsd:simpleType name="compliancyLevelType">
+                <xsd:annotation>
+                	<xsd:documentation>Defines the PDF A compliancy level: could be either 1a or 1b</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="1a"/>
+            		<xsd:enumeration value="1b"/>
+            	</xsd:restriction>
+            </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="convertFromStream_faultMsg">
+    <wsdl:part name="parameters" element="ns0:convertFromStream_fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromUrl_faultMsg">
+    <wsdl:part name="parameters" element="ns0:convertFromUrl_fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromUrlResponse">
+    <wsdl:part name="parameters" element="ns0:convertFromUrlResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromUrlRequest">
+    <wsdl:part name="parameters" element="ns0:convertFromUrl">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromAttachment_faultMsg">
+    <wsdl:part name="parameters" element="ns0:convertFromAttachment_fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromAttachmentResponse">
+    <wsdl:part name="parameters" element="ns0:convertFromAttachmentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromAttachmentRequest">
+    <wsdl:part name="parameters" element="ns0:convertFromAttachment">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromStreamRequest">
+    <wsdl:part name="parameters" element="ns0:convertFromStream">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="convertFromStreamResponse">
+    <wsdl:part name="parameters" element="ns0:convertFromStreamResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PdfAConverter">
+    <wsdl:operation name="convertFromUrl">
+<wsdl:documentation>Operation converts a PDF supplied by an URL to PDF/A. Operation returns 2 URLs: one for the PDF/A and one for the Report. </wsdl:documentation>
+      <wsdl:input message="tns:convertFromUrlRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:convertFromUrlResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:convertFromUrl_faultMsg">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="convertFromStream">
+<wsdl:documentation>Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.</wsdl:documentation>
+      <wsdl:input message="tns:convertFromStreamRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:convertFromStreamResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:convertFromStream_faultMsg">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="convertFromAttachment">
+<wsdl:documentation>Operation uses SwA (Soap with Attachment) for supplying the PDF to the PDF/A Converter. Operation returns an Attachment with the PDF/A and an Attachment with the Record inside</wsdl:documentation>
+      <wsdl:input message="tns:convertFromAttachmentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:convertFromAttachmentResponse">
+    </wsdl:output>
+      <wsdl:fault name="fault" message="tns:convertFromAttachment_faultMsg">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PdfAConverterSOAP" type="tns:PdfAConverter">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="convertFromUrl">
+      <soap:operation soapAction="http://www.hbz-nrw.de/PdfAConverter/services/convertFromUrl"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="convertFromStream">
+      <soap:operation soapAction="http://www.hbz-nrw.de/PdfAConverter/services/convertFromStream"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="convertFromAttachment">
+      <soap:operation soapAction="http://www.hbz-nrw.de/PdfAConverter/services/convertFromAttachment"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PdfAConverter">
+    <wsdl:port name="PdfAConverterSOAP" binding="tns:PdfAConverterSOAP">
+      <soap:address location="http://www.hbz-nrw.de/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

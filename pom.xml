@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dipp</groupId>
+  <artifactId>pdfaconverter</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>PDFA Converter Web Services</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <organization>
+  	<name>Hochschulbibliothekszentrum des Landes Nordrhein-Westfalen</name>
+  	<url>http://www.hbz-nrw.de</url>
+  </organization>
+  <build>
+  	<plugins>
+
+		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-assembly-plugin</artifactId>
+  			<version>2.2-beta-5</version>
+  			<configuration>
+  				<descriptorRefs>
+  					<descriptorRef>jar-with-dependencies</descriptorRef>
+  				</descriptorRefs>
+  				<archive>
+  					<manifest>
+  						<mainClass>de.hbz_nrw.www.pdfconverter.Servermpl.ServiceImpl</mainClass>
+  					</manifest>
+  				</archive>
+  			</configuration>
+  		</plugin>
+
+		<plugin>
+  			<groupId>org.apache.axis2</groupId>
+  			<artifactId>axis2-aar-maven-plugin</artifactId>
+  			<version>1.4.1</version>
+			<configuration>
+			    <fileSets>
+			        <fileSet>
+			            <directory>src/main/resources/requestTemplates</directory>
+			            <outputDirectory>requestTemplates</outputDirectory>
+			            <includes>
+			                <include>**/*.txt</include>
+			            </includes>
+			        </fileSet>
+			    </fileSets>
+   			</configuration>
+			<executions>
+  				<execution>
+  					<id>aar</id>
+  				</execution>
+  			</executions>
+  		</plugin>
+
+		<!-- <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <id>sign</id>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <keystore>${project.basedir}/src/conf/pdfaconv.jks</keystore>
+          <alias>quast</alias>
+          <storepass>!pubsys4cert</storepass>
+          <keypass>!pubsys4cert</keypass>
+        </configuration>
+      </plugin>  -->
+  	</plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.axis2</groupId>
+    	<artifactId>axis2-adb</artifactId>
+    	<version>1.4.1</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.xmlbeans</groupId>
+    	<artifactId>xmlbeans</artifactId>
+    	<version>2.4.0</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+    <dependency>
+    	<groupId>log4j</groupId>
+    	<artifactId>log4j</artifactId>
+    	<version>1.2.8</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
