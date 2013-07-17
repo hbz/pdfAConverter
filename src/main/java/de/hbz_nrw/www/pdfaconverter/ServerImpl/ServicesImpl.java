@@ -36,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 import java.util.Iterator;
 
@@ -44,6 +45,7 @@ import org.apache.axis2.databinding.types.URI;
 import org.apache.axis2.databinding.types.URI.MalformedURIException;
 
 import javax.activation.DataHandler;
+import javax.servlet.ServletException;
 
 import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg;
@@ -248,7 +250,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		log.info(dateFormat.format(cal.getTime()));
 		return dateFormat.format(cal.getTime());
 	}
-	
+		
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: Method creates the command line string with all parameters given. 
@@ -261,9 +263,12 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		// call to execute PDFA-Tool
 		
 		// Complete execute String 
-		String executeString = new String("/export/home/pdfapilot/callas_pdfaPilot_CLI_2/pdfaPilot  " +
-				"--noprogress --nohits --substitute --removeincompatiblexmp " 
-				+ "--linkpath=http://nyx.hbz-nrw.de:8080/temp/reporttemplate " 
+		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/bin/pdfaPilot"); 
+		String defaultParams = new String("--noprogress --nohits --substitute  " 
+				// + "--linkpath=http://nyx.hbz-nrw.de:8080/temp/reporttemplate " // new param not clear
+				);
+		String executeString = new String(programPath + " " 
+				+ defaultParams 
 				+ paramString 
 				+ " --resultpath=" + Configuration.getTempfiledir() + "result/" + fileName 
 				+ " " + Configuration.getTempfiledir() + fileName); 
