@@ -1,0 +1,17 @@
+h1. About
+
+pdfaconverter is a project providing Web Services for the pdfaPilot Instance deployed at hbz. The Callas pfdaPilot therefore can be accessed via SOAP-Webservices. Additional an UI is provided to acces pdfaPilot via Web services 
+
+h1. Releases
+
+1.0 for older pdfaPilot Version
+
+h1. Status
+
+-
+
+h1. License
+
+Apache License  Version 2.0, January 2004  http://www.apache.org/licenses/
+Copyright 2012 Hochschulbibliothekszentrum des Lndes Nordrhein-Westfalen (http://www.hbz-nrw.de)
+!!!Callas Software pdfaPilot is not included in this licence!!!
