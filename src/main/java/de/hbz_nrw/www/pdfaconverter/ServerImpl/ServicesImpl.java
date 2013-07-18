@@ -263,7 +263,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		// call to execute PDFA-Tool
 		
 		// Complete execute String 
-		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/bin/pdfaPilot"); 
+		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
 		String defaultParams = new String("--noprogress --nohits --substitute  " 
 				// + "--linkpath=http://nyx.hbz-nrw.de:8080/temp/reporttemplate " // new param not clear
 				);
