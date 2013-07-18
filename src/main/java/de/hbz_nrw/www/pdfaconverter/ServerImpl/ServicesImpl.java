@@ -270,7 +270,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		String executeString = new String(programPath + " " 
 				+ defaultParams 
 				+ paramString 
-				+ " --resultpath=" + Configuration.getTempfiledir() + "result/" + fileName 
+				+ " --outputfile=" + Configuration.getTempfiledir() + "result/" + fileName 
 				+ " " + Configuration.getTempfiledir() + fileName); 
 
 		log.info("The execute String: " + executeString);

@@ -51,6 +51,8 @@ public class clientGui{
 
 	//get Logger Instance
 	Logger log = Logger.getLogger(clientGui.class);
+	
+	private File dir = null;
 
 	JFrame alertFrame = null; 
 	
@@ -476,10 +478,14 @@ public class clientGui{
 	    public void actionPerformed(ActionEvent e) {
 	        iStream = null;
 	    	JFileChooser chooser = new JFileChooser();
-	        chooser.setFileFilter(new PdfFilter());
+	        chooser.setCurrentDirectory(dir);
+	    	chooser.setFileFilter(new PdfFilter());
+	        
 	        int returnVal = chooser.showOpenDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File origPdfFile = chooser.getSelectedFile();
+	            dir = chooser.getCurrentDirectory();
+	            
 	            iStream = FileUtil.loadFileIntoStream(origPdfFile);
 	            fileName = origPdfFile.getName();
 	        }
