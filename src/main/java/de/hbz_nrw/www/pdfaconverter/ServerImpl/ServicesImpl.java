@@ -268,7 +268,6 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 				+ " --resultpath=" + Configuration.getTempfiledir() + "result/" + fileName 
 				+ " " + Configuration.getTempfiledir() + fileName); 
 
-		log.info("Holla");
 		log.info("The execute String: " + executeString);
 		try{
 			//Process proc = java.lang.Runtime.getRuntime().exec("echo " + executeString);
