@@ -61,6 +61,7 @@ public class PdfAPilotParameters {
 		defaultParam.setReportFormat(new ReportFormatType[]{ReportFormatType.HTML});
 
 		defaultParam.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.OPENRESULT});
+		
 
 	}
 	

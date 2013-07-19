@@ -53,6 +53,7 @@ public class clientGui{
 	Logger log = Logger.getLogger(clientGui.class);
 	
 	private File dir = null;
+	private File saveParamDir = null;
 
 	JFrame alertFrame = null; 
 	
@@ -468,6 +469,18 @@ public class clientGui{
 	}
 
 	/**
+	 * <p><em>Title: set default Params for Converting</em></p>
+	 * <p>Description: Method sets Default Values for Converter Params 
+	 * as Properties of Swing Components</p>
+	 *  
+	 */
+	private void setDefaultParam(){
+		//Report properties
+		
+		
+	}
+	
+	/**
 	 * Class LoadListener
 	 * 
 	 * <p><em>Title: </em></p>
@@ -530,7 +543,7 @@ public class clientGui{
 	}
 	
 	/**
-	 * Class SaveListener
+	 * Class SaveParamListener
 	 * 
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -571,7 +584,7 @@ public class clientGui{
 
 	    	log.info("Speichere Parameter");
 	        JFileChooser chooser = new JFileChooser();
-	        chooser.setCurrentDirectory(dir);
+	        chooser.setCurrentDirectory(saveParamDir);
 	        chooser.setSelectedFile(new File( "param.cfg"));
 	        int returnVal = chooser.showSaveDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -595,7 +608,7 @@ public class clientGui{
 					e1.printStackTrace();
 				}
 	            
-	            dir = chooser.getCurrentDirectory();
+	            saveParamDir = chooser.getCurrentDirectory();
 	        }
 	        showLoadPdf.setEnabled(true);
         	paramBox = createDefaultBox();
@@ -677,7 +690,7 @@ public class clientGui{
 	 * <p><em>Title: Process Parameters to Web Service Interface</em></p>
 	 * <p>Description: Sub Class for listening to the Parameter 
 	 * input button and processes the parameter input form. 
-	 * The found parmeter values from form will be submitted in 
+	 * The found parameter values from form will be submitted in 
 	 * the ParameterType Objects from WebService</p>
 	 * 
 	 * @author aquast, email
@@ -923,7 +936,7 @@ public class clientGui{
 		@Override
 		protected Object doInBackground() throws Exception {
 			runProcessing();
-			//Thread.sleep(3000);
+			Thread.sleep(3000);
 			return null;
 		}
 		
@@ -961,7 +974,7 @@ public class clientGui{
 	
 	public void runProcessing() {
 
-		processorCall(param);
+		//processorCall(param);
 		//get back the Reports
 		if(response != null && response.getReportStream() != null){
     		reportString = response.getReportStream();
