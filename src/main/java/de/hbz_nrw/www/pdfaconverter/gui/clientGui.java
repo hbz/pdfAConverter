@@ -116,8 +116,9 @@ public class clientGui{
     	
 	ConvertFromStreamResponse response = null;
 	
-	// create ParameterType
+	// load default parameters for pdfaPilot 
 	Properties paramProp = PdfAPilotParameters.getDefaultProperties();
+	// create ParameterType with default Parameters 
 	ParameterType param = PdfAPilotParameters.createParamType(paramProp);
 
     //make Parameter Boxes global
@@ -228,7 +229,7 @@ public class clientGui{
 		playerPane.add(playerBox);
 	    mainPane.add(BorderLayout.EAST, playerPane);
 
-	    testCenter = new JLabel("hbz NRW, Cologne, 2010");
+	    testCenter = new JLabel("hbz NRW, Cologne, 2013 using Callas pdfaPilot CLI Version 4");
 	    FlowLayout layoutFlow = new FlowLayout(FlowLayout.LEFT);
 	    centerPane = new JPanel(layoutFlow);
 	    centerPane.add(testCenter);
@@ -471,6 +472,39 @@ public class clientGui{
 		//guiFrame.pack();
 	}
 
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: </p>
+	 *  
+	 */
+	private void writeGuiParamsToProp(){
+
+		if(lang != null){
+			for(int i=0; i< lang.length; i++){
+				if(lang[i].isSelected()){
+					paramProp.setProperty("reportLang", lang[i].getText());
+				}
+			}
+		}
+
+		if(xmlReport.isSelected()){
+			paramProp.setProperty("xmlReport", "true");
+		}
+		if(htmlReport.isSelected()){
+			paramProp.setProperty("htmlReport", "true");
+		}
+		if(mhtReport.isSelected()){
+			paramProp.setProperty("mhtReport", "true");
+		}
+
+		if(htmlNoDetails.isSelected()){
+			paramProp.setProperty("htmlNoDetails", "true");
+		}
+		if(htmlNoIcons.isSelected()){
+			paramProp.setProperty("htmlNoIcon", "true");
+		}
+		
+	}
 	
 	/**
 	 * Class LoadListener
@@ -546,34 +580,8 @@ public class clientGui{
 	 */
 	class SaveParamListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-            //paramProp = new Properties();
-			if(lang != null){
-				for(int i=0; i< lang.length; i++){
-					if(lang[i].isSelected()){
-							paramProp.setProperty("reportLang", lang[i].getText());
-					}
-				}
-			}
-
-			if(xmlReport.isSelected()){
-				paramProp.setProperty("xmlReport", "true");
-			}
-			if(htmlReport.isSelected()){
-				paramProp.setProperty("htmlReport", "true");
-			}
-			if(mhtReport.isSelected()){
-				paramProp.setProperty("mhtReport",  "true");
-			}
-
-			if(htmlNoDetails.isSelected()){
-				paramProp.setProperty("htmlNoDetails", "true");
-			}
-			if(htmlNoIcons.isSelected()){
-				paramProp.setProperty("htmlNoIcons", "true");
-			}
-
-			//paramProp.setProperty("Hallo", "Du Da");
-
+			
+	    	writeGuiParamsToProp();
 	    	log.info("Speichere Parameter");
 	        JFileChooser chooser = new JFileChooser();
 	        chooser.setCurrentDirectory(saveParamDir);
@@ -694,59 +702,14 @@ public class clientGui{
 			
 			response = null;
 			reportString = null;
+	    	//load Gui setted Parameters into Properties if needed
+			writeGuiParamsToProp();
 			
-			// create ParameterType
-			//ParameterType param = new ParameterType();			
-			//param = PdfAPilotParameters.getDefaultParam();
-			
-			if(lang != null){
-				for(int i=0; i< lang.length; i++){
-					if(lang[i].isSelected()){
-						if(lang[i].getText().equals(ReportLangType.DE.getValue())){
-							param.setReportLang(ReportLangType.DE);
-						}
-						else if(lang[i].getText().equals(ReportLangType.EN.getValue())){
-							param.setReportLang(ReportLangType.EN);
-						}
-						else if(lang[i].getText().equals(ReportLangType.FR.getValue())){
-							param.setReportLang(ReportLangType.FR);
-						}
-						else if(lang[i].getText().equals(ReportLangType.ES.getValue())){
-							param.setReportLang(ReportLangType.ES);
-						}
-						else if(lang[i].getText().equals(ReportLangType.IT.getValue())){
-							param.setReportLang(ReportLangType.IT);
-						}
-						else if(lang[i].getText().equals(ReportLangType.JA.getValue())){
-							param.setReportLang(ReportLangType.JA);
-						}
-					}
-				}
-			}
 
-			if(xmlReport.isSelected()){
-				param.addReportFormat(ReportFormatType.XML);
-			}
-			if(htmlReport.isSelected()){
-				param.addReportFormat(ReportFormatType.HTML);
-			}
-			if(mhtReport.isSelected()){
-				param.addReportFormat(ReportFormatType.MHT);
-			}
-
-			if(htmlNoDetails.isSelected()){
-				param.addHtmlReportOptions(HtmlOptionType.NODETAILS);
-			}
-			if(htmlNoIcons.isSelected()){
-				param.addHtmlReportOptions(HtmlOptionType.NOICONS);
-			}
-			/*if(htmlNoCorrection.isSelected()){
-				param.addHtmlReportOptions(HtmlOptionType.NOCORRECTION);
-			}
-			if(htmlOpenResult.isSelected()){
-				param.addHtmlReportOptions(HtmlOptionType.OPENRESULT);
-			}*/				
+	    	//create ParameterType for Web Service Request
+			param = PdfAPilotParameters.createParamType(paramProp);
 			
+			//prepare Request to Web Servvice
 			showLoadPdf.setEnabled(false);
         	showProcessPdf.setEnabled(false);
 			showSavePdfA.setEnabled(false);
@@ -776,37 +739,6 @@ public class clientGui{
 		    alertFrame.setLocationRelativeTo(guiFrame);
 		    alertFrame.setVisible(true);
 		    new Worker().execute();
-		    //alertFrame.repaint();
-		    
-		    //JOptionPane.showOptionDialog(guiFrame, "Konvertierung wird durchgeführt.", "Bitte warten", JOptionPane., 0, null, null, 0);
-        	
-        	//convert = new Thread();
-        	//convert.start();
-        	
-        	//processorThread();
-    		/*
-			while(!threadFinished){
-				try {
-					Thread.sleep(20000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}*/
-			
-			//alertFrame.setEnabled(false);
-			//alertFrame.dispose();
-			//alertFrame.setVisible(false);
-			//guiFrame.remove(alertFrame);
-
-			/*
-		    if(oString == null && reportString != null){
-				JOptionPane.showMessageDialog(guiFrame, "ACHTUNG! \nDie PDF-Datei konnte nicht konvertiert werden" 
-						+ "\nBitte schauen Sie in den Report um die Ursache zu finden");
-				showSavePdfA.setEnabled(false);
-			}else if(oString != null && reportString != null){
-				showSavePdfA.setEnabled(true);
-			}*/
 
         	guiFrame.repaint();
 		}

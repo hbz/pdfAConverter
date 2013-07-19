@@ -139,16 +139,15 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		}
 
-		log.info("Report erstellt? : " +  new String(Configuration.getTempfiledir() + "result/" + fileName + ".HTML"));
 		List<byte[]> reportStreams = new Vector<byte[]>();
 		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".HTML").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".HTML")));
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".html")));
 		}
 		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".XML").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".XML")));
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".xml")));
 		}
 		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".MHT").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".MHT")));
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".mht")));
 		}
 		
 		Iterator<byte[]> it = reportStreams.iterator();
@@ -240,7 +239,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 					paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
 				}
 			}
-			paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent + "." + paramType.getReportFormat()[i]);
+			paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent + "." + paramType.getReportFormat()[i].toString().toLowerCase());
 		}
 		
 
