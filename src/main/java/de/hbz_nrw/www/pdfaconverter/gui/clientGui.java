@@ -670,7 +670,7 @@ public class clientGui{
 			prozessTextPane.setEditable(false);
 			prozessTextPane.setEditorKit(new javax.swing.text.html.HTMLEditorKit());
 			JPanel prozessPanel = new JPanel();
-			Icon processIcon = createImageIconFromUrl("http://nyx.hbz-nrw.de:8080/resources/laufrad.gif");
+			Icon processIcon = createImageIconFromUrl("file:///home/aquast/git/pdfa/wsclient/src/main/resources/images/laufrad.gif");
 			JLabel label = new JLabel("Bitte haben Sie etwas Geduld.", processIcon, JLabel.CENTER);
 			Box prozessBox = new Box(BoxLayout.Y_AXIS);
 			prozessTextPane.setText(prozess);
@@ -767,6 +767,7 @@ public class clientGui{
 	    }
 	}
 	
+
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: Returns an ImageIcon, or null if the path is invalid</p>
@@ -793,6 +794,9 @@ public class clientGui{
 	    }
 	}
 
+	/**
+	 * @param param
+	 */
 	private void processorCall(ParameterType param){
     	ClientImpl client = new ClientImpl();
 
@@ -811,9 +815,10 @@ public class clientGui{
 		convStream.setByteStream(iString);
 	
 		try{
+			log.info("sending Request");
 			response = client.convertFromStream(convStream); 
 			oString = new String();
-			oString = response.getResponseDocumentStream();
+			oString = response.getResponseDocumentStream();	
 		}catch(RemoteException exc){
     		paramBox = createDefaultBox();
 	        showLoadPdf.setEnabled(true);
@@ -829,7 +834,9 @@ public class clientGui{
 			JOptionPane.showMessageDialog(guiFrame, "Server antwortet mit: " + cexc);
 			log.error(cexc);
 			cexc.printStackTrace();
-		}		
+		}	
+		//log.info("Stream in Response = " +  oString);
+		log.info("Report Response-Stream: " + response.getResponseDocumentStream());
 	}
 	
 	class Worker extends SwingWorker<Object, String>{
@@ -843,6 +850,7 @@ public class clientGui{
 		
 		protected void done(){
 			alertFrame.dispose();
+			log.info("Alertframe dispose");
 			if(oString == null && reportString != null){
 				JOptionPane.showMessageDialog(guiFrame, "ACHTUNG! \nDie PDF-Datei konnte nicht konvertiert werden" 
 						+ "\nBitte schauen Sie in den Report um die Ursache zu finden");
@@ -876,11 +884,15 @@ public class clientGui{
 	public void runProcessing() {
 
 		processorCall(param);
+		log.info("Hier gelandet!");
 		//get back the Reports
 		if(response != null && response.getReportStream() != null){
     		reportString = response.getReportStream();
     		showLoadPdf.setEnabled(true);
     		log.info(response.getReportStream());
+		}
+		else{
+			log.warn("Leeres Ergebnis!");
 		}
 		
 		paramBox = createResultBox();

@@ -45,7 +45,7 @@ public class Configuration {
 			System.setProperty("user.dir", "/var/tomcat6/webapps");
 		}
 		else{
-			System.setProperty("user.dir", "/opt/axis2-1.4.1/webapp/axis2-web");
+			System.setProperty("user.dir", "/srv/tomcat6/webapps/axis2");
 		}
 		
 		tempDir = System.getProperty("user.dir") + "/temp/";
