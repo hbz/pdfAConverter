@@ -51,6 +51,9 @@ public class PdfAPilotParameters {
 	private static Properties paramProp = new Properties();
 
 	
+	/**
+	 * @deprecated
+	 */
 	public static void createDefaultParam(){
 		
 		// create ParameterType with default values
@@ -206,6 +209,7 @@ public class PdfAPilotParameters {
 
 	/**
 	 * @return the defaultParam
+	 * @deprecated
 	 */
 	public static ParameterType getDefaultParam() {
 		createDefaultParam();

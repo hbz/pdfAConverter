@@ -20,7 +20,7 @@ public class Configuration {
 	private static Logger log = null;
 
 	private static final String host = "nyx.hbz-nrw.de";
-	private static final String tempDirUrl = "http://" + host + ":8080/temp/";
+	private static final String tempDirUrl = "http://" + host + ":8080/axis2/temp/";
 	
 	// Directory for Configuration files
 	private static final String configFileDir(){

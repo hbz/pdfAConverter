@@ -110,7 +110,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			throws ConvertFromStream_faultMsg {
 		
 		ConvertFromStreamResponse response= new ConvertFromStreamResponse();
-
+		
+		log.info("nun hier");
 		//create a unique temporary file prefix 
 		String fileIdent = getTimePrefix() + ".pdf";
 
@@ -131,21 +132,23 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 			try{
 				response.setResponseDocumentStream(new String(stream, "UTF-8"));
+				log.info("dokumentstream geschrieben");
 			}catch(Exception e){
 			 log.error("Problems with generating files from streams:" + e);	
 			}
 		
 		}
 
+		log.info("Report erstellt? : " +  new String(Configuration.getTempfiledir() + "result/" + fileName + ".HTML"));
 		List<byte[]> reportStreams = new Vector<byte[]>();
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".html").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".html")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".HTML").isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".HTML")));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".xml").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".xml")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".XML").isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".XML")));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".mht").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".mht")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".MHT").isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".MHT")));
 		}
 		
 		Iterator<byte[]> it = reportStreams.iterator();
@@ -265,7 +268,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		// Complete execute String 
 		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
 		String defaultParams = new String("--noprogress --nohits --substitute  " 
-				// + "--linkpath=http://nyx.hbz-nrw.de:8080/temp/reporttemplate " // new param not clear
+				 + "--linkpath=http://nyx.hbz-nrw.de:8080/axis2/temp/reporttemplate "
 				);
 		String executeString = new String(programPath + " " 
 				+ defaultParams 
@@ -284,7 +287,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
             String line = null;
             StringBuffer lineBuffer = new StringBuffer();
             while ((line = br.readLine()) != null){
-                lineBuffer.append(line);
+                lineBuffer.append(line + "\n");
             }
             log.info("STOUT: " + lineBuffer.toString());
             log.info("Exit State: " + exitState);

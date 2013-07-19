@@ -429,6 +429,8 @@ public class clientGui{
 	public Box createResultBox(){
 		Box resultBox = new Box(BoxLayout.Y_AXIS);
 		String reportStream = null;
+		log.info("Starting with resultBox");
+		//reportString = new String[]{"Test this"};
 		if(reportString != null){
 			log.debug(reportString.length);
 			List<String> reports = Arrays.asList(reportString);
@@ -933,7 +935,7 @@ public class clientGui{
 		@Override
 		protected Object doInBackground() throws Exception {
 			runProcessing();
-			Thread.sleep(3000);
+			//Thread.sleep(3000);
 			return null;
 		}
 		
@@ -973,7 +975,6 @@ public class clientGui{
 	public void runProcessing() {
 
 		processorCall(param);
-		log.info("Hier gelandet!");
 		//get back the Reports
 		if(response != null && response.getReportStream() != null){
     		reportString = response.getReportStream();
@@ -981,10 +982,10 @@ public class clientGui{
     		log.info(response.getReportStream());
 		}
 		else{
-			log.warn("Leeres Ergebnis!");
+			log.warn("Leerer ReportStream!");
 		}
 		
-		//paramBox = createResultBox();
+		paramBox = createResultBox();
 		guiFrame.setCursor(Cursor.DEFAULT_CURSOR);
 		guiFrame.repaint();
 		refreshFrame(paramBox);
