@@ -22,6 +22,8 @@
  */
 package de.hbz_nrw.www.pdfaconverter.gui;
 
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType;
@@ -46,6 +48,7 @@ public class PdfAPilotParameters {
 	// Initiate Logger for PdfAPilotParameters
 	private static Logger log = Logger.getLogger(PdfAPilotParameters.class);
 	private static ParameterType defaultParam = new ParameterType();
+	private static Properties paramProp = new Properties();
 
 	
 	public static void createDefaultParam(){
@@ -65,6 +68,135 @@ public class PdfAPilotParameters {
 
 	}
 	
+	public static ParameterType createParamType(Properties prop){
+		
+		paramProp = prop;
+		ParameterType param = new ParameterType();
+		// define Processing Params
+		if(paramProp.containsKey("returnOnlyValidPdfA")){
+			param.setReturnOnlyValidPDFA(paramProp.getProperty("returnOnlyValidPdfA").matches("true"));
+		
+		}
+		
+		if(paramProp.containsKey("quickProcessing")){
+			param.setQuickProcessing(paramProp.getProperty("quickProcessing").matches("true"));
+		}
+		
+		if(paramProp.containsKey("compliancyLevel")){
+			if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value1.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value1);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value2.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value2);
+			}
+		}
+
+		// define Report Params
+		if(paramProp.containsKey("htmlReport")){
+			if(paramProp.getProperty("htmlReport").matches("true")){
+				param.setReportFormat(new ReportFormatType[]{ReportFormatType.HTML});
+			}
+		}
+		if(paramProp.containsKey("xmlReport")){
+			if(paramProp.getProperty("xmlReport").matches("true")){
+				param.setReportFormat(new ReportFormatType[]{ReportFormatType.XML});
+			}
+		}
+		if(paramProp.containsKey("mhtReport")){
+			if(paramProp.getProperty("mhtReport").matches("true")){
+				param.setReportFormat(new ReportFormatType[]{ReportFormatType.MHT});
+			}
+		}
+		
+		if(paramProp.containsKey("reportLang")){
+			if(paramProp.getProperty("reportLang").equals(ReportLangType.DE.getValue())){
+				param.setReportLang(ReportLangType.DE);
+			}
+			else if(paramProp.getProperty("reportLang").equals(ReportLangType.EN.getValue())){
+				param.setReportLang(ReportLangType.EN);
+			}
+			else if(paramProp.getProperty("reportLang").equals(ReportLangType.FR.getValue())){
+				param.setReportLang(ReportLangType.FR);
+			}
+			else if(paramProp.getProperty("reportLang").equals(ReportLangType.ES.getValue())){
+				param.setReportLang(ReportLangType.ES);
+			}
+			else if(paramProp.getProperty("reportLang").equals(ReportLangType.IT.getValue())){
+				param.setReportLang(ReportLangType.IT);
+			}
+			else if(paramProp.getProperty("reportLang").equals(ReportLangType.JA.getValue())){
+				param.setReportLang(ReportLangType.JA);
+			}			
+		}
+		
+		if(paramProp.containsKey("reportTrigger")){
+
+			if(paramProp.getProperty("reportTrigger").equals(ReportTriggerType.ALWAYS.getValue())){
+				param.setReportTrigger(ReportTriggerType.ALWAYS);
+			}
+			else if(paramProp.getProperty("reportTrigger").equals(ReportTriggerType.NEVER.getValue())){
+				param.setReportTrigger(ReportTriggerType.NEVER);
+			}
+			else if(paramProp.getProperty("reportTrigger").equals(ReportTriggerType.IFPDFA.getValue())){
+				param.setReportTrigger(ReportTriggerType.IFPDFA);
+			}
+			else if(paramProp.getProperty("reportTrigger").equals(ReportTriggerType.IFNOPDFA.getValue())){
+				param.setReportTrigger(ReportTriggerType.IFNOPDFA);
+			}
+			
+		}
+
+		if(paramProp.containsKey("htmlOpenResult")){
+			if(paramProp.getProperty("htmlOpenResult").matches("true")){
+				param.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.OPENRESULT});
+			}
+		}
+
+		if(paramProp.containsKey("htmlNoIcons")){
+			if(paramProp.getProperty("htmlNoIcons").matches("true")){
+				param.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.NOICONS});
+			}
+		}
+		
+		if(paramProp.containsKey("htmlNoDetails")){
+			if(paramProp.getProperty("htmlNoDetails").matches("true")){
+				param.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.NODETAILS});
+			}
+		}
+
+		if(paramProp.containsKey("htmlNoCorrection")){
+			if(paramProp.getProperty("htmlNoCorrestion").matches("true")){
+				param.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.NOCORRECTION});
+			}
+		}
+		
+
+		return param;
+
+	}
+
+	
+	private static void createDefaultProperties(){
+		
+		// set Processing Params
+		paramProp.setProperty("returnOnlyValidPdfA", "true");
+		paramProp.setProperty("quickProcessing", "true");
+		paramProp.setProperty("compliancyLevel", "1b");
+		
+		
+		//set Reporting Params
+		paramProp.setProperty("reportTrigger", "ALWAYS");
+		paramProp.setProperty("reportLang", "DE");
+		paramProp.setProperty("htmlReport", "true");
+		paramProp.setProperty("htmlOpenResult", "true");
+		paramProp.setProperty("htmlNoIcons", "false");
+		paramProp.setProperty("xmlReport", "false");
+		paramProp.setProperty("mhtReport", "false");
+		
+		
+		
+	}
+	
 	/**
 	 * @param defaultParam the defaultParam to set
 	 */
@@ -79,4 +211,20 @@ public class PdfAPilotParameters {
 		createDefaultParam();
 		return defaultParam;
 	}
+
+	/**
+	 * @param defaultParam the defaultParam to set
+	 */
+	public static void setDefaultProperties(Properties ParamProp) {
+		paramProp = ParamProp;
+	}
+
+	/**
+	 * @return the defaultParam
+	 */
+	public static Properties getDefaultProperties() {
+		createDefaultProperties();
+		return paramProp;
+	}
+
 }

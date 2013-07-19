@@ -117,7 +117,8 @@ public class clientGui{
 	ConvertFromStreamResponse response = null;
 	
 	// create ParameterType
-	ParameterType param = PdfAPilotParameters.getDefaultParam();
+	Properties paramProp = PdfAPilotParameters.getDefaultProperties();
+	ParameterType param = PdfAPilotParameters.createParamType(paramProp);
 
     //make Parameter Boxes global
 	ButtonGroup bGroup1 = null;
@@ -468,17 +469,6 @@ public class clientGui{
 		//guiFrame.pack();
 	}
 
-	/**
-	 * <p><em>Title: set default Params for Converting</em></p>
-	 * <p>Description: Method sets Default Values for Converter Params 
-	 * as Properties of Swing Components</p>
-	 *  
-	 */
-	private void setDefaultParam(){
-		//Report properties
-		
-		
-	}
 	
 	/**
 	 * Class LoadListener
@@ -554,7 +544,7 @@ public class clientGui{
 	 */
 	class SaveParamListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-            Properties paramProp = new Properties();
+            //paramProp = new Properties();
 			if(lang != null){
 				for(int i=0; i< lang.length; i++){
 					if(lang[i].isSelected()){
@@ -574,10 +564,10 @@ public class clientGui{
 			}
 
 			if(htmlNoDetails.isSelected()){
-				paramProp.setProperty("htmlNoDetail", "true");
+				paramProp.setProperty("htmlNoDetails", "true");
 			}
 			if(htmlNoIcons.isSelected()){
-				paramProp.setProperty("htmlNoIcon", "true");
+				paramProp.setProperty("htmlNoIcons", "true");
 			}
 
 			//paramProp.setProperty("Hallo", "Du Da");
@@ -994,7 +984,7 @@ public class clientGui{
 			log.warn("Leeres Ergebnis!");
 		}
 		
-		paramBox = createResultBox();
+		//paramBox = createResultBox();
 		guiFrame.setCursor(Cursor.DEFAULT_CURSOR);
 		guiFrame.repaint();
 		refreshFrame(paramBox);
