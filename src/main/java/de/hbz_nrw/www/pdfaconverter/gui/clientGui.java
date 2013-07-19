@@ -51,6 +51,8 @@ public class clientGui{
 
 	//get Logger Instance
 	Logger log = Logger.getLogger(clientGui.class);
+	
+	private File dir = null;
 
 	JFrame alertFrame = null; 
 	
@@ -152,6 +154,7 @@ public class clientGui{
 
 		MenuItem mLoad = new MenuItem("Datei laden");
 	    MenuItem mSave = new MenuItem("Datei speichern");
+	    MenuItem mSaveParam = new MenuItem("Konfiguration speichern");
 	    MenuItem mCancel = new MenuItem("PDF A Tool Client beenden");
 	    MenuItem mProperties = new MenuItem("PDF A Processing einstellen");
 	    MenuItem mLookFeelC = new MenuItem ("Cross Plattform Look & Feel");
@@ -160,6 +163,7 @@ public class clientGui{
 	    MenuItem mLookFeelW = new MenuItem ("Windows Look & Feel");
 	    mLoad.addActionListener(new LoadListener());
 	    mSave.addActionListener(new SaveListener());
+	    mSaveParam.addActionListener(new SaveParamListener());
 	    mCancel.addActionListener(new ExitListener());
 	    mProperties.addActionListener(new CreateParamsListener());
 	    mLookFeelC.setActionCommand(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -179,6 +183,7 @@ public class clientGui{
 
 	    menuField1.add(mLoad);
 	    menuField1.add(mSave);
+	    menuField1.add(mSaveParam);
 	    menuField1.add(mCancel);
 	    menuField2.add(mProperties);
 	    menuField3.add(mLookFeelS);
@@ -476,10 +481,14 @@ public class clientGui{
 	    public void actionPerformed(ActionEvent e) {
 	        iStream = null;
 	    	JFileChooser chooser = new JFileChooser();
-	        chooser.setFileFilter(new PdfFilter());
+	        chooser.setCurrentDirectory(dir);
+	    	chooser.setFileFilter(new PdfFilter());
+	        
 	        int returnVal = chooser.showOpenDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File origPdfFile = chooser.getSelectedFile();
+	            dir = chooser.getCurrentDirectory();
+	            
 	            iStream = FileUtil.loadFileIntoStream(origPdfFile);
 	            fileName = origPdfFile.getName();
 	        }
@@ -505,11 +514,13 @@ public class clientGui{
 	    public void actionPerformed(ActionEvent e) {
             log.info("Speichere PDF A" + oStream);
 	        JFileChooser chooser = new JFileChooser();
+	        chooser.setCurrentDirectory(dir);
 	        chooser.setSelectedFile(new File( "PDFA." + fileName));
 	        int returnVal = chooser.showSaveDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File saveFile = chooser.getSelectedFile();
 				FileUtil.saveStreamToFile(saveFile, oString);
+	            dir = chooser.getCurrentDirectory();
 	        }
 	        showLoadPdf.setEnabled(true);
         	paramBox = createDefaultBox();
@@ -518,6 +529,81 @@ public class clientGui{
 	    }
 	}
 	
+	/**
+	 * Class SaveListener
+	 * 
+	 * <p><em>Title: </em></p>
+	 * <p>Description: </p>
+	 * 
+	 * @author Andres Quast, quast@hbz-nrw.de
+	 * creation date: 26.01.2010
+	 *
+	 */
+	class SaveParamListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+            Properties paramProp = new Properties();
+			if(lang != null){
+				for(int i=0; i< lang.length; i++){
+					if(lang[i].isSelected()){
+							paramProp.setProperty("reportLang", lang[i].getText());
+					}
+				}
+			}
+
+			if(xmlReport.isSelected()){
+				paramProp.setProperty("xmlReport", "true");
+			}
+			if(htmlReport.isSelected()){
+				paramProp.setProperty("htmlReport", "true");
+			}
+			if(mhtReport.isSelected()){
+				paramProp.setProperty("mhtReport",  "true");
+			}
+
+			if(htmlNoDetails.isSelected()){
+				paramProp.setProperty("htmlNoDetail", "true");
+			}
+			if(htmlNoIcons.isSelected()){
+				paramProp.setProperty("htmlNoIcon", "true");
+			}
+
+			//paramProp.setProperty("Hallo", "Du Da");
+
+	    	log.info("Speichere Parameter");
+	        JFileChooser chooser = new JFileChooser();
+	        chooser.setCurrentDirectory(dir);
+	        chooser.setSelectedFile(new File( "param.cfg"));
+	        int returnVal = chooser.showSaveDialog(guiFrame);
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	            File saveFile = chooser.getSelectedFile();
+	            try {
+					FileOutputStream fos = new FileOutputStream(saveFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+					try {
+						paramProp.store(bos, "Callas pdfaPilot Configuration File");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//bos.write(new String("Huhu").getBytes("UTF-8"));
+					bos.flush();
+					bos.close();
+
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	            
+	            dir = chooser.getCurrentDirectory();
+	        }
+	        showLoadPdf.setEnabled(true);
+        	paramBox = createDefaultBox();
+        	refreshFrame(paramBox);
+	        
+	    }
+	}
+
 	/**
 	 * Class ExitListener
 	 * 
