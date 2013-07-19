@@ -237,7 +237,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 					paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
 				}
 			}
-			paramBuffer.append(","+ Configuration.getTempfiledir() + "result/" + fileIdent + "." + paramType.getReportFormat()[i]);
+			paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent + "." + paramType.getReportFormat()[i]);
 		}
 		
 
