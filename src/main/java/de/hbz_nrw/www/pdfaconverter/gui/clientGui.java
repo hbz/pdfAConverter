@@ -229,7 +229,7 @@ public class clientGui{
 		playerPane.add(playerBox);
 	    mainPane.add(BorderLayout.EAST, playerPane);
 
-	    testCenter = new JLabel("hbz NRW, Cologne, 2013 using Callas pdfaPilot CLI Version 4");
+	    testCenter = new JLabel("hbz NRW, Cologne, 2013 - Callas pdfaPilot CLI Version 4 integretated");
 	    FlowLayout layoutFlow = new FlowLayout(FlowLayout.LEFT);
 	    centerPane = new JPanel(layoutFlow);
 	    centerPane.add(testCenter);
@@ -489,6 +489,8 @@ public class clientGui{
 
 		if(xmlReport.isSelected()){
 			paramProp.setProperty("xmlReport", "true");
+		}else{
+			paramProp.setProperty("xmlReport", "false");
 		}
 		if(htmlReport.isSelected()){
 			paramProp.setProperty("htmlReport", "true");
