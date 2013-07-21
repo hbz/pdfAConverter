@@ -58,6 +58,7 @@ public class ClientImpl implements PdfAConverter {
 	private PdfAConverterStub getStub(){
 				PdfAConverterStub stub = null;
 		try{
+			//stub = new PdfAConverterStub("http://nyx.hbz-nrw.de/pfda");
 			stub = new PdfAConverterStub("http://nyx.hbz-nrw.de:8080/axis2/services/PdfAConverter");
 			//stub = new PdfAConverterStub("http://melpomene.hbz-nrw.de:8081/axis2/services/PdfAConverter");
 		}catch(Exception e){
