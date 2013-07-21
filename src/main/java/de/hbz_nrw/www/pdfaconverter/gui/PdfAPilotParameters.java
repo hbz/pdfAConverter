@@ -202,6 +202,9 @@ public class PdfAPilotParameters {
 		// set Processing Params
 		paramProp.setProperty("returnOnlyValidPdfA", "true");
 		paramProp.setProperty("quickProcessing", "true");
+		paramProp.setProperty("analyseOnly", "false");
+		paramProp.setProperty("createEpub", "false");
+		
 		paramProp.setProperty("compliancyLevel", "1b");
 		
 		

@@ -53,7 +53,7 @@ public class clientGui{
 	Logger log = Logger.getLogger(clientGui.class);
 	
 	private File dir = null;
-	private File saveParamDir = null;
+	private File paramDir = null;
 
 	JFrame alertFrame = null; 
 	
@@ -90,6 +90,8 @@ public class clientGui{
 	JCheckBox quickProcessing = new JCheckBox("schneller Durchlauf");
 	JCheckBox onlyValidPDFA = new JCheckBox("nur valides PDF A zurückgeben");
 	JCheckBox analyseOnly = new JCheckBox("nur Analysieren");
+	JCheckBox createEpub = new JCheckBox("E-Pub erstellen");
+	
 
 	JRadioButton trigger[] = null;
 	JRadioButton lang[] = null;
@@ -157,6 +159,7 @@ public class clientGui{
 
 		MenuItem mLoad = new MenuItem("Datei laden");
 	    MenuItem mSave = new MenuItem("Datei speichern");
+	    MenuItem mLoadParam = new MenuItem("Konfiguration laden");
 	    MenuItem mSaveParam = new MenuItem("Konfiguration speichern");
 	    MenuItem mCancel = new MenuItem("PDF A Tool Client beenden");
 	    MenuItem mProperties = new MenuItem("PDF A Processing einstellen");
@@ -166,6 +169,7 @@ public class clientGui{
 	    MenuItem mLookFeelW = new MenuItem ("Windows Look & Feel");
 	    mLoad.addActionListener(new LoadListener());
 	    mSave.addActionListener(new SaveListener());
+	    mLoadParam.addActionListener(new LoadParamListener());
 	    mSaveParam.addActionListener(new SaveParamListener());
 	    mCancel.addActionListener(new ExitListener());
 	    mProperties.addActionListener(new CreateParamsListener());
@@ -186,6 +190,7 @@ public class clientGui{
 
 	    menuField1.add(mLoad);
 	    menuField1.add(mSave);
+	    menuField1.add(mLoadParam);
 	    menuField1.add(mSaveParam);
 	    menuField1.add(mCancel);
 	    menuField2.add(mProperties);
@@ -308,9 +313,15 @@ public class clientGui{
 		report2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		report2.add(new JLabel("Ausgabeformat(e) für Report(e)"));
 		
-		xmlReport.setSelected(false);
-		htmlReport.setSelected(true);
-		mhtReport.setSelected(false);
+		if(paramProp.getProperty("xmlReport").equalsIgnoreCase("true")){
+			xmlReport.setSelected(true);
+		}
+		if(paramProp.getProperty("htmlReport").equalsIgnoreCase("true")){
+			htmlReport.setSelected(true);
+		}
+		if(paramProp.getProperty("mhtReport").equalsIgnoreCase("true")){
+			mhtReport.setSelected(true);
+		}
 		report2.add(xmlReport);
 		report2.add(htmlReport);
 		report2.add(mhtReport);
@@ -341,7 +352,7 @@ public class clientGui{
 				lang[i] = new JRadioButton(lit.next());
 				report3.add(lang[i]);
 				bGroup1.add(lang[i]);
-				if(lang[i].getText().equals("DE")){
+				if(lang[i].getText().equals(paramProp.getProperty("reportLang"))){
 					lang[i].setSelected(true);
 				}
 				i++;
@@ -380,8 +391,15 @@ public class clientGui{
 		//run1.setBackground(hbzBrightBlue);
 		run1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		quickProcessing.setSelected(true);
-		onlyValidPDFA.setSelected(true);
+		if(paramProp.getProperty("quickProcessing").equalsIgnoreCase("true")){
+			quickProcessing.setSelected(true);
+		}
+		if(paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
+			onlyValidPDFA.setSelected(true);
+		}
+		if(paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
+			analyseOnly.setSelected(true);
+		}
 		analyseOnly.setSelected(false);
 		//mhtReport.setSelected(false);
 		run1.add(quickProcessing);
@@ -409,12 +427,14 @@ public class clientGui{
 			compliancy[i] = new JRadioButton(cit.next());
 			run2.add(compliancy[i]);
 			bGroup2.add(compliancy[i]);
-			if(compliancy[i].getText().equals("1b")){
+			if(compliancy[i].getText().equals(paramProp.getProperty("compliancyLevel"))){
 				compliancy[i].setSelected(true);
 			}
+			/*
 			if(compliancy[i].getText().equals("1a")){
 				compliancy[i].setEnabled(false);
 			}
+			*/
 			i++;
 		}
 		runTabBox.add(run2);
@@ -484,6 +504,14 @@ public class clientGui{
 	 *  
 	 */
 	private void writeGuiParamsToProp(){
+
+		if(compliancy != null){
+			for(int i=0; i< compliancy.length; i++){
+				if(compliancy[i].isSelected()){
+					paramProp.setProperty("compliancyLevel", compliancy[i].getText());
+				}
+			}
+		}
 
 		if(lang != null){
 			for(int i=0; i< lang.length; i++){
@@ -576,6 +604,28 @@ public class clientGui{
 	    }
 	}
 	
+	class LoadParamListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	        iStream = null;
+	    	JFileChooser chooser = new JFileChooser();
+	        chooser.setCurrentDirectory(paramDir);
+	        
+	        int returnVal = chooser.showOpenDialog(guiFrame);
+	        if(returnVal == JFileChooser.APPROVE_OPTION) {
+	            File paramConfFile = chooser.getSelectedFile();
+	            paramDir = chooser.getCurrentDirectory();
+				try {
+		            FileInputStream fis = new FileInputStream(paramConfFile);
+		            BufferedInputStream bis = new BufferedInputStream(fis);
+					paramProp.load(bis);
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+	        }
+	    }
+	}
+ 
 	/**
 	 * Class SaveParamListener
 	 * 
@@ -592,7 +642,7 @@ public class clientGui{
 	    	writeGuiParamsToProp();
 	    	log.info("Speichere Parameter");
 	        JFileChooser chooser = new JFileChooser();
-	        chooser.setCurrentDirectory(saveParamDir);
+	        chooser.setCurrentDirectory(paramDir);
 	        chooser.setSelectedFile(new File( "param.cfg"));
 	        int returnVal = chooser.showSaveDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
@@ -616,7 +666,7 @@ public class clientGui{
 					e1.printStackTrace();
 				}
 	            
-	            saveParamDir = chooser.getCurrentDirectory();
+	            paramDir = chooser.getCurrentDirectory();
 	        }
 	        showLoadPdf.setEnabled(true);
         	paramBox = createDefaultBox();
