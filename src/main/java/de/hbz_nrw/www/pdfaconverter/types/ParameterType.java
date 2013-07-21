@@ -212,6 +212,186 @@
                             
 
                         /**
+                        * field for CreateHtml
+                        */
+
+                        
+                                    protected boolean localCreateHtml ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCreateHtmlTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getCreateHtml(){
+                               return localCreateHtml;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param CreateHtml
+                               */
+                               public void setCreateHtml(boolean param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       
+                                               if (false) {
+                                           localCreateHtmlTracker = false;
+                                              
+                                       } else {
+                                          localCreateHtmlTracker = true;
+                                       }
+                                   
+                                            this.localCreateHtml=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ForceConversionReconvert
+                        */
+
+                        
+                                    protected boolean localForceConversionReconvert ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localForceConversionReconvertTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getForceConversionReconvert(){
+                               return localForceConversionReconvert;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ForceConversionReconvert
+                               */
+                               public void setForceConversionReconvert(boolean param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       
+                                               if (false) {
+                                           localForceConversionReconvertTracker = false;
+                                              
+                                       } else {
+                                          localForceConversionReconvertTracker = true;
+                                       }
+                                   
+                                            this.localForceConversionReconvert=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ForceConversionPagesToImages
+                        */
+
+                        
+                                    protected boolean localForceConversionPagesToImages ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localForceConversionPagesToImagesTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getForceConversionPagesToImages(){
+                               return localForceConversionPagesToImages;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ForceConversionPagesToImages
+                               */
+                               public void setForceConversionPagesToImages(boolean param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       
+                                               if (false) {
+                                           localForceConversionPagesToImagesTracker = false;
+                                              
+                                       } else {
+                                          localForceConversionPagesToImagesTracker = true;
+                                       }
+                                   
+                                            this.localForceConversionPagesToImages=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ForceConversionDocToImages
+                        */
+
+                        
+                                    protected boolean localForceConversionDocToImages ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localForceConversionDocToImagesTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getForceConversionDocToImages(){
+                               return localForceConversionDocToImages;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ForceConversionDocToImages
+                               */
+                               public void setForceConversionDocToImages(boolean param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       
+                                               if (false) {
+                                           localForceConversionDocToImagesTracker = false;
+                                              
+                                       } else {
+                                          localForceConversionDocToImagesTracker = true;
+                                       }
+                                   
+                                            this.localForceConversionDocToImages=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for CompliancyLevel
                         */
 
@@ -719,6 +899,122 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
+                             } if (localCreateHtmlTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"createHtml", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"createHtml");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("createHtml");
+                                    }
+                                
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("createHtml cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCreateHtml));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localForceConversionReconvertTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"forceConversionReconvert", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"forceConversionReconvert");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("forceConversionReconvert");
+                                    }
+                                
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("forceConversionReconvert cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionReconvert));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localForceConversionPagesToImagesTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"forceConversionPagesToImages", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"forceConversionPagesToImages");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("forceConversionPagesToImages");
+                                    }
+                                
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("forceConversionPagesToImages cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionPagesToImages));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localForceConversionDocToImagesTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"forceConversionDocToImages", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"forceConversionDocToImages");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("forceConversionDocToImages");
+                                    }
+                                
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("forceConversionDocToImages cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionDocToImages));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
                              } if (localCompliancyLevelTracker){
                                             if (localCompliancyLevel==null){
                                                  throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
@@ -959,6 +1255,30 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCreateEpub));
+                            } if (localCreateHtmlTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "createHtml"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCreateHtml));
+                            } if (localForceConversionReconvertTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "forceConversionReconvert"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionReconvert));
+                            } if (localForceConversionPagesToImagesTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "forceConversionPagesToImages"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionPagesToImages));
+                            } if (localForceConversionDocToImagesTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "forceConversionDocToImages"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConversionDocToImages));
                             } if (localCompliancyLevelTracker){
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "compliancyLevel"));
@@ -1104,9 +1424,9 @@
                     
                     reader.next();
                 
-                        java.util.ArrayList list6 = new java.util.ArrayList();
+                        java.util.ArrayList list10 = new java.util.ArrayList();
                     
-                        java.util.ArrayList list9 = new java.util.ArrayList();
+                        java.util.ArrayList list13 = new java.util.ArrayList();
                     
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
@@ -1183,6 +1503,78 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","createHtml").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setCreateHtml(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","forceConversionReconvert").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setForceConversionReconvert(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","forceConversionPagesToImages").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setForceConversionPagesToImages(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","forceConversionDocToImages").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setForceConversionDocToImages(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
                                 
                                                 object.setCompliancyLevel(de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType.Factory.parse(reader));
@@ -1203,11 +1595,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list6.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
+                                    list10.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
-                                                        boolean loopDone6 = false;
-                                                        while(!loopDone6){
+                                                        boolean loopDone10 = false;
+                                                        while(!loopDone10){
                                                             // We should be at the end element, but make sure
                                                             while (!reader.isEndElement())
                                                                 reader.next();
@@ -1218,13 +1610,13 @@
                                                                 reader.next();
                                                             if (reader.isEndElement()){
                                                                 //two continuous end elements means we are exiting the xml structure
-                                                                loopDone6 = true;
+                                                                loopDone10 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","reportFormat").equals(reader.getName())){
-                                                                    list6.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
+                                                                    list10.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
                                                                         
                                                                 }else{
-                                                                    loopDone6 = true;
+                                                                    loopDone10 = true;
                                                                 }
                                                             }
                                                         }
@@ -1233,7 +1625,7 @@
                                                         object.setReportFormat((de.hbz_nrw.www.pdfaconverter.types.ReportFormatType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.class,
-                                                                list6));
+                                                                list10));
                                                             
                               }  // End of if for expected property start element
                                 
@@ -1279,11 +1671,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list9.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
+                                    list13.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
-                                                        boolean loopDone9 = false;
-                                                        while(!loopDone9){
+                                                        boolean loopDone13 = false;
+                                                        while(!loopDone13){
                                                             // We should be at the end element, but make sure
                                                             while (!reader.isEndElement())
                                                                 reader.next();
@@ -1294,13 +1686,13 @@
                                                                 reader.next();
                                                             if (reader.isEndElement()){
                                                                 //two continuous end elements means we are exiting the xml structure
-                                                                loopDone9 = true;
+                                                                loopDone13 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","htmlReportOptions").equals(reader.getName())){
-                                                                    list9.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
+                                                                    list13.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
                                                                         
                                                                 }else{
-                                                                    loopDone9 = true;
+                                                                    loopDone13 = true;
                                                                 }
                                                             }
                                                         }
@@ -1309,7 +1701,7 @@
                                                         object.setHtmlReportOptions((de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.class,
-                                                                list9));
+                                                                list13));
                                                             
                               }  // End of if for expected property start element
                                 

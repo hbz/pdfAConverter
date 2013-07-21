@@ -61,7 +61,19 @@
                 	<xsd:element maxOccurs="1" minOccurs="0"
                 		name="returnOnlyValidPDFA" type="xsd:boolean">
                 	</xsd:element>
-                	<xsd:element name="createEpub" type="xsd:boolean" maxOccurs="1" minOccurs="0"></xsd:element>
+                	<xsd:element name="createEpub" type="xsd:boolean"
+                		maxOccurs="1" minOccurs="0">
+                	</xsd:element>
+                	<xsd:element name="createHtml" type="xsd:boolean"
+                		maxOccurs="1" minOccurs="0">
+                	</xsd:element>
+                	<xsd:element name="forceConversionReconvert"
+                		type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                	</xsd:element>
+                	<xsd:element name="forceConversionPagesToImages"
+                		type="xsd:boolean" maxOccurs="1" minOccurs="0">
+                	</xsd:element>
+                	<xsd:element name="forceConversionDocToImages" type="xsd:boolean" maxOccurs="1" minOccurs="0"></xsd:element>
                 	<xsd:element maxOccurs="1" minOccurs="0"
                 		name="compliancyLevel"
                 		type="ns0:compliancyLevelType">
