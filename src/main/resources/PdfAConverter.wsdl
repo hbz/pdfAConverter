@@ -52,17 +52,25 @@
                 	<xsd:documentation/>
                 </xsd:annotation>
                 <xsd:sequence>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="quickProcessing" type="xsd:boolean">
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="quickProcessing" type="xsd:boolean">
                 	</xsd:element>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="analyseOnly" type="xsd:boolean">
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="analyseOnly" type="xsd:boolean">
                 	</xsd:element>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="returnOnlyValidPDFA" type="xsd:boolean">
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="returnOnlyValidPDFA" type="xsd:boolean">
                 	</xsd:element>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="compliancyLevel" type="ns0:compliancyLevelType">
+                	<xsd:element name="createEpub" type="xsd:boolean" maxOccurs="1" minOccurs="0"></xsd:element>
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="compliancyLevel"
+                		type="ns0:compliancyLevelType">
                 	</xsd:element>
-                	<xsd:element maxOccurs="unbounded" minOccurs="0" name="reportFormat" type="ns0:reportFormatType">
+                	<xsd:element maxOccurs="unbounded" minOccurs="0"
+                		name="reportFormat" type="ns0:reportFormatType">
                 	</xsd:element>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="reportLang" type="ns0:reportLangType">
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="reportLang" type="ns0:reportLangType">
                 		<xsd:annotation>
                 			<xsd:documentation>
                 				Defines the language of report output.
@@ -70,9 +78,11 @@
                 			</xsd:documentation>
                 		</xsd:annotation>
                 	</xsd:element>
-                	<xsd:element maxOccurs="1" minOccurs="0" name="reportTrigger" type="ns0:reportTriggerType">
+                	<xsd:element maxOccurs="1" minOccurs="0"
+                		name="reportTrigger" type="ns0:reportTriggerType">
                 	</xsd:element>
-                	<xsd:element maxOccurs="unbounded" minOccurs="0" name="htmlReportOptions" type="ns0:htmlOptionType">
+                	<xsd:element maxOccurs="unbounded" minOccurs="0"
+                		name="htmlReportOptions" type="ns0:htmlOptionType">
                 	</xsd:element>
                 </xsd:sequence>
       </xsd:complexType>
@@ -190,12 +200,21 @@
             </xsd:simpleType>
     
             <xsd:simpleType name="compliancyLevelType">
-                <xsd:annotation>
-                	<xsd:documentation>Defines the PDF A compliancy level: could be either 1a or 1b</xsd:documentation>
-                </xsd:annotation>
-                <xsd:restriction base="xsd:string">
-            		<xsd:enumeration value="1a"/>
-            		<xsd:enumeration value="1b"/>
+            	<xsd:annotation>
+            		<xsd:documentation>
+            			Defines the PDF A compliancy level: could be
+            			either 1a or 1b
+            		</xsd:documentation>
+            	</xsd:annotation>
+            	<xsd:restriction base="xsd:string">
+            		<xsd:enumeration value="1a" />
+            		<xsd:enumeration value="1b" />
+            		<xsd:enumeration value="2a"></xsd:enumeration>
+            		<xsd:enumeration value="2u"></xsd:enumeration>
+            		<xsd:enumeration value="2b"></xsd:enumeration>
+            		<xsd:enumeration value="3a"></xsd:enumeration>
+            		<xsd:enumeration value="3u"></xsd:enumeration>
+            		<xsd:enumeration value="3b"></xsd:enumeration>
             	</xsd:restriction>
             </xsd:simpleType>
     </xsd:schema>
