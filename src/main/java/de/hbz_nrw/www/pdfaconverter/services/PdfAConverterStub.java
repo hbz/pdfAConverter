@@ -15,7 +15,7 @@
 
         
         public class PdfAConverterStub extends org.apache.axis2.client.Stub
-        {
+        implements PdfAConverter{
         protected org.apache.axis2.description.AxisOperation[] _operations;
 
         //hashmaps to keep the fault mapping
@@ -168,7 +168,7 @@
                      * Auto generated method signature
                      * Operation converts a PDF supplied by an URL to PDF/A. Operation returns 2 URLs: one for the PDF/A and one for the Report.
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromUrl
-                     * @param convertFromUrl42
+                     * @param convertFromUrl6
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromUrl_faultMsg : 
                      */
@@ -177,7 +177,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrlResponse convertFromUrl(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl42)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl6)
                         
 
                     throws java.rmi.RemoteException
@@ -205,7 +205,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromUrl42,
+                                                    convertFromUrl6,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromUrl")));
                                                 
@@ -293,12 +293,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation converts a PDF supplied by an URL to PDF/A. Operation returns 2 URLs: one for the PDF/A and one for the Report.
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromUrl
-                    * @param convertFromUrl42
+                    * @param convertFromUrl6
                 
                 */
                 public  void startconvertFromUrl(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl42,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl6,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
@@ -323,7 +323,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromUrl42,
+                                                    convertFromUrl6,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromUrl")));
                                                 
@@ -444,7 +444,7 @@
                      * Auto generated method signature
                      * Operation uses SwA (Soap with Attachment) for supplying the PDF to the PDF/A Converter. Operation returns an Attachment with the PDF/A and an Attachment with the Record inside
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromAttachment
-                     * @param convertFromAttachment44
+                     * @param convertFromAttachment8
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg : 
                      */
@@ -453,7 +453,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachmentResponse convertFromAttachment(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment44)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment8)
                         
 
                     throws java.rmi.RemoteException
@@ -481,7 +481,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromAttachment44,
+                                                    convertFromAttachment8,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromAttachment")));
                                                 
@@ -569,12 +569,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation uses SwA (Soap with Attachment) for supplying the PDF to the PDF/A Converter. Operation returns an Attachment with the PDF/A and an Attachment with the Record inside
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromAttachment
-                    * @param convertFromAttachment44
+                    * @param convertFromAttachment8
                 
                 */
                 public  void startconvertFromAttachment(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment44,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment8,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
@@ -599,7 +599,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromAttachment44,
+                                                    convertFromAttachment8,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromAttachment")));
                                                 
@@ -720,7 +720,7 @@
                      * Auto generated method signature
                      * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromStream
-                     * @param convertFromStream46
+                     * @param convertFromStream10
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg : 
                      */
@@ -729,7 +729,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStream(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream46)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream10)
                         
 
                     throws java.rmi.RemoteException
@@ -741,10 +741,6 @@
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
               _operationClient.getOptions().setAction("http://www.hbz-nrw.de/PdfAConverter/services/convertFromStream");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-              
-              //QA: set Timeout:
-              _operationClient.getOptions().setTimeOutInMilliSeconds(3600000);
-              
 
               
               
@@ -761,7 +757,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromStream46,
+                                                    convertFromStream10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromStream")));
                                                 
@@ -849,12 +845,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromStream
-                    * @param convertFromStream46
+                    * @param convertFromStream10
                 
                 */
                 public  void startconvertFromStream(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream46,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream10,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
@@ -879,7 +875,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromStream46,
+                                                    convertFromStream10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromStream")));
                                                 

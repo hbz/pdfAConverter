@@ -216,6 +216,10 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			paramBuffer.append(" --analyse");
 		}
 		
+		if(paramType.getCreateEpub() && paramType.getCreateEpub() == true){
+			paramBuffer.append(" --createepub " + fileIdent);
+		}
+
 		if(paramType.getQuickProcessing() && paramType.getQuickProcessing() == true){
 			paramBuffer.append(" --quick");
 		}

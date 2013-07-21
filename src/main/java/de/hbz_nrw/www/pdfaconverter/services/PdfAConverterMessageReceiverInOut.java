@@ -38,56 +38,56 @@
 
             if("convertFromUrl".equals(methodName)){
                 
-                de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrlResponse convertFromUrlResponse7 = null;
+                de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrlResponse convertFromUrlResponse1 = null;
 	                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl wrappedParam =
                                                              (de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               convertFromUrlResponse7 =
+                                               convertFromUrlResponse1 =
                                                    
                                                    
                                                          skel.convertFromUrl(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromUrlResponse7, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromUrlResponse1, false);
                                     } else 
 
             if("convertFromAttachment".equals(methodName)){
                 
-                de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachmentResponse convertFromAttachmentResponse9 = null;
+                de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachmentResponse convertFromAttachmentResponse3 = null;
 	                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment wrappedParam =
                                                              (de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               convertFromAttachmentResponse9 =
+                                               convertFromAttachmentResponse3 =
                                                    
                                                    
                                                          skel.convertFromAttachment(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromAttachmentResponse9, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromAttachmentResponse3, false);
                                     } else 
 
             if("convertFromStream".equals(methodName)){
                 
-                de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStreamResponse11 = null;
+                de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStreamResponse5 = null;
 	                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream wrappedParam =
                                                              (de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               convertFromStreamResponse11 =
+                                               convertFromStreamResponse5 =
                                                    
                                                    
                                                          skel.convertFromStream(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromStreamResponse11, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromStreamResponse5, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");

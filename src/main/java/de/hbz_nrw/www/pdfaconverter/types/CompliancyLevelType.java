@@ -59,11 +59,47 @@
                                     public static final java.lang.String _value2 =
                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString("1b");
                                 
+                                    public static final java.lang.String _value3 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("2a");
+                                
+                                    public static final java.lang.String _value4 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("2u");
+                                
+                                    public static final java.lang.String _value5 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("2b");
+                                
+                                    public static final java.lang.String _value6 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("3a");
+                                
+                                    public static final java.lang.String _value7 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("3u");
+                                
+                                    public static final java.lang.String _value8 =
+                                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString("3b");
+                                
                                 public static final CompliancyLevelType value1 =
                                     new CompliancyLevelType(_value1,true);
                             
                                 public static final CompliancyLevelType value2 =
                                     new CompliancyLevelType(_value2,true);
+                            
+                                public static final CompliancyLevelType value3 =
+                                    new CompliancyLevelType(_value3,true);
+                            
+                                public static final CompliancyLevelType value4 =
+                                    new CompliancyLevelType(_value4,true);
+                            
+                                public static final CompliancyLevelType value5 =
+                                    new CompliancyLevelType(_value5,true);
+                            
+                                public static final CompliancyLevelType value6 =
+                                    new CompliancyLevelType(_value6,true);
+                            
+                                public static final CompliancyLevelType value7 =
+                                    new CompliancyLevelType(_value7,true);
+                            
+                                public static final CompliancyLevelType value8 =
+                                    new CompliancyLevelType(_value8,true);
                             
 
                                 public java.lang.String getValue() { return localCompliancyLevelType;}

@@ -167,6 +167,51 @@
                             
 
                         /**
+                        * field for CreateEpub
+                        */
+
+                        
+                                    protected boolean localCreateEpub ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localCreateEpubTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return boolean
+                           */
+                           public  boolean getCreateEpub(){
+                               return localCreateEpub;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param CreateEpub
+                               */
+                               public void setCreateEpub(boolean param){
+                            
+                                       // setting primitive attribute tracker to true
+                                       
+                                               if (false) {
+                                           localCreateEpubTracker = false;
+                                              
+                                       } else {
+                                          localCreateEpubTracker = true;
+                                       }
+                                   
+                                            this.localCreateEpub=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for CompliancyLevel
                         */
 
@@ -645,6 +690,35 @@
                                                }
                                     
                                    xmlWriter.writeEndElement();
+                             } if (localCreateEpubTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"createEpub", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"createEpub");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("createEpub");
+                                    }
+                                
+                                               if (false) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("createEpub cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCreateEpub));
+                                               }
+                                    
+                                   xmlWriter.writeEndElement();
                              } if (localCompliancyLevelTracker){
                                             if (localCompliancyLevel==null){
                                                  throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
@@ -879,6 +953,12 @@
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReturnOnlyValidPDFA));
+                            } if (localCreateEpubTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "createEpub"));
+                                 
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCreateEpub));
                             } if (localCompliancyLevelTracker){
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "compliancyLevel"));
@@ -1024,9 +1104,9 @@
                     
                     reader.next();
                 
-                        java.util.ArrayList list5 = new java.util.ArrayList();
+                        java.util.ArrayList list6 = new java.util.ArrayList();
                     
-                        java.util.ArrayList list8 = new java.util.ArrayList();
+                        java.util.ArrayList list9 = new java.util.ArrayList();
                     
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
@@ -1085,6 +1165,24 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","createEpub").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setCreateEpub(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
                                 
                                                 object.setCompliancyLevel(de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType.Factory.parse(reader));
@@ -1105,11 +1203,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list5.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
+                                    list6.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
-                                                        boolean loopDone5 = false;
-                                                        while(!loopDone5){
+                                                        boolean loopDone6 = false;
+                                                        while(!loopDone6){
                                                             // We should be at the end element, but make sure
                                                             while (!reader.isEndElement())
                                                                 reader.next();
@@ -1120,13 +1218,13 @@
                                                                 reader.next();
                                                             if (reader.isEndElement()){
                                                                 //two continuous end elements means we are exiting the xml structure
-                                                                loopDone5 = true;
+                                                                loopDone6 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","reportFormat").equals(reader.getName())){
-                                                                    list5.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
+                                                                    list6.add(de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.Factory.parse(reader));
                                                                         
                                                                 }else{
-                                                                    loopDone5 = true;
+                                                                    loopDone6 = true;
                                                                 }
                                                             }
                                                         }
@@ -1135,7 +1233,7 @@
                                                         object.setReportFormat((de.hbz_nrw.www.pdfaconverter.types.ReportFormatType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 de.hbz_nrw.www.pdfaconverter.types.ReportFormatType.class,
-                                                                list5));
+                                                                list6));
                                                             
                               }  // End of if for expected property start element
                                 
@@ -1181,11 +1279,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list8.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
+                                    list9.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
-                                                        boolean loopDone8 = false;
-                                                        while(!loopDone8){
+                                                        boolean loopDone9 = false;
+                                                        while(!loopDone9){
                                                             // We should be at the end element, but make sure
                                                             while (!reader.isEndElement())
                                                                 reader.next();
@@ -1196,13 +1294,13 @@
                                                                 reader.next();
                                                             if (reader.isEndElement()){
                                                                 //two continuous end elements means we are exiting the xml structure
-                                                                loopDone8 = true;
+                                                                loopDone9 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","htmlReportOptions").equals(reader.getName())){
-                                                                    list8.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
+                                                                    list9.add(de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.Factory.parse(reader));
                                                                         
                                                                 }else{
-                                                                    loopDone8 = true;
+                                                                    loopDone9 = true;
                                                                 }
                                                             }
                                                         }
@@ -1211,7 +1309,7 @@
                                                         object.setHtmlReportOptions((de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
                                                                 de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType.class,
-                                                                list8));
+                                                                list9));
                                                             
                               }  // End of if for expected property start element
                                 
