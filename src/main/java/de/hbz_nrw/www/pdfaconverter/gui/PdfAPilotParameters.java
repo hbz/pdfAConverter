@@ -92,6 +92,24 @@ public class PdfAPilotParameters {
 			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value2.getValue())){
 				param.setCompliancyLevel(CompliancyLevelType.value2);
 			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value3.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value3);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value4.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value4);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value5.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value5);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value6.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value6);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value7.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value7);
+			}
+			else if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value8.getValue())){
+				param.setCompliancyLevel(CompliancyLevelType.value8);
+			}
 		}
 
 		// define Report Params

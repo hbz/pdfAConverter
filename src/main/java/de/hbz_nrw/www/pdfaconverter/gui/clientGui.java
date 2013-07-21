@@ -396,6 +396,12 @@ public class clientGui{
 		Vector<String> compliancyLevel = new Vector<String>();
 		compliancyLevel.add("1a");
 		compliancyLevel.add("1b");
+		compliancyLevel.add("2a");
+		compliancyLevel.add("2u");
+		compliancyLevel.add("2b");
+		compliancyLevel.add("3a");
+		compliancyLevel.add("3u");
+		compliancyLevel.add("3b");
 		Iterator<String> cit = compliancyLevel.iterator();
 		compliancy = new JRadioButton[compliancyLevel.size()];  
 		int i = 0;

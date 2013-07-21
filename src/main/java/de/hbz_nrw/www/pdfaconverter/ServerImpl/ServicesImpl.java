@@ -132,7 +132,6 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 			try{
 				response.setResponseDocumentStream(new String(stream, "UTF-8"));
-				log.info("dokumentstream geschrieben");
 			}catch(Exception e){
 			 log.error("Problems with generating files from streams:" + e);	
 			}
