@@ -138,14 +138,14 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		}
 
 		List<byte[]> reportStreams = new Vector<byte[]>();
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".HTML").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".html")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".html")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".html"))));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".XML").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".xml")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".xml")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".xml"))));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName + ".MHT").isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName + ".mht")));
+		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".mht")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".mht"))));
 		}
 		
 		Iterator<byte[]> it = reportStreams.iterator();
@@ -231,17 +231,19 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		}
 		
 
-		for(int i=0; i < paramType.getReportFormat().length; i++){
-			paramBuffer.append(" --report=" + paramType.getReportFormat()[i]);
-			if(paramType.getReportTrigger()!=null){
-				paramBuffer.append("," + paramType.getReportTrigger());
-			}
-			if(paramType.getReportFormat()[i].equals(ReportFormatType.HTML) && paramType.getHtmlReportOptions() != null){
-				for(int j=0; j < paramType.getHtmlReportOptions().length; j++){
-					paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
+		if(paramType.getReportFormat() != null){
+			for(int i=0; i < paramType.getReportFormat().length; i++){
+				paramBuffer.append(" --report=" + paramType.getReportFormat()[i]);
+				if(paramType.getReportTrigger()!=null){
+					paramBuffer.append("," + paramType.getReportTrigger());
 				}
+				if(paramType.getReportFormat()[i].equals(ReportFormatType.HTML) && paramType.getHtmlReportOptions() != null){
+					for(int j=0; j < paramType.getHtmlReportOptions().length; j++){
+						paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
+					}
+				}
+				paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
 			}
-			paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent + "." + paramType.getReportFormat()[i].toString().toLowerCase());
 		}
 		
 

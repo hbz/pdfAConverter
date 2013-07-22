@@ -161,7 +161,7 @@ public class ReportBox {
 		Matcher m = p.matcher(new String(Base64.decodeBase64(stream)));
 		m.find();
 		String filename = new String(Base64.decodeBase64(stream)).substring(m.start(), m.end());
-		return filename;
+		return filename.replace(".pdf", "");
 		
 	}
 

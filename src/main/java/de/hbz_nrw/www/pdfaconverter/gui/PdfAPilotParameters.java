@@ -75,14 +75,19 @@ public class PdfAPilotParameters {
 		
 		paramProp = prop;
 		ParameterType param = new ParameterType();
+		
 		// define Processing Params
 		if(paramProp.containsKey("returnOnlyValidPdfA")){
 			param.setReturnOnlyValidPDFA(paramProp.getProperty("returnOnlyValidPdfA").matches("true"));
-		
 		}
-		
 		if(paramProp.containsKey("quickProcessing")){
 			param.setQuickProcessing(paramProp.getProperty("quickProcessing").matches("true"));
+		}
+		if(paramProp.containsKey("analyseOnly")){
+			param.setAnalyseOnly(paramProp.getProperty("analyseOnly").matches("true"));
+		}
+		if(paramProp.containsKey("createEpub")){
+			param.setCreateEpub(paramProp.getProperty("createEpub").matches("true"));
 		}
 		
 		if(paramProp.containsKey("compliancyLevel")){
