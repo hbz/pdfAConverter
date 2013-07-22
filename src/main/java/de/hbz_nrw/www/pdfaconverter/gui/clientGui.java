@@ -109,6 +109,7 @@ public class clientGui{
 	byte[] iStream = null;
 	byte[] oStream = null;
 	String oString = null;
+	String remoteFileName = null;
 	
 	private int countReport = 0;
 	String[] reportString = null;
@@ -487,11 +488,9 @@ public class clientGui{
 				reportStream = rit.next();
 				resultBox.add(new ReportBox(reportStream).getResultBox());
 			}			
-		}else{
-			//TODO
 		}
 		if(oString != null){
-			resultBox.add(new PdfAViewerBox(reportStream).getResultBox());
+			resultBox.add(new PdfAViewerBox(remoteFileName).getResultBox());
 		}
 		return resultBox;
 	}
@@ -954,7 +953,8 @@ public class clientGui{
 		try{
 			log.info("sending Request");
 			response = client.convertFromStream(convStream); 
-			oString = response.getResponseDocumentStream();	
+			oString = response.getResponseDocumentStream();
+			remoteFileName = response.getJobIdentifier() + ".pdf";
 		}catch(RemoteException exc){
     		paramBox = createDefaultBox();
 	        showLoadPdf.setEnabled(true);
@@ -1025,7 +1025,6 @@ public class clientGui{
     		reportString = response.getReportStream();
     		showLoadPdf.setEnabled(true);
     		log.info(response.getReportStream());
-    		paramBox = createResultBox();
 		}
 		else{
 			log.warn("Leerer ReportStream!");

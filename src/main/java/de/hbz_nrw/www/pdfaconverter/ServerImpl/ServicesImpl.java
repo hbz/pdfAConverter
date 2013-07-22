@@ -112,7 +112,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		ConvertFromStreamResponse response= new ConvertFromStreamResponse();
 		
 		//create a unique temporary file prefix 
-		String fileIdent = getTimePrefix() + ".pdf";
+		String jobIdent  = getTimePrefix();
+		String fileIdent = jobIdent + ".pdf";
 
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
@@ -156,6 +157,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			 log.error("Problems with generating files from streams:" + e);	
 			}
 		}
+		response.setJobIdentifier(jobIdent);
 		return response;
 	}
 

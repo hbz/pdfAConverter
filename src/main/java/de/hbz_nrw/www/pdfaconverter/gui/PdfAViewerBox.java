@@ -44,15 +44,15 @@ public class PdfAViewerBox {
 
 	Box resultBox = new Box(BoxLayout.Y_AXIS);
 	JPanel resultPanel = new JPanel();
-	String reportString;
+	String remoteFileName;
 	
 	File fileName;
 	String saveString = null;
 
-	public PdfAViewerBox(String report){
+	public PdfAViewerBox(String RemoteFileName){
 		resultPanel.setLayout(new GridLayout(5, 1, 2, 2));
 		resultPanel.setBackground(new Color(255,255,255));
-		reportString = report;
+		remoteFileName = RemoteFileName;
 		this.addButtons();
 	}
 	
@@ -62,11 +62,6 @@ public class PdfAViewerBox {
 	 *  
 	 */
 	private void addButtons(){
-		try {
-			stream = reportString.getBytes("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			log.error(e);
-		}
 		resultBox.add(resultPanel);
    		JTextPane reportTextPane = new JTextPane();
    		String view = new String("<h3><font face=\"sans, Arial\">PDF/A erstellt</font></h3>");
@@ -93,7 +88,7 @@ public class PdfAViewerBox {
 	class launchReaderListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
 	    	
-	    	String filename = getFileName();
+	    	String filename = remoteFileName;
 	    	ReaderLauncher.setUrl(Configuration.getTempdirurl() + "result/" + filename);
 	    	ReaderLauncher.launch();
 	    }
@@ -101,7 +96,7 @@ public class PdfAViewerBox {
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: parses the report stream for getting the filename used on nyx for conversion</p>
-	 * 
+	 * @deprecated
 	 * @return 
 	 */
 	private String getFileName(){

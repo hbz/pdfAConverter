@@ -33,6 +33,50 @@
         
 
                         /**
+                        * field for JobIdentifier
+                        */
+
+                        
+                                    protected java.lang.String localJobIdentifier ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localJobIdentifierTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getJobIdentifier(){
+                               return localJobIdentifier;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param JobIdentifier
+                               */
+                               public void setJobIdentifier(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localJobIdentifierTracker = true;
+                                       } else {
+                                          localJobIdentifierTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localJobIdentifier=param;
+                                    
+
+                               }
+                            
+
+                        /**
                         * field for ResponseDocumentStream
                         */
 
@@ -254,7 +298,41 @@
 
                
                    }
-                if (localResponseDocumentStreamTracker){
+                if (localJobIdentifierTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"jobIdentifier", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"jobIdentifier");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("jobIdentifier");
+                                    }
+                                
+
+                                          if (localJobIdentifier==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("jobIdentifier cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localJobIdentifier);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localResponseDocumentStreamTracker){
                                     namespace = "";
                                     if (! namespace.equals("")) {
                                         prefix = xmlWriter.getPrefix(namespace);
@@ -493,7 +571,16 @@
                  java.util.ArrayList elementList = new java.util.ArrayList();
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
-                 if (localResponseDocumentStreamTracker){
+                 if (localJobIdentifierTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "jobIdentifier"));
+                                 
+                                        if (localJobIdentifier != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localJobIdentifier));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("jobIdentifier cannot be null!!");
+                                        }
+                                    } if (localResponseDocumentStreamTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "responseDocumentStream"));
                                  
@@ -601,8 +688,26 @@
                     
                     reader.next();
                 
-                        java.util.ArrayList list2 = new java.util.ArrayList();
+                        java.util.ArrayList list3 = new java.util.ArrayList();
                     
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","jobIdentifier").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setJobIdentifier(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -629,11 +734,11 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list2.add(reader.getElementText());
+                                    list3.add(reader.getElementText());
                                             
                                             //loop until we find a start element that is not part of this array
-                                            boolean loopDone2 = false;
-                                            while(!loopDone2){
+                                            boolean loopDone3 = false;
+                                            while(!loopDone3){
                                                 // Ensure we are at the EndElement
                                                 while (!reader.isEndElement()){
                                                     reader.next();
@@ -645,20 +750,20 @@
                                                     reader.next();
                                                 if (reader.isEndElement()){
                                                     //two continuous end elements means we are exiting the xml structure
-                                                    loopDone2 = true;
+                                                    loopDone3 = true;
                                                 } else {
                                                     if (new javax.xml.namespace.QName("","reportStream").equals(reader.getName())){
-                                                         list2.add(reader.getElementText());
+                                                         list3.add(reader.getElementText());
                                                         
                                                     }else{
-                                                        loopDone2 = true;
+                                                        loopDone3 = true;
                                                     }
                                                 }
                                             }
                                             // call the converter utility  to convert and set the array
                                             
                                                     object.setReportStream((java.lang.String[])
-                                                        list2.toArray(new java.lang.String[list2.size()]));
+                                                        list3.toArray(new java.lang.String[list3.size()]));
                                                 
                               }  // End of if for expected property start element
                                 
