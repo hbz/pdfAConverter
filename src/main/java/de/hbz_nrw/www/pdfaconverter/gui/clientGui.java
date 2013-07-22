@@ -236,7 +236,7 @@ public class clientGui{
 		playerPane.add(playerBox);
 	    mainPane.add(BorderLayout.EAST, playerPane);
 
-	    testCenter = new JLabel("hbz NRW, Cologne, 2013 - Callas pdfaPilot CLI Version 4 integretated");
+	    testCenter = new JLabel("hbz NRW, Cologne, 2013 - Callas pdfaPilot CLI Version 4 integrated");
 	    FlowLayout layoutFlow = new FlowLayout(FlowLayout.LEFT);
 	    centerPane = new JPanel(layoutFlow);
 	    centerPane.add(testCenter);
@@ -994,8 +994,14 @@ public class clientGui{
 			}else if(oString != null && reportString != null){
 				showSavePdfA.setEnabled(true);
 				fNames.add(new String[]{fileName});
+			}else if(oString == null && reportString == null){
+				JOptionPane.showMessageDialog(guiFrame, "ACHTUNG! \nDie PDF-Datei konnte nicht konvertiert werden" 
+						+ "\nLeider konnte auch kein Report erstellt werden"
+						+ "\nKontaktieren Sie bitte publikationssysteme@hbz-nrw.de \nunter Angabe der Job-ID: \n"
+						+ response.getJobIdentifier());
+				showSavePdfA.setEnabled(false);
+				showLoadPdf.setEnabled(true);
 			}
-			
 			for(int i= 0; i < fNames.size(); i++){
 				for(int j=0; j < fNames.get(i).length; j++){
 					System.out.println(fNames.get(i)[j].toString());
