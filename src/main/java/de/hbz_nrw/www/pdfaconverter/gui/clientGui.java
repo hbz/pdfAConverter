@@ -313,13 +313,13 @@ public class clientGui{
 		report2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		report2.add(new JLabel("Ausgabeformat(e) für Report(e)"));
 		
-		if(paramProp.getProperty("xmlReport").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("xmlReport") && paramProp.getProperty("xmlReport").equalsIgnoreCase("true")){
 			xmlReport.setSelected(true);
 		}
-		if(paramProp.getProperty("htmlReport").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("htmlReport") && paramProp.getProperty("htmlReport").equalsIgnoreCase("true")){
 			htmlReport.setSelected(true);
 		}
-		if(paramProp.getProperty("mhtReport").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("mhtReport") && paramProp.getProperty("mhtReport").equalsIgnoreCase("true")){
 			mhtReport.setSelected(true);
 		}
 		report2.add(xmlReport);
@@ -352,7 +352,7 @@ public class clientGui{
 				lang[i] = new JRadioButton(lit.next());
 				report3.add(lang[i]);
 				bGroup1.add(lang[i]);
-				if(lang[i].getText().equals(paramProp.getProperty("reportLang"))){
+				if(paramProp.containsKey("reportLang") && lang[i].getText().equals(paramProp.getProperty("reportLang"))){
 					lang[i].setSelected(true);
 				}
 				i++;
@@ -371,6 +371,15 @@ public class clientGui{
 		report5.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		report5.add(new JLabel("Ausgabedetails für HTML"));
 		
+		if(paramProp.getProperty("quickProcessing").equalsIgnoreCase("true")){
+			quickProcessing.setSelected(true);
+		}
+		if(paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
+			onlyValidPDFA.setSelected(true);
+		}
+		if(paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
+			analyseOnly.setSelected(true);
+		}
 		htmlNoCorrection.setEnabled(false);
 		htmlOpenResult.setEnabled(false);
 		report5.add(htmlNoDetails);
@@ -391,20 +400,23 @@ public class clientGui{
 		//run1.setBackground(hbzBrightBlue);
 		run1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		
-		if(paramProp.getProperty("quickProcessing").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("quickProcessing") && paramProp.getProperty("quickProcessing").equalsIgnoreCase("true")){
 			quickProcessing.setSelected(true);
 		}
-		if(paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("returnOnlyValidPdfA") && paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
 			onlyValidPDFA.setSelected(true);
 		}
-		if(paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
+		if(paramProp.containsKey("analyseOnly") && paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
 			analyseOnly.setSelected(true);
 		}
-		analyseOnly.setSelected(false);
-		//mhtReport.setSelected(false);
+		if(paramProp.containsKey("createEpub") && paramProp.getProperty("createEpub").equalsIgnoreCase("true")){
+			createEpub.setSelected(true);
+		}
+
 		run1.add(quickProcessing);
 		run1.add(onlyValidPDFA);
 		run1.add(analyseOnly);
+		run1.add(createEpub);
 		runTabBox.add(run1);
 		runTabBox.add(new JSeparator());
 		
@@ -528,18 +540,46 @@ public class clientGui{
 		}
 		if(htmlReport.isSelected()){
 			paramProp.setProperty("htmlReport", "true");
+		}else{
+			paramProp.setProperty("htmlReport", "false");
 		}
 		if(mhtReport.isSelected()){
 			paramProp.setProperty("mhtReport", "true");
+		}else{
+			paramProp.setProperty("mhtReport", "false");
 		}
 
 		if(htmlNoDetails.isSelected()){
 			paramProp.setProperty("htmlNoDetails", "true");
+		}else{
+			paramProp.setProperty("htmlNoDetails", "false");
 		}
 		if(htmlNoIcons.isSelected()){
 			paramProp.setProperty("htmlNoIcon", "true");
+		}else{
+			paramProp.setProperty("htmlNoIcons", "false");
 		}
 		
+		if(quickProcessing.isSelected()){
+			paramProp.setProperty("quickProcessing", "true");
+		}else{
+			paramProp.setProperty("quickProcessing", "false");
+		}
+		if(onlyValidPDFA.isSelected()){
+			paramProp.setProperty("returnOnlyValidPdfA", "true");
+		}else{
+			paramProp.setProperty("returnOnlyValidPdfA", "false");
+		}
+		if(analyseOnly.isSelected()){
+			paramProp.setProperty("analyseOnly", "true");
+		}else{
+			paramProp.setProperty("analyseOnly", "false");
+		}
+		if(createEpub.isSelected()){
+			paramProp.setProperty("createEpub", "true");
+		}else{
+			paramProp.setProperty("createEpub", "false");
+		}
 	}
 	
 	/**
