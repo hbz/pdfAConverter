@@ -85,7 +85,7 @@ public class clientGui{
 	JCheckBox htmlNoIcons = new JCheckBox("HTML Report ohne Icons");
 	JCheckBox htmlNoDetails = new JCheckBox("HTML-Report ohne Details");
 	JCheckBox htmlOpenResult = new JCheckBox("HTML-Report OpenResults");
-	JCheckBox htmlNoCorrection = new JCheckBox("HTML-Report no Corrections");
+	JCheckBox htmlNoCorrections = new JCheckBox("HTML-Report no Corrections");
 
 	JCheckBox quickProcessing = new JCheckBox("schneller Durchlauf");
 	JCheckBox onlyValidPDFA = new JCheckBox("nur valides PDF A zurückgeben");
@@ -113,6 +113,7 @@ public class clientGui{
 	private int countReport = 0;
 	String[] reportString = null;
 	private static String fileName = null;
+	private boolean visitedParamBox = false;
 	
 	private ArrayList<String[]> fNames = new ArrayList<String[]>();
     	
@@ -371,20 +372,24 @@ public class clientGui{
 		report5.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		report5.add(new JLabel("Ausgabedetails für HTML"));
 		
-		if(paramProp.getProperty("quickProcessing").equalsIgnoreCase("true")){
-			quickProcessing.setSelected(true);
+		if(paramProp.containsKey("htmlNoDetails") && paramProp.getProperty("htmlNoDetails").equalsIgnoreCase("true")){
+			htmlNoDetails.setSelected(true);
 		}
-		if(paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
-			onlyValidPDFA.setSelected(true);
+		if(paramProp.containsKey("htmlNoIcons") && paramProp.getProperty("htmlNoIcons").equalsIgnoreCase("true")){
+			htmlNoIcons.setSelected(true);
 		}
-		if(paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
-			analyseOnly.setSelected(true);
+		if(paramProp.containsKey("htmlNoCorrections") && paramProp.getProperty("htmlNoCorrections").equalsIgnoreCase("true")){
+			htmlNoCorrections.setSelected(true);
 		}
-		htmlNoCorrection.setEnabled(false);
+		if(paramProp.containsKey("htmlOpenResult") && paramProp.getProperty("htmlOpenResult").equalsIgnoreCase("true")){
+			htmlOpenResult.setSelected(true);
+		}
+
+		htmlNoCorrections.setEnabled(false);
 		htmlOpenResult.setEnabled(false);
 		report5.add(htmlNoDetails);
 		report5.add(htmlNoIcons);
-		report5.add(htmlNoCorrection);
+		report5.add(htmlNoCorrections);
 		report5.add(htmlOpenResult);
 		reportTabBox.add(report5);
 		
@@ -455,6 +460,8 @@ public class clientGui{
 		runTab.add(runTabBox);
 		
 		paramBox.add(tab);
+		// hack: if parambox was visited, use parameters from GUI alse use default params
+		visitedParamBox = true;
 		return paramBox;
 	}
 	
@@ -480,6 +487,8 @@ public class clientGui{
 				reportStream = rit.next();
 				resultBox.add(new ReportBox(reportStream).getResultBox());
 			}			
+		}else{
+			//TODO
 		}
 		if(oString != null){
 			resultBox.add(new PdfAViewerBox(reportStream).getResultBox());
@@ -801,7 +810,12 @@ public class clientGui{
 			response = null;
 			reportString = null;
 	    	//load Gui setted Parameters into Properties if needed
-			writeGuiParamsToProp();
+			if(visitedParamBox){
+				writeGuiParamsToProp();
+			}else{
+				// default Params should be already in Props?
+				log.info("Use Default paramters");
+			}
 			
 
 	    	//create ParameterType for Web Service Request
@@ -822,6 +836,7 @@ public class clientGui{
 			prozessTextPane.setEditable(false);
 			prozessTextPane.setEditorKit(new javax.swing.text.html.HTMLEditorKit());
 			JPanel prozessPanel = new JPanel();
+			// TODO: implement animated gif not via url
 			Icon processIcon = createImageIconFromUrl("file:///home/aquast/git/pdfa/wsclient/src/main/resources/images/laufrad.gif");
 			JLabel label = new JLabel("Bitte haben Sie etwas Geduld.", processIcon, JLabel.CENTER);
 			Box prozessBox = new Box(BoxLayout.Y_AXIS);
@@ -927,6 +942,7 @@ public class clientGui{
 		convStream.setConverterParameters(param);
 		// parse stream into String 
 		String iString = null;
+		oString = new String();
 			try {
 			iString = new String(iStream, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -938,7 +954,6 @@ public class clientGui{
 		try{
 			log.info("sending Request");
 			response = client.convertFromStream(convStream); 
-			oString = new String();
 			oString = response.getResponseDocumentStream();	
 		}catch(RemoteException exc){
     		paramBox = createDefaultBox();
@@ -957,7 +972,6 @@ public class clientGui{
 			cexc.printStackTrace();
 		}	
 		//log.info("Stream in Response = " +  oString);
-		log.info("Report Response-Stream: " + response.getResponseDocumentStream());
 	}
 	
 	class Worker extends SwingWorker<Object, String>{
@@ -981,6 +995,7 @@ public class clientGui{
 				showSavePdfA.setEnabled(true);
 				fNames.add(new String[]{fileName});
 			}
+			
 			for(int i= 0; i < fNames.size(); i++){
 				for(int j=0; j < fNames.get(i).length; j++){
 					System.out.println(fNames.get(i)[j].toString());
@@ -1010,9 +1025,11 @@ public class clientGui{
     		reportString = response.getReportStream();
     		showLoadPdf.setEnabled(true);
     		log.info(response.getReportStream());
+    		paramBox = createResultBox();
 		}
 		else{
 			log.warn("Leerer ReportStream!");
+			
 		}
 		
 		paramBox = createResultBox();
