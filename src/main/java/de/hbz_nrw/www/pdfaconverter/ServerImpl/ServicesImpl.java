@@ -228,10 +228,22 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			paramBuffer.append(" --level=" + paramType.getCompliancyLevel());
 		}
 		
+		if(paramType.getForceConversionReconvert() && paramType.getForceConversionReconvert() == true){
+			paramBuffer.append(" --forceconversion_reconvert");
+		}
+
+		if(paramType.getForceConversionPagesToImages() && paramType.getForceConversionPagesToImages() == true){
+			paramBuffer.append(" --forceconversion_pagestoimages");
+		}
+
+		if(paramType.getForceConversionDocToImages() && paramType.getForceConversionDocToImages() == true){
+			paramBuffer.append(" --forceconversion_doctoimages");
+		}
+
 		if(paramType.getReportLang()!=null){
 			paramBuffer.append(" --language=" + paramType.getReportLang());
 		}
-		
+
 
 		if(paramType.getReportFormat() != null){
 			for(int i=0; i < paramType.getReportFormat().length; i++){

@@ -89,6 +89,18 @@ public class PdfAPilotParameters {
 		if(paramProp.containsKey("createEpub")){
 			param.setCreateEpub(paramProp.getProperty("createEpub").matches("true"));
 		}
+		if(paramProp.containsKey("createEpub")){
+			param.setCreateEpub(paramProp.getProperty("createEpub").matches("true"));
+		}
+		if(paramProp.containsKey("forceConversionReconvert")){
+			param.setForceConversionReconvert(paramProp.getProperty("forceConversionReconvert").matches("true"));
+		}
+		if(paramProp.containsKey("forceConversionPagesToImages")){
+			param.setForceConversionPagesToImages(paramProp.getProperty("forceConversionPagesToImages").matches("true"));
+		}
+		if(paramProp.containsKey("forceConversionDocToImages")){
+			param.setForceConversionDocToImages(paramProp.getProperty("forceConversionDocToImages").matches("true"));
+		}
 		
 		if(paramProp.containsKey("compliancyLevel")){
 			if(paramProp.getProperty("compliancyLevel").equals(CompliancyLevelType.value1.getValue())){

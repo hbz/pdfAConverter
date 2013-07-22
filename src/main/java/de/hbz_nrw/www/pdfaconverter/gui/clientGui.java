@@ -92,6 +92,9 @@ public class clientGui{
 	JCheckBox analyseOnly = new JCheckBox("nur Analysieren");
 	JCheckBox createEpub = new JCheckBox("E-Pub erstellen");
 	
+	JCheckBox forceConversionReconvert = new JCheckBox("erzwinge Neukonvertierung per PS");
+	JCheckBox forceConversionPagesToImages = new JCheckBox("wandle fehlerhafte Seiten in Bilder");
+	JCheckBox forceConversionDocToImages = new JCheckBox("wandle gemsamtes PDF in Bilder");
 
 	JRadioButton trigger[] = null;
 	JRadioButton lang[] = null;
@@ -456,7 +459,32 @@ public class clientGui{
 			i++;
 		}
 		runTabBox.add(run2);
+		runTabBox.add(new JSeparator());
 		
+		// Create Trigger Box
+		Box run3 = new Box(BoxLayout.Y_AXIS);
+		run3.add(new JLabel("Erweitert"));
+		//run1.setBackground(hbzBrightBlue);
+		run3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		
+		if(paramProp.containsKey("forceConversionReconvert") && paramProp.getProperty("forceConversionReconvert").equalsIgnoreCase("true")){
+			forceConversionReconvert.setSelected(true);
+		}
+		if(paramProp.containsKey("returnOnlyValidPdfA") && paramProp.getProperty("returnOnlyValidPdfA").equalsIgnoreCase("true")){
+			onlyValidPDFA.setSelected(true);
+		}
+		if(paramProp.containsKey("analyseOnly") && paramProp.getProperty("analyseOnly").equalsIgnoreCase("true")){
+			analyseOnly.setSelected(true);
+		}
+		if(paramProp.containsKey("createEpub") && paramProp.getProperty("createEpub").equalsIgnoreCase("true")){
+			createEpub.setSelected(true);
+		}
+
+		run3.add(forceConversionReconvert);
+		run3.add(forceConversionPagesToImages);
+		run3.add(forceConversionDocToImages);
+		runTabBox.add(run3);
+
 		reportTab.add(reportTabBox);
 		runTab.add(runTabBox);
 		
@@ -587,6 +615,21 @@ public class clientGui{
 			paramProp.setProperty("createEpub", "true");
 		}else{
 			paramProp.setProperty("createEpub", "false");
+		}
+		if(forceConversionReconvert.isSelected()){
+			paramProp.setProperty("forceConversionReconvert", "true");
+		}else{
+			paramProp.setProperty("forceConversionReconvert", "false");
+		}
+		if(forceConversionPagesToImages.isSelected()){
+			paramProp.setProperty("forceConversionPagesToImages", "true");
+		}else{
+			paramProp.setProperty("forceConversionPagesToImages", "false");
+		}
+		if(forceConversionDocToImages.isSelected()){
+			paramProp.setProperty("forceConversionDocToImages", "true");
+		}else{
+			paramProp.setProperty("forceConversionDocToImages", "false");
 		}
 	}
 	
