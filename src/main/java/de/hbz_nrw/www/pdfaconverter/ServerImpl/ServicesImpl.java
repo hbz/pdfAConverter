@@ -111,7 +111,6 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		ConvertFromStreamResponse response= new ConvertFromStreamResponse();
 		
-		log.info("nun hier");
 		//create a unique temporary file prefix 
 		String fileIdent = getTimePrefix() + ".pdf";
 

@@ -210,7 +210,7 @@ public class PdfAPilotParameters {
 		
 		//set Reporting Params
 		paramProp.setProperty("reportTrigger", "ALWAYS");
-		paramProp.setProperty("reportLang", "DE");
+		paramProp.setProperty("reportLang", "IT");
 		paramProp.setProperty("htmlReport", "true");
 		paramProp.setProperty("htmlOpenResult", "true");
 		paramProp.setProperty("htmlNoIcons", "false");
