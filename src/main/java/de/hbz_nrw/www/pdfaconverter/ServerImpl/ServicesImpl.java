@@ -192,6 +192,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			e.printStackTrace();
 		}
 		response.setResponseDocumentUrl(documentUri);
+		response.setReportUrl(documentUri);
+		response.setResult("unknown");
 		return response;
 	}
 	

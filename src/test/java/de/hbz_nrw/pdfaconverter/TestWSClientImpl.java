@@ -70,6 +70,7 @@ public class TestWSClientImpl {
 		/** Prepare a Url Request **/
 		// create ConvertFromUrl Request 
 		ConvertFromUrl convUrl = new ConvertFromUrl();
+		convUrl.setCompliancyLevel("1a");
 		//convUrl.setConverterParameters(getParams());
 
 		convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
@@ -82,7 +83,10 @@ public class TestWSClientImpl {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Ergebnis Url: " + response.getResponseDocumentUrl());		
+		System.out.println("Ergebnis Url: " + response.getResponseDocumentUrl());
+		System.out.println("Ergebnis Report: " + response.getReportUrl());
+		System.out.println("Ergebnis Wert: " + response.getResult());
+		
 	}
 	
 	@Test void convertFromStream(){
