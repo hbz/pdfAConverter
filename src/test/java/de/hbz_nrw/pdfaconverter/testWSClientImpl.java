@@ -70,10 +70,10 @@ public class testWSClientImpl {
 		/** Prepare a Url Request **/
 		// create ConvertFromUrl Request 
 		ConvertFromUrl convUrl = new ConvertFromUrl();
-		convUrl.setConverterParameters(getParams());
+		//convUrl.setConverterParameters(getParams());
 
 		convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
-	
+		
 		/** Call the client with the previously generated request **/
 		try{
 			response = cImpl.convertFromUrl(convUrl);
@@ -150,7 +150,7 @@ public class testWSClientImpl {
 		ParameterType param = new ParameterType();
 		param.setReturnOnlyValidPDFA(true);
 		//param.setAnalyseOnly(true);
-		param.setCompliancyLevel(CompliancyLevelType.value2);
+		param.setCompliancyLevel(CompliancyLevelType.value1);
 		param.setQuickProcessing(true);
 		param.setReportLang(ReportLangType.DE);
 		param.setReportTrigger(ReportTriggerType.ALWAYS);

@@ -79,22 +79,24 @@ public class TestWSServerImpl {
 		param.addHtmlReportOptions(HtmlOptionType.OPENRESULT);
 
 		
-
 		// create ConvertFromAttachment Request 
 		ConvertFromAttachment convAttach = new ConvertFromAttachment();
 		convAttach.setConverterParameters(param);
 		
 		// create ConvertFromUrl Request 
 		ConvertFromUrl convUrl = new ConvertFromUrl();
-		convUrl.setConverterParameters(param);
+		//convUrl.setConverterParameters(param);
 		convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
+		convUrl.setCompliancyLevel("1b");
+		convUrl.setReportType("html");
+		convUrl.setForceConvLevel("3");
 
 		// create ConvertFromUrl Request 
 		ConvertFromStream convStream = new ConvertFromStream();
 		convStream.setConverterParameters(param);
 	
 		// create a Teststream for convertFromStream Operation
-		File origPdfFile = new File("test.pdf");
+		File origPdfFile = new File("simple_test.pdf");
 		//System.out.println("File-Size 1: " + origPdfFile.length());
 		
 		// load a test file and create a bytestream of this

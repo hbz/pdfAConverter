@@ -33,36 +33,6 @@
         
 
                         /**
-                        * field for ConverterParameters
-                        */
-
-                        
-                                    protected de.hbz_nrw.www.pdfaconverter.types.ParameterType localConverterParameters ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return de.hbz_nrw.www.pdfaconverter.types.ParameterType
-                           */
-                           public  de.hbz_nrw.www.pdfaconverter.types.ParameterType getConverterParameters(){
-                               return localConverterParameters;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ConverterParameters
-                               */
-                               public void setConverterParameters(de.hbz_nrw.www.pdfaconverter.types.ParameterType param){
-                            
-                                            this.localConverterParameters=param;
-                                    
-
-                               }
-                            
-
-                        /**
                         * field for Url
                         */
 
@@ -93,44 +63,118 @@
                             
 
                         /**
-                        * field for Authorization
+                        * field for CompliancyLevel
                         */
 
                         
-                                    protected de.hbz_nrw.www.pdfaconverter.types.AuthorizationType localAuthorization ;
+                                    protected java.lang.String localCompliancyLevel ;
                                 
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localAuthorizationTracker = false ;
-                           
 
                            /**
                            * Auto generated getter method
-                           * @return de.hbz_nrw.www.pdfaconverter.types.AuthorizationType
+                           * @return java.lang.String
                            */
-                           public  de.hbz_nrw.www.pdfaconverter.types.AuthorizationType getAuthorization(){
-                               return localAuthorization;
+                           public  java.lang.String getCompliancyLevel(){
+                               return localCompliancyLevel;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Authorization
+                               * @param param CompliancyLevel
                                */
-                               public void setAuthorization(de.hbz_nrw.www.pdfaconverter.types.AuthorizationType param){
+                               public void setCompliancyLevel(java.lang.String param){
+                            
+                                            this.localCompliancyLevel=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ReportType
+                        */
+
+                        
+                                    protected java.lang.String localReportType ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localReportTypeTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getReportType(){
+                               return localReportType;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ReportType
+                               */
+                               public void setReportType(java.lang.String param){
                             
                                        if (param != null){
                                           //update the setting tracker
-                                          localAuthorizationTracker = true;
+                                          localReportTypeTracker = true;
                                        } else {
-                                          localAuthorizationTracker = false;
+                                          localReportTypeTracker = false;
                                               
                                        }
                                    
-                                            this.localAuthorization=param;
+                                            this.localReportType=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ForceConvLevel
+                        */
+
+                        
+                                    protected java.lang.String localForceConvLevel ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localForceConvLevelTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getForceConvLevel(){
+                               return localForceConvLevel;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ForceConvLevel
+                               */
+                               public void setForceConvLevel(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localForceConvLevelTracker = true;
+                                       } else {
+                                          localForceConvLevelTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localForceConvLevel=param;
                                     
 
                                }
@@ -233,12 +277,6 @@
                
                    }
                
-                                            if (localConverterParameters==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("converterParameters cannot be null!!");
-                                            }
-                                           localConverterParameters.serialize(new javax.xml.namespace.QName("","converterParameters"),
-                                               factory,xmlWriter);
-                                        
                                     namespace = "";
                                     if (! namespace.equals("")) {
                                         prefix = xmlWriter.getPrefix(namespace);
@@ -272,13 +310,109 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                              if (localAuthorizationTracker){
-                                            if (localAuthorization==null){
-                                                 throw new org.apache.axis2.databinding.ADBException("authorization cannot be null!!");
-                                            }
-                                           localAuthorization.serialize(new javax.xml.namespace.QName("","authorization"),
-                                               factory,xmlWriter);
+                             
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"compliancyLevel", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"compliancyLevel");
                                         }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("compliancyLevel");
+                                    }
+                                
+
+                                          if (localCompliancyLevel==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localCompliancyLevel);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                              if (localReportTypeTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"reportType", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"reportType");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("reportType");
+                                    }
+                                
+
+                                          if (localReportType==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localReportType);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localForceConvLevelTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"forceConvLevel", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"forceConvLevel");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("forceConvLevel");
+                                    }
+                                
+
+                                          if (localForceConvLevel==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("forceConvLevel cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localForceConvLevel);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -441,15 +575,6 @@
                  java.util.ArrayList attribList = new java.util.ArrayList();
 
                 
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "converterParameters"));
-                            
-                            
-                                    if (localConverterParameters==null){
-                                         throw new org.apache.axis2.databinding.ADBException("converterParameters cannot be null!!");
-                                    }
-                                    elementList.add(localConverterParameters);
-                                
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "url"));
                                  
@@ -458,16 +583,34 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("url cannot be null!!");
                                         }
-                                     if (localAuthorizationTracker){
-                            elementList.add(new javax.xml.namespace.QName("",
-                                                                      "authorization"));
-                            
-                            
-                                    if (localAuthorization==null){
-                                         throw new org.apache.axis2.databinding.ADBException("authorization cannot be null!!");
+                                    
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "compliancyLevel"));
+                                 
+                                        if (localCompliancyLevel != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCompliancyLevel));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
+                                        }
+                                     if (localReportTypeTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "reportType"));
+                                 
+                                        if (localReportType != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportType));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
+                                        }
+                                    } if (localForceConvLevelTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "forceConvLevel"));
+                                 
+                                        if (localForceConvLevel != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConvLevel));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("forceConvLevel cannot be null!!");
+                                        }
                                     }
-                                    elementList.add(localAuthorization);
-                                }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -546,22 +689,6 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","converterParameters").equals(reader.getName())){
-                                
-                                                object.setConverterParameters(de.hbz_nrw.www.pdfaconverter.types.ParameterType.Factory.parse(reader));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","url").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
@@ -581,9 +708,49 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","authorization").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
                                 
-                                                object.setAuthorization(de.hbz_nrw.www.pdfaconverter.types.AuthorizationType.Factory.parse(reader));
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setCompliancyLevel(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportType").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setReportType(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","forceConvLevel").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setForceConvLevel(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     

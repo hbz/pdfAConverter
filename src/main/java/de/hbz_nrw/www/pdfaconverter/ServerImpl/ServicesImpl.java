@@ -174,7 +174,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
-		String paramString = createParameterString(fileIdent, convertFromUrl.getConverterParameters());
+		String paramString = createParameterString(fileIdent, convertFromUrl);
 		System.out.println(paramString);
 		log.info(paramString);
 		
@@ -263,7 +263,17 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 		return paramBuffer.toString();
 	}
+
+	private String createParameterString(String fileIdent, ConvertFromUrl convFromUrl){
+		String url = convFromUrl.getUrl();
+		
 	
+		String paramString = null;
+		
+		return paramString;
+		
+	}
+
 	private String getTimePrefix(){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'kkmmssSSS'Z'");
 		Calendar cal = Calendar.getInstance();

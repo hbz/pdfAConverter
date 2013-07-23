@@ -8,11 +8,16 @@
                 </xsd:annotation>
                 <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element maxOccurs="1" minOccurs="1" name="converterParameters" type="ns0:parameterType"/>
-          	<xsd:element maxOccurs="1" minOccurs="1" name="url" type="xsd:string">
+          	<xsd:element maxOccurs="1" minOccurs="1" name="url"
+          		type="xsd:string">
           	</xsd:element>
-          	<xsd:element maxOccurs="1" minOccurs="0" name="authorization" type="ns0:authorizationType">
+          	<xsd:element name="compliancyLevel" type="xsd:string"
+          		maxOccurs="1" minOccurs="1">
           	</xsd:element>
+          	<xsd:element name="reportType" type="xsd:string"
+          		maxOccurs="1" minOccurs="0">
+          	</xsd:element>
+          	<xsd:element name="forceConvLevel" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
           </xsd:sequence>
                 </xsd:complexType>
       </xsd:element>
