@@ -17,7 +17,13 @@
           	<xsd:element name="reportType" type="xsd:string"
           		maxOccurs="1" minOccurs="0">
           	</xsd:element>
-          	<xsd:element name="forceConvLevel" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+          	<xsd:element name="forceConvLevel" type="xsd:string"
+          		maxOccurs="1" minOccurs="0">
+          	</xsd:element>
+          	<xsd:element name="htmlReportOptions" type="xsd:string"
+          		maxOccurs="1" minOccurs="0">
+          	</xsd:element>
+          	<xsd:element name="reportLevel" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
           </xsd:sequence>
                 </xsd:complexType>
       </xsd:element>

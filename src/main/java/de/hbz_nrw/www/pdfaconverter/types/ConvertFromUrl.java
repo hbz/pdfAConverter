@@ -180,6 +180,94 @@
                                }
                             
 
+                        /**
+                        * field for HtmlReportOptions
+                        */
+
+                        
+                                    protected java.lang.String localHtmlReportOptions ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localHtmlReportOptionsTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getHtmlReportOptions(){
+                               return localHtmlReportOptions;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param HtmlReportOptions
+                               */
+                               public void setHtmlReportOptions(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localHtmlReportOptionsTracker = true;
+                                       } else {
+                                          localHtmlReportOptionsTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localHtmlReportOptions=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for ReportLevel
+                        */
+
+                        
+                                    protected java.lang.String localReportLevel ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localReportLevelTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getReportLevel(){
+                               return localReportLevel;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param ReportLevel
+                               */
+                               public void setReportLevel(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localReportLevelTracker = true;
+                                       } else {
+                                          localReportLevelTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localReportLevel=param;
+                                    
+
+                               }
+                            
+
      /**
      * isReaderMTOMAware
      * @return true if the reader supports MTOM
@@ -412,6 +500,74 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
+                             } if (localHtmlReportOptionsTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"htmlReportOptions", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"htmlReportOptions");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("htmlReportOptions");
+                                    }
+                                
+
+                                          if (localHtmlReportOptions==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("htmlReportOptions cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localHtmlReportOptions);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localReportLevelTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"reportLevel", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"reportLevel");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("reportLevel");
+                                    }
+                                
+
+                                          if (localReportLevel==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("reportLevel cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localReportLevel);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
                              }
                     xmlWriter.writeEndElement();
                
@@ -610,6 +766,24 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("forceConvLevel cannot be null!!");
                                         }
+                                    } if (localHtmlReportOptionsTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "htmlReportOptions"));
+                                 
+                                        if (localHtmlReportOptions != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHtmlReportOptions));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("htmlReportOptions cannot be null!!");
+                                        }
+                                    } if (localReportLevelTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "reportLevel"));
+                                 
+                                        if (localReportLevel != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportLevel));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("reportLevel cannot be null!!");
+                                        }
                                     }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
@@ -750,6 +924,42 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setForceConvLevel(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","htmlReportOptions").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setHtmlReportOptions(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportLevel").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setReportLevel(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
