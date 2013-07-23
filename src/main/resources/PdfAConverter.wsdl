@@ -6,25 +6,12 @@
                 <xsd:annotation>
                 	<xsd:documentation/>
                 </xsd:annotation>
-                <xsd:complexType>
-          <xsd:sequence>
-          	<xsd:element maxOccurs="1" minOccurs="1" name="url"
-          		type="xsd:string">
-          	</xsd:element>
-          	<xsd:element name="compliancyLevel" type="xsd:string"
-          		maxOccurs="1" minOccurs="1">
-          	</xsd:element>
-          	<xsd:element name="reportType" type="xsd:string"
-          		maxOccurs="1" minOccurs="0">
-          	</xsd:element>
-          	<xsd:element name="forceConvLevel" type="xsd:string"
-          		maxOccurs="1" minOccurs="0">
-          	</xsd:element>
-          	<xsd:element name="htmlReportOptions" type="xsd:string"
-          		maxOccurs="1" minOccurs="0">
-          	</xsd:element>
-          	<xsd:element name="reportLevel" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
-          </xsd:sequence>
+            	    <xsd:complexType>
+			          <xsd:sequence>
+          				<xsd:element name="compliancyLevel" type="xsd:string"
+          					maxOccurs="1" minOccurs="1">
+          				</xsd:element>
+          			</xsd:sequence>
                 </xsd:complexType>
       </xsd:element>
       <xsd:element name="convertFromUrlResponse">

@@ -178,8 +178,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		System.out.println(paramString);
 		log.info(paramString);
 		
-		// Write incoming PDF-Base64 Stream as file into temporary Directory
-		String fileName = FileUtil.saveUrlToFile(fileIdent, convertFromUrl.getUrl());
+		// copy remote Object to temporary Directory
+		String fileName = FileUtil.saveUrlToFile(fileIdent, "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
 		
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
@@ -267,10 +267,12 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 	}
 
 	private String createParameterString(String fileIdent, ConvertFromUrl convFromUrl){
-		String url = convFromUrl.getUrl();
+		String url = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf";
 		
-	
-		String paramString = null;
+		StringBuffer paramBuffer = new StringBuffer();
+		paramBuffer.append(url);
+		
+		String paramString = paramBuffer.toString();
 		
 		return paramString;
 		

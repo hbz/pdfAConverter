@@ -85,27 +85,28 @@ public class TestWSServerImpl {
 		
 		// create ConvertFromUrl Request 
 		ConvertFromUrl convUrl = new ConvertFromUrl();
+		convUrl.setCompliancyLevel("1a");
 		//convUrl.setConverterParameters(param);
-		convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
-		convUrl.setCompliancyLevel("1b");
-		convUrl.setReportType("html");
-		convUrl.setForceConvLevel("3");
+		//convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
+		//convUrl.setCompliancyLevel("1b");
+		//convUrl.setReportType("html");
+		//convUrl.setForceConvLevel("3");
 
 		// create ConvertFromUrl Request 
 		ConvertFromStream convStream = new ConvertFromStream();
 		convStream.setConverterParameters(param);
 	
 		// create a Teststream for convertFromStream Operation
-		File origPdfFile = new File("simple_test.pdf");
+		//File origPdfFile = new File("simple_test.pdf");
 		//System.out.println("File-Size 1: " + origPdfFile.length());
 		
 		// load a test file and create a bytestream of this
 		// stream is encoded to Base64
-		byte[] stream = FileUtil.loadFileIntoStream(origPdfFile);
+		//byte[] stream = FileUtil.loadFileIntoStream(origPdfFile);
 		//System.out.println("Stream-Size 1 unkodiert: " + stream.length);
 		
 		// parse stream into String 
-		String test = null;
+		/*String test = null;
 		boolean is64 = false;
 		try {
 			is64= Base64.isArrayByteBase64(stream);
@@ -120,7 +121,7 @@ public class TestWSServerImpl {
 		// DataHandler documentHandler = convAttach.getDocument().getData();
 		// String fileName = convAttach.getDocument().getName();
 
-		
+		*/
 		try{
 			sImpl.convertFromUrl(convUrl);
 			//sImpl.convertFromStream(convStream);

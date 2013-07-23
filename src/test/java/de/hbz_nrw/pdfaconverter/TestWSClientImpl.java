@@ -64,7 +64,7 @@ public class TestWSClientImpl {
 	private static Logger log = Logger.getLogger(TestWSClientImpl.class);
 	private ClientImpl cImpl = new ClientImpl();
 
-	@Test void convertFromUrl(){
+	@Test public void convertFromUrl(){
 		ConvertFromUrlResponse response = null; 
 
 		/** Prepare a Url Request **/
@@ -73,7 +73,7 @@ public class TestWSClientImpl {
 		convUrl.setCompliancyLevel("1a");
 		//convUrl.setConverterParameters(getParams());
 
-		convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
+		//convUrl.setUrl("http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
 		
 		/** Call the client with the previously generated request **/
 		try{
@@ -89,7 +89,7 @@ public class TestWSClientImpl {
 		
 	}
 	
-	@Test void convertFromStream(){
+	@Test public void convertFromStream(){
 		
 		ConvertFromStreamResponse response = null; 
 

@@ -33,36 +33,6 @@
         
 
                         /**
-                        * field for Url
-                        */
-
-                        
-                                    protected java.lang.String localUrl ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getUrl(){
-                               return localUrl;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Url
-                               */
-                               public void setUrl(java.lang.String param){
-                            
-                                            this.localUrl=param;
-                                    
-
-                               }
-                            
-
-                        /**
                         * field for CompliancyLevel
                         */
 
@@ -87,182 +57,6 @@
                                public void setCompliancyLevel(java.lang.String param){
                             
                                             this.localCompliancyLevel=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for ReportType
-                        */
-
-                        
-                                    protected java.lang.String localReportType ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localReportTypeTracker = false ;
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getReportType(){
-                               return localReportType;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ReportType
-                               */
-                               public void setReportType(java.lang.String param){
-                            
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localReportTypeTracker = true;
-                                       } else {
-                                          localReportTypeTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localReportType=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for ForceConvLevel
-                        */
-
-                        
-                                    protected java.lang.String localForceConvLevel ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localForceConvLevelTracker = false ;
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getForceConvLevel(){
-                               return localForceConvLevel;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ForceConvLevel
-                               */
-                               public void setForceConvLevel(java.lang.String param){
-                            
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localForceConvLevelTracker = true;
-                                       } else {
-                                          localForceConvLevelTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localForceConvLevel=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for HtmlReportOptions
-                        */
-
-                        
-                                    protected java.lang.String localHtmlReportOptions ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localHtmlReportOptionsTracker = false ;
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getHtmlReportOptions(){
-                               return localHtmlReportOptions;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param HtmlReportOptions
-                               */
-                               public void setHtmlReportOptions(java.lang.String param){
-                            
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localHtmlReportOptionsTracker = true;
-                                       } else {
-                                          localHtmlReportOptionsTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localHtmlReportOptions=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for ReportLevel
-                        */
-
-                        
-                                    protected java.lang.String localReportLevel ;
-                                
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localReportLevelTracker = false ;
-                           
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getReportLevel(){
-                               return localReportLevel;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ReportLevel
-                               */
-                               public void setReportLevel(java.lang.String param){
-                            
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localReportLevelTracker = true;
-                                       } else {
-                                          localReportLevelTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localReportLevel=param;
                                     
 
                                }
@@ -372,40 +166,6 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"url", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"url");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("url");
-                                    }
-                                
-
-                                          if (localUrl==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("url cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localUrl);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
                                             xmlWriter.writeStartElement(prefix,"compliancyLevel", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
@@ -432,143 +192,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                              if (localReportTypeTracker){
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"reportType", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"reportType");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("reportType");
-                                    }
-                                
-
-                                          if (localReportType==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localReportType);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localForceConvLevelTracker){
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"forceConvLevel", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"forceConvLevel");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("forceConvLevel");
-                                    }
-                                
-
-                                          if (localForceConvLevel==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("forceConvLevel cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localForceConvLevel);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localHtmlReportOptionsTracker){
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"htmlReportOptions", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"htmlReportOptions");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("htmlReportOptions");
-                                    }
-                                
-
-                                          if (localHtmlReportOptions==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("htmlReportOptions cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localHtmlReportOptions);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             } if (localReportLevelTracker){
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"reportLevel", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"reportLevel");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("reportLevel");
-                                    }
-                                
-
-                                          if (localReportLevel==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("reportLevel cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localReportLevel);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             }
+                             
                     xmlWriter.writeEndElement();
                
 
@@ -732,15 +356,6 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "url"));
-                                 
-                                        if (localUrl != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUrl));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("url cannot be null!!");
-                                        }
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
                                                                       "compliancyLevel"));
                                  
                                         if (localCompliancyLevel != null){
@@ -748,43 +363,7 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
                                         }
-                                     if (localReportTypeTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "reportType"));
-                                 
-                                        if (localReportType != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportType));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
-                                        }
-                                    } if (localForceConvLevelTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "forceConvLevel"));
-                                 
-                                        if (localForceConvLevel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localForceConvLevel));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("forceConvLevel cannot be null!!");
-                                        }
-                                    } if (localHtmlReportOptionsTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "htmlReportOptions"));
-                                 
-                                        if (localHtmlReportOptions != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHtmlReportOptions));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("htmlReportOptions cannot be null!!");
-                                        }
-                                    } if (localReportLevelTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "reportLevel"));
-                                 
-                                        if (localReportLevel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportLevel));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("reportLevel cannot be null!!");
-                                        }
-                                    }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -863,25 +442,6 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","url").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setUrl(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
@@ -897,79 +457,7 @@
                                     // A start element we are not expecting indicates an invalid parameter was passed
                                     throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
                                 }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportType").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setReportType(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","forceConvLevel").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setForceConvLevel(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","htmlReportOptions").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setHtmlReportOptions(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportLevel").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setReportLevel(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                    else {
-                                        
-                                    }
-                                  
+                              
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
