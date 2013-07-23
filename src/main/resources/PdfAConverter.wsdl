@@ -30,8 +30,12 @@
       <xsd:element name="convertFromUrlResponse">
         <xsd:complexType>
           <xsd:sequence>
-          	<xsd:element name="responseDocumentUrl" type="xsd:anyURI" maxOccurs="1" minOccurs="0"/>
-          	<xsd:element name="reportUrl" type="xsd:anyURI" maxOccurs="1" minOccurs="0"/>
+          	<xsd:element name="responseDocumentUrl" type="xsd:anyURI"
+          		maxOccurs="1" minOccurs="0" />
+          	<xsd:element name="reportUrl" type="xsd:anyURI"
+          		maxOccurs="1" minOccurs="0" />
+          	<xsd:element name="result" maxOccurs="1" minOccurs="1" type="xsd:string">
+          	</xsd:element>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>

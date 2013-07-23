@@ -120,6 +120,36 @@
                                }
                             
 
+                        /**
+                        * field for Result
+                        */
+
+                        
+                                    protected java.lang.String localResult ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getResult(){
+                               return localResult;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Result
+                               */
+                               public void setResult(java.lang.String param){
+                            
+                                            this.localResult=param;
+                                    
+
+                               }
+                            
+
      /**
      * isReaderMTOMAware
      * @return true if the reader supports MTOM
@@ -285,6 +315,40 @@
                                     
                                    xmlWriter.writeEndElement();
                              }
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"result", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"result");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("result");
+                                    }
+                                
+
+                                          if (localResult==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("result cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localResult);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
                     xmlWriter.writeEndElement();
                
 
@@ -465,6 +529,15 @@
                                            throw new org.apache.axis2.databinding.ADBException("reportUrl cannot be null!!");
                                         }
                                     }
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "result"));
+                                 
+                                        if (localResult != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localResult));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("result cannot be null!!");
+                                        }
+                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -575,7 +648,26 @@
                                     else {
                                         
                                     }
-                                  
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","result").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setResult(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
+                                }
+                              
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             
