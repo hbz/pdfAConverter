@@ -23,6 +23,8 @@
 package de.hbz_nrw.www.pdfaconverter.ServerImpl;
 
 import java.lang.StringBuffer;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.File;
@@ -47,7 +49,11 @@ import org.apache.axis2.databinding.types.URI.MalformedURIException;
 import javax.activation.DataHandler;
 import javax.servlet.ServletException;
 
+import de.hbz_nrw.www.pdfaconverter.fileUtils.BatchFileUtil;
 import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.gui.PdfAPilotParameters;
+import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
+import de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromUrl_faultMsg;
@@ -82,10 +88,12 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 	}
 	// Initiate Logger for ServicesImpl
 	private static Logger log = Logger.getLogger(ServicesImpl.class);
+	private String exitStateStr = null;
 
 	/* (non-Javadoc)
 	 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverterSkeletonInterface#convertFromAttachment(de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment)
 	 */
+	@Override
 	public ConvertFromAttachmentResponse convertFromAttachment(
 			ConvertFromAttachment convertFromAttachment)
 			throws ConvertFromAttachment_faultMsg {
@@ -97,7 +105,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
-		String paramString = createParameterString(fileName, convertFromAttachment.getConverterParameters());
+		String paramString = PdfAPilotParameters.createParameterString(fileName, convertFromAttachment.getConverterParameters());
 		log.debug("created paramString: " + paramString);
 		return null;
 	}
@@ -105,6 +113,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 	/* (non-Javadoc)
 	 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverterSkeletonInterface#convertFromStream(de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream)
 	 */
+	@Override
 	public ConvertFromStreamResponse convertFromStream(
 			ConvertFromStream convertFromStream)
 			throws ConvertFromStream_faultMsg {
@@ -117,7 +126,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
-		String paramString = createParameterString(fileIdent, convertFromStream.getConverterParameters());
+		String paramString = PdfAPilotParameters.createParameterString(fileIdent, convertFromStream.getConverterParameters());
 		log.debug("created paramString: " + paramString);
 		
 		// Write incoming PDF-Base64 Stream as file into temporary Directory
@@ -161,6 +170,70 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		return response;
 	}
 
+	@Override
+	public BatchConvertResponse batchConvert(BatchConvert batchConvert) {
+		// TODO Auto-generated method stub
+		BatchConvertResponse batchResponse = new BatchConvertResponse(); 
+		String paramString = null;
+		String fileName = null;
+
+		//create unique directory identifier
+		String fileIdent = getTimePrefix();
+
+		String batchFileName = FileUtil.saveUrlToFile(fileIdent + "_batch.txt", batchConvert.getDocumentsFile());
+		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", batchConvert.getParameterFile());
+		List<String> documentList = null;
+		ParameterType paramType = null;
+		
+		log.info("Batch File URL: " + batchFileName);
+		
+		try {
+			log.info("Reading Batch File");
+			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		StringBuffer resultBuffer = new StringBuffer();
+
+		log.info("Starting Batch Job");
+		Iterator<String> it = documentList.iterator();
+		while(it.hasNext()){
+			String fileUrl = it.next();
+			log.info("File :" + fileUrl);
+
+			//create unique directory identifier
+			fileIdent = getTimePrefix();
+			
+			// Load File to temp dir
+			fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", fileUrl);
+			String reportType = null;
+			try {
+				//paramString = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
+				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
+				log.info("Reading Parameters File");
+	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempfiledir() + paramFileName));
+	            BufferedInputStream bis = new BufferedInputStream(fis);
+				paramProp.load(bis);
+				paramType = PdfAPilotParameters.createParamType(paramProp);
+				paramString = PdfAPilotParameters.createParameterString(fileName, paramType);
+				reportType = paramType.getReportFormat()[0].getValue().toLowerCase();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// we may should run threads? 
+			executePdfATool(paramString, fileName);
+			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + exitStateStr +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
+		}
+		log.info(resultBuffer.toString());
+		FileUtil.saveStreamToFile(new File(Configuration.getTempfiledir() + "result" + fileName + ".result"), resultBuffer.toString());
+		batchResponse.setResultsFile(Configuration.getTempdirurl() + "result" + fileName + ".result");
+		return batchResponse;
+	}
+
 	/* (non-Javadoc)
 	 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverterSkeletonInterface#convertFromUrl(de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl)
 	 */
@@ -174,12 +247,12 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
-		String paramString = createParameterString(fileIdent, convertFromUrl);
+		String paramString = PdfAPilotParameters.createParameterString(fileIdent, convertFromUrl);
 		System.out.println(paramString);
 		log.info(paramString);
 		
 		// copy remote Object to temporary Directory
-		String fileName = FileUtil.saveUrlToFile(fileIdent, "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
+		String fileName = FileUtil.saveUrlToFile(fileIdent, convertFromUrl.getConvertFrom());
 		
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
@@ -191,92 +264,24 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		} catch (MalformedURIException e) {
 			e.printStackTrace();
 		}
+		URI reportUri = null;
+		try {
+			reportUri = new URI(Configuration.getTempdirurl() + "result/" + fileName.replace(".pdf", "." + convertFromUrl.getReportType().toLowerCase()));
+		} catch (MalformedURIException e) {
+			e.printStackTrace();
+		}
 		response.setResponseDocumentUrl(documentUri);
-		response.setReportUrl(documentUri);
-		response.setResult("unknown");
+		response.setReportUrl(reportUri);
+		if(exitStateStr != null && exitStateStr.equals("0")){
+			response.setResult("success");
+		}else if(exitStateStr != null && !exitStateStr.equals("0")){
+			response.setResult("Conversion to PDFA failed. System returns code: " + exitStateStr);			
+		}else{
+			response.setResult("System returns unknown state, please contact staff");			
+		}
 		return response;
 	}
 	
-	/**
-	 * <p><em>Title: Parse the ParameterType Object</em></p>
-	 * <p>Description: method generates an String output from all Callas Parameters given 
-	 * as Elements from ParameterType by WebService Operation calls.</p>
-	 * 
-	 * @param paramType <code>parameterType</code> a complex Data Type that provides all needed parameters for 
-	 * the Callas PDF A Tool 
-	 * @return <code>String</code> with all given parameters parsed from xml
-	 */
-	private String createParameterString(String fileIdent, ParameterType paramType){
-		StringBuffer paramBuffer = new StringBuffer();
-		
-		// set Parameter Strings
-		if(paramType.getReturnOnlyValidPDFA() && paramType.getReturnOnlyValidPDFA() == true){
-			paramBuffer.append(" --onlypdfa");
-		}
-		
-		if(paramType.getAnalyseOnly() && paramType.getAnalyseOnly() == true){
-			paramBuffer.append(" --analyse");
-		}
-		
-		if(paramType.getCreateEpub() && paramType.getCreateEpub() == true){
-			paramBuffer.append(" --createepub " + fileIdent);
-		}
-
-		if(paramType.getQuickProcessing() && paramType.getQuickProcessing() == true){
-			paramBuffer.append(" --quick");
-		}
-
-		if(paramType.getCompliancyLevel()!=null){
-			paramBuffer.append(" --level=" + paramType.getCompliancyLevel());
-		}
-		
-		if(paramType.getForceConversionReconvert() && paramType.getForceConversionReconvert() == true){
-			paramBuffer.append(" --forceconversion_reconvert");
-		}
-
-		if(paramType.getForceConversionPagesToImages() && paramType.getForceConversionPagesToImages() == true){
-			paramBuffer.append(" --forceconversion_pagestoimages");
-		}
-
-		if(paramType.getForceConversionDocToImages() && paramType.getForceConversionDocToImages() == true){
-			paramBuffer.append(" --forceconversion_doctoimages");
-		}
-
-		if(paramType.getReportLang()!=null){
-			paramBuffer.append(" --language=" + paramType.getReportLang());
-		}
-
-
-		if(paramType.getReportFormat() != null){
-			for(int i=0; i < paramType.getReportFormat().length; i++){
-				paramBuffer.append(" --report=" + paramType.getReportFormat()[i]);
-				if(paramType.getReportTrigger()!=null){
-					paramBuffer.append("," + paramType.getReportTrigger());
-				}
-				if(paramType.getReportFormat()[i].equals(ReportFormatType.HTML) && paramType.getHtmlReportOptions() != null){
-					for(int j=0; j < paramType.getHtmlReportOptions().length; j++){
-						paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
-					}
-				}
-				paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
-			}
-		}
-		
-
-		return paramBuffer.toString();
-	}
-
-	private String createParameterString(String fileIdent, ConvertFromUrl convFromUrl){
-		String url = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf";
-		
-		StringBuffer paramBuffer = new StringBuffer();
-		paramBuffer.append(url);
-		
-		String paramString = paramBuffer.toString();
-		
-		return paramString;
-		
-	}
 
 	private String getTimePrefix(){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'kkmmssSSS'Z'");
@@ -300,6 +305,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
 		String defaultParams = new String("--noprogress --nohits --substitute  " 
 				 + "--linkpath=http://nyx.hbz-nrw.de:8080/axis2/temp/reporttemplate "
+				 + "--fontfolder=/opt/pdfapilot/fontfolder "
 				);
 		String executeString = new String(programPath + " " 
 				+ defaultParams 
@@ -322,10 +328,12 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
             }
             log.info("STOUT: " + lineBuffer.toString());
             log.info("Exit State: " + exitState);
+            exitStateStr = Integer.toString(exitState);
 		}catch(Exception Exc){
 			log.error(Exc);
 		}	
 		// TODO: das Ausführen des PDFA Tools kann etwas dauern... was mache
 		// ich um festzustellen, dass Tool seine Arbeit beendet hat? 		
 	}
+
 }

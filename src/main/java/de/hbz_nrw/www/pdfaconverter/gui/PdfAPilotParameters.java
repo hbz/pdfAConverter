@@ -26,7 +26,9 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import de.hbz_nrw.www.pdfaconverter.ServerImpl.Configuration;
 import de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType;
+import de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl;
 import de.hbz_nrw.www.pdfaconverter.types.HtmlOptionType;
 import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
 import de.hbz_nrw.www.pdfaconverter.types.ReportFormatType;
@@ -227,7 +229,7 @@ public class PdfAPilotParameters {
 		
 		//set Reporting Params
 		paramProp.setProperty("reportTrigger", "ALWAYS");
-		paramProp.setProperty("reportLang", "IT");
+		paramProp.setProperty("reportLang", "DE");
 		paramProp.setProperty("htmlReport", "true");
 		paramProp.setProperty("htmlOpenResult", "true");
 		paramProp.setProperty("htmlNoIcons", "false");
@@ -238,6 +240,93 @@ public class PdfAPilotParameters {
 		
 	}
 	
+	/**
+	 * <p><em>Title: Parse the ParameterType Object</em></p>
+	 * <p>Description: method generates an String output from all Callas Parameters given 
+	 * as Elements from ParameterType by WebService Operation calls.</p>
+	 * 
+	 * @param paramType <code>parameterType</code> a complex Data Type that provides all needed parameters for 
+	 * the Callas PDF A Tool 
+	 * @return <code>String</code> with all given parameters parsed from xml
+	 */
+	public static String createParameterString(String fileIdent, ParameterType paramType){
+		StringBuffer paramBuffer = new StringBuffer();
+		
+		// set Parameter Strings
+		if(paramType.getReturnOnlyValidPDFA() && paramType.getReturnOnlyValidPDFA() == true){
+			paramBuffer.append(" --onlypdfa");
+		}
+		
+		if(paramType.getAnalyseOnly() && paramType.getAnalyseOnly() == true){
+			paramBuffer.append(" --analyse");
+		}
+		
+		if(paramType.getCreateEpub() && paramType.getCreateEpub() == true){
+			paramBuffer.append(" --createepub " + fileIdent);
+		}
+
+		if(paramType.getQuickProcessing() && paramType.getQuickProcessing() == true){
+			paramBuffer.append(" --quick");
+		}
+
+		if(paramType.getCompliancyLevel()!=null){
+			paramBuffer.append(" --level=" + paramType.getCompliancyLevel());
+		}
+		
+		if(paramType.getForceConversionReconvert() && paramType.getForceConversionReconvert() == true){
+			paramBuffer.append(" --forceconversion_reconvert");
+		}
+
+		if(paramType.getForceConversionPagesToImages() && paramType.getForceConversionPagesToImages() == true){
+			paramBuffer.append(" --forceconversion_pagestoimages");
+		}
+
+		if(paramType.getForceConversionDocToImages() && paramType.getForceConversionDocToImages() == true){
+			paramBuffer.append(" --forceconversion_doctoimages");
+		}
+
+		if(paramType.getReportLang()!=null){
+			paramBuffer.append(" --language=" + paramType.getReportLang());
+		}
+
+
+		if(paramType.getReportFormat() != null){
+			for(int i=0; i < paramType.getReportFormat().length; i++){
+				paramBuffer.append(" --report=" + paramType.getReportFormat()[i]);
+				if(paramType.getReportTrigger()!=null){
+					paramBuffer.append("," + paramType.getReportTrigger());
+				}
+				if(paramType.getReportFormat()[i].equals(ReportFormatType.HTML) && paramType.getHtmlReportOptions() != null){
+					for(int j=0; j < paramType.getHtmlReportOptions().length; j++){
+						paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
+					}
+				}
+				paramBuffer.append(",PATH="+ Configuration.getTempfiledir() + "result/" + fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
+			}
+		}
+		
+
+		return paramBuffer.toString();
+	}
+	
+	public static String createParameterString(String fileIdent, ConvertFromUrl convFromUrl){
+
+		StringBuffer paramBuffer = new StringBuffer();
+
+		if(convFromUrl.getCompliancyLevel() != null){
+			String param = "--level=" + convFromUrl.getCompliancyLevel();
+			paramBuffer.append(param);
+		}
+
+		if(convFromUrl.getReportType() != null){
+			String param = " --report=" + convFromUrl.getReportType();
+			paramBuffer.append(param);
+		}
+		return paramBuffer.toString();
+				
+	}
+
+
 	/**
 	 * @param defaultParam the defaultParam to set
 	 */

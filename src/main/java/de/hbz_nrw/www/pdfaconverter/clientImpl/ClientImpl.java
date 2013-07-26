@@ -24,8 +24,14 @@ package de.hbz_nrw.www.pdfaconverter.clientImpl;
 
 import java.rmi.RemoteException;
 
+import org.apache.axis2.client.Options;
+import org.apache.axis2.client.ServiceClient;
+import org.apache.axis2.context.ConfigurationContext;
 import org.apache.log4j.Logger;
 
+import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
+import de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0;
+import de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromUrl_faultMsg;
@@ -61,6 +67,11 @@ public class ClientImpl implements PdfAConverter {
 			//stub = new PdfAConverterStub("http://nyx.hbz-nrw.de/pfda");
 			stub = new PdfAConverterStub("http://nyx.hbz-nrw.de:8080/axis2/services/PdfAConverter");
 			//stub = new PdfAConverterStub("http://melpomene.hbz-nrw.de:8081/axis2/services/PdfAConverter");
+			
+			// batchConverter needs a lot of time...
+			// TODO: make batchConverter asynchronous
+			long timeout = 900000;
+			stub._getServiceClient().getOptions().setTimeOutInMilliSeconds(timeout);
 		}catch(Exception e){
 			log.error(e);
 		}
@@ -102,6 +113,19 @@ public class ClientImpl implements PdfAConverter {
 		// Call stub method
 		// Delegate Exceptions from method to calling method
 		response = getStub().convertFromUrl(convertFromUrl42);
+		log.info(response);
+		return response;
+	}
+
+	@Override
+	public BatchConvertResponse batchConvert(BatchConvert batchConvert4)
+			throws RemoteException, BatchConvertFaultException0 {
+		BatchConvertResponse response = null;
+
+		// Call stub method
+		// Delegate Exceptions from method to calling method
+		response = getStub().batchConvert(batchConvert4);
+		log.info(response);
 		return response;
 	}
 
@@ -134,6 +158,12 @@ public class ClientImpl implements PdfAConverter {
 			PdfAConverterCallbackHandler callback) throws RemoteException {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public void startbatchConvert(BatchConvert batchConvert4,
+			PdfAConverterCallbackHandler callback) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
