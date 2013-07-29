@@ -84,8 +84,41 @@
 
         /**
           * Auto generated method signature
+          * 
+                    * @param batchConvert4
+                
+             * @throws de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0 : 
+         */
+
+         
+                     public de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse batchConvert(
+
+                        de.hbz_nrw.www.pdfaconverter.services.BatchConvert batchConvert4)
+                        throws java.rmi.RemoteException
+             
+          ,de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0;
+
+        
+         /**
+            * Auto generated method signature for Asynchronous Invocations
+            * 
+                * @param batchConvert4
+            
+          */
+        public void startbatchConvert(
+
+            de.hbz_nrw.www.pdfaconverter.services.BatchConvert batchConvert4,
+
+            final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
+
+            throws java.rmi.RemoteException;
+
+     
+
+        /**
+          * Auto generated method signature
           * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
-                    * @param convertFromStream4
+                    * @param convertFromStream6
                 
              * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg : 
          */
@@ -93,7 +126,7 @@
          
                      public de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStream(
 
-                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream4)
+                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream6)
                         throws java.rmi.RemoteException
              
           ,de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
@@ -102,12 +135,12 @@
          /**
             * Auto generated method signature for Asynchronous Invocations
             * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
-                * @param convertFromStream4
+                * @param convertFromStream6
             
           */
         public void startconvertFromStream(
 
-            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream4,
+            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream6,
 
             final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 

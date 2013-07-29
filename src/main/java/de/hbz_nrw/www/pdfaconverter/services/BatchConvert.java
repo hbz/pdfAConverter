@@ -1,31 +1,31 @@
 
 /**
- * ConvertFromUrl.java
+ * BatchConvert.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:41 LKT)
  */
             
-                package de.hbz_nrw.www.pdfaconverter.types;
+                package de.hbz_nrw.www.pdfaconverter.services;
             
 
             /**
-            *  ConvertFromUrl bean class
+            *  BatchConvert bean class
             */
         
-        public  class ConvertFromUrl
+        public  class BatchConvert
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.hbz-nrw.de/PdfAConverter/types/",
-                "convertFromUrl",
-                "ns1");
+                "http://www.hbz-nrw.de/PdfAConverter/services/",
+                "batchConvert",
+                "ns2");
 
             
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://www.hbz-nrw.de/PdfAConverter/types/")){
-                return "ns1";
+            if(namespace.equals("http://www.hbz-nrw.de/PdfAConverter/services/")){
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -33,90 +33,120 @@
         
 
                         /**
-                        * field for ConvertFrom
+                        * field for DocumentsFile
                         */
 
                         
-                                    protected java.lang.String localConvertFrom ;
+                                    protected java.lang.String localDocumentsFile ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getConvertFrom(){
-                               return localConvertFrom;
+                           public  java.lang.String getDocumentsFile(){
+                               return localDocumentsFile;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ConvertFrom
+                               * @param param DocumentsFile
                                */
-                               public void setConvertFrom(java.lang.String param){
+                               public void setDocumentsFile(java.lang.String param){
                             
-                                            this.localConvertFrom=param;
+                                            this.localDocumentsFile=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for ReportType
+                        * field for ParameterFile
                         */
 
                         
-                                    protected java.lang.String localReportType ;
+                                    protected java.lang.String localParameterFile ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getReportType(){
-                               return localReportType;
+                           public  java.lang.String getParameterFile(){
+                               return localParameterFile;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ReportType
+                               * @param param ParameterFile
                                */
-                               public void setReportType(java.lang.String param){
+                               public void setParameterFile(java.lang.String param){
                             
-                                            this.localReportType=param;
+                                            this.localParameterFile=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for CompliancyLevel
+                        * field for User
                         */
 
                         
-                                    protected java.lang.String localCompliancyLevel ;
+                                    protected java.lang.String localUser ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getCompliancyLevel(){
-                               return localCompliancyLevel;
+                           public  java.lang.String getUser(){
+                               return localUser;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param CompliancyLevel
+                               * @param param User
                                */
-                               public void setCompliancyLevel(java.lang.String param){
+                               public void setUser(java.lang.String param){
                             
-                                            this.localCompliancyLevel=param;
+                                            this.localUser=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Password
+                        */
+
+                        
+                                    protected java.lang.String localPassword ;
+                                
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getPassword(){
+                               return localPassword;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Password
+                               */
+                               public void setPassword(java.lang.String param){
+                            
+                                            this.localPassword=param;
                                     
 
                                }
@@ -154,7 +184,7 @@
                        new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME){
 
                  public void serialize(org.apache.axis2.databinding.utils.writer.MTOMAwareXMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-                       ConvertFromUrl.this.serialize(MY_QNAME,factory,xmlWriter);
+                       BatchConvert.this.serialize(MY_QNAME,factory,xmlWriter);
                  }
                };
                return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
@@ -205,14 +235,14 @@
                   if (serializeType){
                
 
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.hbz-nrw.de/PdfAConverter/types/");
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.hbz-nrw.de/PdfAConverter/services/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":convertFromUrl",
+                           namespacePrefix+":batchConvert",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "convertFromUrl",
+                           "batchConvert",
                            xmlWriter);
                    }
 
@@ -226,28 +256,28 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"convertFrom", namespace);
+                                            xmlWriter.writeStartElement(prefix,"documentsFile", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"convertFrom");
+                                            xmlWriter.writeStartElement(namespace,"documentsFile");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("convertFrom");
+                                        xmlWriter.writeStartElement("documentsFile");
                                     }
                                 
 
-                                          if (localConvertFrom==null){
+                                          if (localDocumentsFile==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("convertFrom cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("documentsFile cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localConvertFrom);
+                                                   xmlWriter.writeCharacters(localDocumentsFile);
                                             
                                           }
                                     
@@ -260,28 +290,28 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"reportType", namespace);
+                                            xmlWriter.writeStartElement(prefix,"parameterFile", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"reportType");
+                                            xmlWriter.writeStartElement(namespace,"parameterFile");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("reportType");
+                                        xmlWriter.writeStartElement("parameterFile");
                                     }
                                 
 
-                                          if (localReportType==null){
+                                          if (localParameterFile==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("parameterFile cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localReportType);
+                                                   xmlWriter.writeCharacters(localParameterFile);
                                             
                                           }
                                     
@@ -294,28 +324,62 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"compliancyLevel", namespace);
+                                            xmlWriter.writeStartElement(prefix,"user", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"compliancyLevel");
+                                            xmlWriter.writeStartElement(namespace,"user");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("compliancyLevel");
+                                        xmlWriter.writeStartElement("user");
                                     }
                                 
 
-                                          if (localCompliancyLevel==null){
+                                          if (localUser==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("user cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localCompliancyLevel);
+                                                   xmlWriter.writeCharacters(localUser);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"password", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"password");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("password");
+                                    }
+                                
+
+                                          if (localPassword==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("password cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localPassword);
                                             
                                           }
                                     
@@ -484,30 +548,39 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "convertFrom"));
+                                                                      "documentsFile"));
                                  
-                                        if (localConvertFrom != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConvertFrom));
+                                        if (localDocumentsFile != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDocumentsFile));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("convertFrom cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("documentsFile cannot be null!!");
                                         }
                                     
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "reportType"));
+                                                                      "parameterFile"));
                                  
-                                        if (localReportType != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportType));
+                                        if (localParameterFile != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localParameterFile));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("parameterFile cannot be null!!");
                                         }
                                     
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "compliancyLevel"));
+                                                                      "user"));
                                  
-                                        if (localCompliancyLevel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCompliancyLevel));
+                                        if (localUser != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localUser));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("user cannot be null!!");
+                                        }
+                                    
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "password"));
+                                 
+                                        if (localPassword != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPassword));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("password cannot be null!!");
                                         }
                                     
 
@@ -534,9 +607,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static ConvertFromUrl parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            ConvertFromUrl object =
-                new ConvertFromUrl();
+        public static BatchConvert parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            BatchConvert object =
+                new BatchConvert();
 
             int event;
             java.lang.String nillableValue = null;
@@ -560,10 +633,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"convertFromUrl".equals(type)){
+                            if (!"batchConvert".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (ConvertFromUrl)de.hbz_nrw.www.pdfaconverter.types.ExtensionMapper.getTypeObject(
+                                return (BatchConvert)de.hbz_nrw.www.pdfaconverter.types.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -588,11 +661,11 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","convertFrom").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","documentsFile").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setConvertFrom(
+                                              object.setDocumentsFile(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
@@ -607,11 +680,11 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportType").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","parameterFile").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setReportType(
+                                              object.setParameterFile(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
@@ -626,11 +699,30 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","user").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setCompliancyLevel(
+                                              object.setUser(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
+                                }
+                            
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","password").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPassword(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();

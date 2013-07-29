@@ -44,6 +44,21 @@
          
         /**
          * Auto generated method signature
+         * 
+                                    * @param batchConvert
+             * @throws BatchConvertFaultException0 : 
+         */
+
+        
+                public de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse batchConvert
+                (
+                  de.hbz_nrw.www.pdfaconverter.services.BatchConvert batchConvert
+                 )
+            throws BatchConvertFaultException0;
+        
+         
+        /**
+         * Auto generated method signature
          * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
                                     * @param convertFromStream
              * @throws ConvertFromStream_faultMsg : 

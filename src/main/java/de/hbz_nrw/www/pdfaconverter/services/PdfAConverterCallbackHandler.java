@@ -77,6 +77,22 @@
             }
                 
            /**
+            * auto generated Axis2 call back method for batchConvert method
+            * override this method for handling normal response from batchConvert operation
+            */
+           public void receiveResultbatchConvert(
+                    de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from batchConvert operation
+           */
+            public void receiveErrorbatchConvert(java.lang.Exception e) {
+            }
+                
+           /**
             * auto generated Axis2 call back method for convertFromStream method
             * override this method for handling normal response from convertFromStream operation
             */

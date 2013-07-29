@@ -72,22 +72,40 @@
                                         envelope = toEnvelope(getSOAPFactory(msgContext), convertFromAttachmentResponse3, false);
                                     } else 
 
+            if("batchConvert".equals(methodName)){
+                
+                de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse batchConvertResponse5 = null;
+	                        de.hbz_nrw.www.pdfaconverter.services.BatchConvert wrappedParam =
+                                                             (de.hbz_nrw.www.pdfaconverter.services.BatchConvert)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    de.hbz_nrw.www.pdfaconverter.services.BatchConvert.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               batchConvertResponse5 =
+                                                   
+                                                   
+                                                         skel.batchConvert(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), batchConvertResponse5, false);
+                                    } else 
+
             if("convertFromStream".equals(methodName)){
                 
-                de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStreamResponse5 = null;
+                de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStreamResponse7 = null;
 	                        de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream wrappedParam =
                                                              (de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               convertFromStreamResponse5 =
+                                               convertFromStreamResponse7 =
                                                    
                                                    
                                                          skel.convertFromStream(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromStreamResponse5, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), convertFromStreamResponse7, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -117,6 +135,15 @@
          catch (ConvertFromAttachment_faultMsg e) {
 
             msgContext.setProperty(org.apache.axis2.Constants.FAULT_NAME,"convertFromAttachment_fault");
+            org.apache.axis2.AxisFault f = createAxisFault(e);
+            if (e.getFaultMessage() != null){
+                f.setDetail(toOM(e.getFaultMessage(),false));
+            }
+            throw f;
+            }
+         catch (BatchConvertFaultException0 e) {
+
+            msgContext.setProperty(org.apache.axis2.Constants.FAULT_NAME,"batchConvertFault");
             org.apache.axis2.AxisFault f = createAxisFault(e);
             if (e.getFaultMessage() != null){
                 f.setDetail(toOM(e.getFaultMessage(),false));
@@ -214,6 +241,48 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvert param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvert.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -294,6 +363,25 @@
                                 return wrappedElement;
                          }
                     
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse param, boolean optimizeContent)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse wrapbatchConvert(){
+                                de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse wrappedElement = new de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse param, boolean optimizeContent)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -368,6 +456,27 @@
                 if (de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment_fault.class.equals(type)){
                 
                            return de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment_fault.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvert.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvert.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

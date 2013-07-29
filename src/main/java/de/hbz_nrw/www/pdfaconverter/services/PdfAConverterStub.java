@@ -44,7 +44,7 @@
         //creating the operations
         org.apache.axis2.description.AxisOperation __operation;
 
-        _operations = new org.apache.axis2.description.AxisOperation[3];
+        _operations = new org.apache.axis2.description.AxisOperation[4];
         
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
@@ -73,13 +73,25 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/", "convertFromStream"));
+            __operation.setName(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/", "batchConvert"));
 	    _service.addOperation(__operation);
 	    
 
 	    
 	    
             _operations[2]=__operation;
+            
+        
+                   __operation = new org.apache.axis2.description.OutInAxisOperation();
+                
+
+            __operation.setName(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/", "convertFromStream"));
+	    _service.addOperation(__operation);
+	    
+
+	    
+	    
+            _operations[3]=__operation;
             
         
         }
@@ -94,6 +106,10 @@
               faultExceptionNameMap.put( new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/types/","convertFromAttachment_fault"),"de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg");
               faultExceptionClassNameMap.put(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/types/","convertFromAttachment_fault"),"de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg");
               faultMessageMap.put( new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/types/","convertFromAttachment_fault"),"de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment_fault");
+           
+              faultExceptionNameMap.put( new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/","batchConvertFault"),"de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0");
+              faultExceptionClassNameMap.put(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/","batchConvertFault"),"de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0");
+              faultMessageMap.put( new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/","batchConvertFault"),"de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault");
            
               faultExceptionNameMap.put( new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/types/","convertFromStream_fault"),"de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg");
               faultExceptionClassNameMap.put(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/types/","convertFromStream_fault"),"de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg");
@@ -168,7 +184,7 @@
                      * Auto generated method signature
                      * Operation converts a PDF supplied by an URL to PDF/A. Operation returns 2 URLs: one for the PDF/A and one for the Report.
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromUrl
-                     * @param convertFromUrl6
+                     * @param convertFromUrl8
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromUrl_faultMsg : 
                      */
@@ -177,7 +193,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrlResponse convertFromUrl(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl6)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl8)
                         
 
                     throws java.rmi.RemoteException
@@ -205,7 +221,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromUrl6,
+                                                    convertFromUrl8,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromUrl")));
                                                 
@@ -293,12 +309,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation converts a PDF supplied by an URL to PDF/A. Operation returns 2 URLs: one for the PDF/A and one for the Report.
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromUrl
-                    * @param convertFromUrl6
+                    * @param convertFromUrl8
                 
                 */
                 public  void startconvertFromUrl(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl6,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl convertFromUrl8,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
@@ -323,7 +339,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromUrl6,
+                                                    convertFromUrl8,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromUrl")));
                                                 
@@ -444,7 +460,7 @@
                      * Auto generated method signature
                      * Operation uses SwA (Soap with Attachment) for supplying the PDF to the PDF/A Converter. Operation returns an Attachment with the PDF/A and an Attachment with the Record inside
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromAttachment
-                     * @param convertFromAttachment8
+                     * @param convertFromAttachment10
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg : 
                      */
@@ -453,7 +469,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachmentResponse convertFromAttachment(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment8)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment10)
                         
 
                     throws java.rmi.RemoteException
@@ -481,7 +497,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromAttachment8,
+                                                    convertFromAttachment10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromAttachment")));
                                                 
@@ -569,12 +585,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation uses SwA (Soap with Attachment) for supplying the PDF to the PDF/A Converter. Operation returns an Attachment with the PDF/A and an Attachment with the Record inside
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromAttachment
-                    * @param convertFromAttachment8
+                    * @param convertFromAttachment10
                 
                 */
                 public  void startconvertFromAttachment(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment8,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment convertFromAttachment10,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
@@ -599,7 +615,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromAttachment8,
+                                                    convertFromAttachment10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromAttachment")));
                                                 
@@ -718,9 +734,285 @@
                 
                     /**
                      * Auto generated method signature
+                     * 
+                     * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#batchConvert
+                     * @param batchConvert12
+                    
+                     * @throws de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0 : 
+                     */
+
+                    
+
+                            public  de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse batchConvert(
+
+                            de.hbz_nrw.www.pdfaconverter.services.BatchConvert batchConvert12)
+                        
+
+                    throws java.rmi.RemoteException
+                    
+                    
+                        ,de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0{
+              org.apache.axis2.context.MessageContext _messageContext = null;
+              try{
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
+              _operationClient.getOptions().setAction("http://www.hbz-nrw.de/PdfAConverter/services/batchConvert");
+              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+              // create a message context
+              _messageContext = new org.apache.axis2.context.MessageContext();
+
+              
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env = null;
+                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    batchConvert12,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
+                                                    "batchConvert")));
+                                                
+        //adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // set the message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message contxt to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+        //execute the operation client
+        _operationClient.execute(true);
+
+         
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                                java.lang.Object object = fromOM(
+                                             _returnEnv.getBody().getFirstElement() ,
+                                             de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.class,
+                                              getEnvelopeNamespaces(_returnEnv));
+
+                               
+                                        return (de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse)object;
+                                   
+         }catch(org.apache.axis2.AxisFault f){
+
+            org.apache.axiom.om.OMElement faultElt = f.getDetail();
+            if (faultElt!=null){
+                if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+                    //make the fault by reflection
+                    try{
+                        java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                        java.lang.Exception ex=
+                                (java.lang.Exception) exceptionClass.newInstance();
+                        //message class
+                        java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                        java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                   new java.lang.Class[]{messageClass});
+                        m.invoke(ex,new java.lang.Object[]{messageObject});
+                        
+                        if (ex instanceof de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0){
+                          throw (de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0)ex;
+                        }
+                        
+
+                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
+                    }catch(java.lang.ClassCastException e){
+                       // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }catch (java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }  catch (java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }   catch (java.lang.InstantiationException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }
+                }else{
+                    throw f;
+                }
+            }else{
+                throw f;
+            }
+            } finally {
+                _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+            }
+        }
+            
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startbatchConvert
+                    * @param batchConvert12
+                
+                */
+                public  void startbatchConvert(
+
+                 de.hbz_nrw.www.pdfaconverter.services.BatchConvert batchConvert12,
+
+                  final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
+             _operationClient.getOptions().setAction("http://www.hbz-nrw.de/PdfAConverter/services/batchConvert");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    batchConvert12,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
+                                                    "batchConvert")));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultbatchConvert(
+                                        (de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorbatchConvert(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.Exception ex=
+														(java.lang.Exception) exceptionClass.newInstance();
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+													if (ex instanceof de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0){
+														callback.receiveErrorbatchConvert((de.hbz_nrw.www.pdfaconverter.services.BatchConvertFaultException0)ex);
+											            return;
+										            }
+										            
+					
+										            callback.receiveErrorbatchConvert(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorbatchConvert(f);
+                                            }
+									    } else {
+										    callback.receiveErrorbatchConvert(f);
+									    }
+									} else {
+									    callback.receiveErrorbatchConvert(f);
+									}
+								} else {
+								    callback.receiveErrorbatchConvert(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorbatchConvert(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[2].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[2].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
+                    /**
+                     * Auto generated method signature
                      * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
                      * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#convertFromStream
-                     * @param convertFromStream10
+                     * @param convertFromStream14
                     
                      * @throws de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg : 
                      */
@@ -729,7 +1021,7 @@
 
                             public  de.hbz_nrw.www.pdfaconverter.types.ConvertFromStreamResponse convertFromStream(
 
-                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream10)
+                            de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream14)
                         
 
                     throws java.rmi.RemoteException
@@ -738,7 +1030,7 @@
                         ,de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg{
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
-               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
               _operationClient.getOptions().setAction("http://www.hbz-nrw.de/PdfAConverter/services/convertFromStream");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -757,7 +1049,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromStream10,
+                                                    convertFromStream14,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromStream")));
                                                 
@@ -845,18 +1137,18 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * Operation converts a PDF supplied within the SOAP Message as Byte-Stream to PDF/A. Operation returns one Bytestream for the PDF/A and one for the Report associated.
                 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverter#startconvertFromStream
-                    * @param convertFromStream10
+                    * @param convertFromStream14
                 
                 */
                 public  void startconvertFromStream(
 
-                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream10,
+                 de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream convertFromStream14,
 
                   final de.hbz_nrw.www.pdfaconverter.services.PdfAConverterCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
-              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
              _operationClient.getOptions().setAction("http://www.hbz-nrw.de/PdfAConverter/services/convertFromStream");
              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -875,7 +1167,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    convertFromStream10,
+                                                    convertFromStream14,
                                                     optimizeContent(new javax.xml.namespace.QName("http://www.hbz-nrw.de/PdfAConverter/services/",
                                                     "convertFromStream")));
                                                 
@@ -981,9 +1273,9 @@
                         
 
           org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
-        if ( _operations[2].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+        if ( _operations[3].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
            _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
-          _operations[2].setMessageReceiver(
+          _operations[3].setMessageReceiver(
                     _callbackReceiver);
         }
 
@@ -1108,6 +1400,48 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvert param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvert.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(de.hbz_nrw.www.pdfaconverter.types.ConvertFromStream param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -1180,6 +1514,27 @@
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
                                                             emptyEnvelope.getBody().addChild(param.getOMElement(de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment.MY_QNAME,factory));
+                                                            return emptyEnvelope;
+                                                        } catch(org.apache.axis2.databinding.ADBException e){
+                                                            throw org.apache.axis2.AxisFault.makeFault(e);
+                                                        }
+                                                
+
+                                        }
+                                
+                             
+                             /* methods to provide back word compatibility */
+
+                             
+                                    
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.hbz_nrw.www.pdfaconverter.services.BatchConvert param, boolean optimizeContent)
+                                        throws org.apache.axis2.AxisFault{
+
+                                             
+                                                    try{
+
+                                                            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(de.hbz_nrw.www.pdfaconverter.services.BatchConvert.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -1268,6 +1623,27 @@
                 if (de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment_fault.class.equals(type)){
                 
                            return de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment_fault.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvert.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvert.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.class.equals(type)){
+                
+                           return de.hbz_nrw.www.pdfaconverter.services.BatchConvertFault.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

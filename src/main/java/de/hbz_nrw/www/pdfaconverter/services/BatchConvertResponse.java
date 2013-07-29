@@ -1,31 +1,31 @@
 
 /**
- * ConvertFromUrl.java
+ * BatchConvertResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:41 LKT)
  */
             
-                package de.hbz_nrw.www.pdfaconverter.types;
+                package de.hbz_nrw.www.pdfaconverter.services;
             
 
             /**
-            *  ConvertFromUrl bean class
+            *  BatchConvertResponse bean class
             */
         
-        public  class ConvertFromUrl
+        public  class BatchConvertResponse
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.hbz-nrw.de/PdfAConverter/types/",
-                "convertFromUrl",
-                "ns1");
+                "http://www.hbz-nrw.de/PdfAConverter/services/",
+                "batchConvertResponse",
+                "ns2");
 
             
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://www.hbz-nrw.de/PdfAConverter/types/")){
-                return "ns1";
+            if(namespace.equals("http://www.hbz-nrw.de/PdfAConverter/services/")){
+                return "ns2";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -33,90 +33,30 @@
         
 
                         /**
-                        * field for ConvertFrom
+                        * field for ResultsFile
                         */
 
                         
-                                    protected java.lang.String localConvertFrom ;
+                                    protected java.lang.String localResultsFile ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getConvertFrom(){
-                               return localConvertFrom;
+                           public  java.lang.String getResultsFile(){
+                               return localResultsFile;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param ConvertFrom
+                               * @param param ResultsFile
                                */
-                               public void setConvertFrom(java.lang.String param){
+                               public void setResultsFile(java.lang.String param){
                             
-                                            this.localConvertFrom=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for ReportType
-                        */
-
-                        
-                                    protected java.lang.String localReportType ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getReportType(){
-                               return localReportType;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ReportType
-                               */
-                               public void setReportType(java.lang.String param){
-                            
-                                            this.localReportType=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for CompliancyLevel
-                        */
-
-                        
-                                    protected java.lang.String localCompliancyLevel ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getCompliancyLevel(){
-                               return localCompliancyLevel;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param CompliancyLevel
-                               */
-                               public void setCompliancyLevel(java.lang.String param){
-                            
-                                            this.localCompliancyLevel=param;
+                                            this.localResultsFile=param;
                                     
 
                                }
@@ -154,7 +94,7 @@
                        new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME){
 
                  public void serialize(org.apache.axis2.databinding.utils.writer.MTOMAwareXMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-                       ConvertFromUrl.this.serialize(MY_QNAME,factory,xmlWriter);
+                       BatchConvertResponse.this.serialize(MY_QNAME,factory,xmlWriter);
                  }
                };
                return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
@@ -205,14 +145,14 @@
                   if (serializeType){
                
 
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.hbz-nrw.de/PdfAConverter/types/");
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.hbz-nrw.de/PdfAConverter/services/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":convertFromUrl",
+                           namespacePrefix+":batchConvertResponse",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "convertFromUrl",
+                           "batchConvertResponse",
                            xmlWriter);
                    }
 
@@ -226,96 +166,28 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"convertFrom", namespace);
+                                            xmlWriter.writeStartElement(prefix,"resultsFile", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"convertFrom");
+                                            xmlWriter.writeStartElement(namespace,"resultsFile");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("convertFrom");
+                                        xmlWriter.writeStartElement("resultsFile");
                                     }
                                 
 
-                                          if (localConvertFrom==null){
+                                          if (localResultsFile==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("convertFrom cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("resultsFile cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localConvertFrom);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"reportType", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"reportType");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("reportType");
-                                    }
-                                
-
-                                          if (localReportType==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localReportType);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"compliancyLevel", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"compliancyLevel");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("compliancyLevel");
-                                    }
-                                
-
-                                          if (localCompliancyLevel==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCompliancyLevel);
+                                                   xmlWriter.writeCharacters(localResultsFile);
                                             
                                           }
                                     
@@ -484,30 +356,12 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "convertFrom"));
+                                                                      "resultsFile"));
                                  
-                                        if (localConvertFrom != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localConvertFrom));
+                                        if (localResultsFile != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localResultsFile));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("convertFrom cannot be null!!");
-                                        }
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "reportType"));
-                                 
-                                        if (localReportType != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localReportType));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("reportType cannot be null!!");
-                                        }
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "compliancyLevel"));
-                                 
-                                        if (localCompliancyLevel != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCompliancyLevel));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("compliancyLevel cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("resultsFile cannot be null!!");
                                         }
                                     
 
@@ -534,9 +388,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static ConvertFromUrl parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            ConvertFromUrl object =
-                new ConvertFromUrl();
+        public static BatchConvertResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            BatchConvertResponse object =
+                new BatchConvertResponse();
 
             int event;
             java.lang.String nillableValue = null;
@@ -560,10 +414,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"convertFromUrl".equals(type)){
+                            if (!"batchConvertResponse".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (ConvertFromUrl)de.hbz_nrw.www.pdfaconverter.types.ExtensionMapper.getTypeObject(
+                                return (BatchConvertResponse)de.hbz_nrw.www.pdfaconverter.types.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -588,49 +442,11 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","convertFrom").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","resultsFile").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setConvertFrom(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","reportType").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setReportType(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","compliancyLevel").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setCompliancyLevel(
+                                              object.setResultsFile(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
