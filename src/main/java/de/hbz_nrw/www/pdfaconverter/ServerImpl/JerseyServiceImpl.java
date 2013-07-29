@@ -52,11 +52,11 @@ public class JerseyServiceImpl {
 	// Initiate Logger for JerseyServiceImpl
 	private static Logger log = Logger.getLogger(JerseyServiceImpl.class);
 
-	@GET
+	@POST
 	@Consumes
 	@Produces({MediaType.TEXT_HTML})
 	public String convertFromUrl(@QueryParam("fileUrl") String PdfFileUrl, 
-			@QueryParam("parameter") Properties paramProp){
+			@QueryParam("parameter") String param){
 
 		String pdfFileUrl = PdfFileUrl;
 		String paramString = null;
@@ -65,7 +65,7 @@ public class JerseyServiceImpl {
 		String fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", pdfFileUrl);
 		
 		PilotRunner pRunner = new PilotRunner();
-		pRunner.executePdfATool(paramString, fileName);
+		//pRunner.executePdfATool(paramString, fileName);
 		
 		return "<html> " + "<title>" + "Access to converted file" + "</title>"
 		        + "<body><h1>" + "Converted file:" + "</h1>" +
