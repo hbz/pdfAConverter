@@ -51,7 +51,6 @@ import javax.servlet.ServletException;
 
 import de.hbz_nrw.www.pdfaconverter.fileUtils.BatchFileUtil;
 import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
-import de.hbz_nrw.www.pdfaconverter.gui.PdfAPilotParameters;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg;
@@ -67,6 +66,8 @@ import de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrlResponse;
 import de.hbz_nrw.www.pdfaconverter.types.DocumentType;
 import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
 import de.hbz_nrw.www.pdfaconverter.types.ReportFormatType;
+import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
+import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
 
 /**
  * Class ServicesImpl
@@ -121,7 +122,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		ConvertFromStreamResponse response= new ConvertFromStreamResponse();
 		
 		//create a unique temporary file prefix 
-		String jobIdent  = getTimePrefix();
+		String jobIdent  = TimePrefix.getTimePrefix();
 		String fileIdent = jobIdent + ".pdf";
 
 		// connect Parameters to a generic method that parses them into
@@ -178,7 +179,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		String fileName = null;
 
 		//create unique directory identifier
-		String fileIdent = getTimePrefix();
+		String fileIdent = TimePrefix.getTimePrefix();
 
 		String batchFileName = FileUtil.saveUrlToFile(fileIdent + "_batch.txt", batchConvert.getDocumentsFile());
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", batchConvert.getParameterFile());
@@ -205,7 +206,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			log.info("File :" + fileUrl);
 
 			//create unique directory identifier
-			fileIdent = getTimePrefix();
+			fileIdent = TimePrefix.getTimePrefix();
 			
 			// Load File to temp dir
 			fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", fileUrl);
@@ -243,7 +244,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		ConvertFromUrlResponse response= new ConvertFromUrlResponse();
 		
 		//create a unique temporary file prefix 
-		String fileIdent = getTimePrefix() + ".pdf";
+		String fileIdent = TimePrefix.getTimePrefix() + ".pdf";
 
 		// connect Parameters to a generic method that parses them into
 		// read line parameters
@@ -283,12 +284,6 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 	}
 	
 
-	private String getTimePrefix(){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'kkmmssSSS'Z'");
-		Calendar cal = Calendar.getInstance();
-		log.info(dateFormat.format(cal.getTime()));
-		return dateFormat.format(cal.getTime());
-	}
 		
 	/**
 	 * <p><em>Title: </em></p>

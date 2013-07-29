@@ -36,6 +36,7 @@ import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
 import de.hbz_nrw.www.pdfaconverter.types.ReportFormatType;
 import de.hbz_nrw.www.pdfaconverter.types.ReportLangType;
 import de.hbz_nrw.www.pdfaconverter.types.ReportTriggerType;
+import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
 
 /**
  * Class clientGui

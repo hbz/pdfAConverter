@@ -1,5 +1,5 @@
 /**
- * JerseyServerImpl.java - This file is part of the DiPP Project by hbz
+ * TimePrefix.java - This file is part of the DiPP Project by hbz
  * Library Service Center North Rhine Westfalia, Cologne 
  *
  * -----------------------------------------------------------------------------
@@ -20,47 +20,42 @@
  * -----------------------------------------------------------------------------
  *
  */
-package de.hbz_nrw.www.pdfaconverter.ServerImpl;
+package de.hbz_nrw.www.pdfaconverter.util;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
-import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
-import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
-
-import javax.ws.rs.*;
-
 /**
- * Class JerseyServerImpl
+ * Class TimePrefix
  * 
- * <p><em>Title: </em></p>
- * <p>Description: </p>
+ * <p><em>Title: Time Stamp for directories or Files </em></p>
+ * <p>Description: Class returns the actual time stamp which can be used for 
+ * creation of unique directory and file names</p>
  * 
  * @author aquast, email
- * creation date: 26.07.2013
+ * creation date: 29.07.2013
  *
  */
-@Path("PdfAConverter")
-public class JerseyServerImpl {
+public class TimePrefix {
 
-	// Initiate Logger for JerseyServerImpl
-	private static Logger log = Logger.getLogger(JerseyServerImpl.class);
+	// Initiate Logger for TimePrefix
+	private static Logger log = Logger.getLogger(TimePrefix.class);
 
-	@Path("convertFromUrl")
-	@PUT
-	@Consumes
-	
-	public void convertFromUrl(@QueryParam("PdfFileUrl") String PdfFileUrl, 
-			@QueryParam("ParamFileUrl") String ParamFileUrl){
-		//create a unique temporary file prefix 
-		
-
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: simple Method that returns a time stamp used to 
+	 * create unique identifiers</p>
+	 * 
+	 * @return 
+	 */
+	public static String getTimePrefix(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'kkmmssSSS'Z'");
+		Calendar cal = Calendar.getInstance();
+		log.debug(dateFormat.format(cal.getTime()));
+		return dateFormat.format(cal.getTime());
 	}
+		
 
 }
