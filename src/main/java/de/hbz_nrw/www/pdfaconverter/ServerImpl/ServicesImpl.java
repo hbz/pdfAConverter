@@ -89,7 +89,6 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 	}
 	// Initiate Logger for ServicesImpl
 	private static Logger log = Logger.getLogger(ServicesImpl.class);
-	private String exitStateStr = null;
 
 	/* (non-Javadoc)
 	 * @see de.hbz_nrw.www.pdfaconverter.services.PdfAConverterSkeletonInterface#convertFromAttachment(de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment)
@@ -133,7 +132,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		// Write incoming PDF-Base64 Stream as file into temporary Directory
 		String fileName = FileUtil.saveStreamToTempFile(fileIdent, convertFromStream.getByteStream());
 		
-		executePdfATool(paramString, fileName);
+		new PilotRunner().executePdfATool(paramString, fileName);
 		
 		//now create Response from temp dir content
 		byte[] stream = null;
@@ -226,8 +225,9 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 				e.printStackTrace();
 			}
 			// we may should run threads? 
-			executePdfATool(paramString, fileName);
-			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + exitStateStr +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
+			PilotRunner pRunner = new PilotRunner();
+			pRunner.executePdfATool(paramString, fileName);
+			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + pRunner.getExitStateStr() +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
 		}
 		log.info(resultBuffer.toString());
 		FileUtil.saveStreamToFile(new File(Configuration.getTempfiledir() + "result" + fileName + ".result"), resultBuffer.toString());
@@ -257,7 +257,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
-		executePdfATool(paramString, fileName);
+		PilotRunner pRunner = new PilotRunner();
+		pRunner.executePdfATool(paramString, fileName);
 
 		URI documentUri = null;
 		try {
@@ -273,62 +274,14 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		}
 		response.setResponseDocumentUrl(documentUri);
 		response.setReportUrl(reportUri);
-		if(exitStateStr != null && exitStateStr.equals("0")){
+		if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
 			response.setResult("success");
-		}else if(exitStateStr != null && !exitStateStr.equals("0")){
-			response.setResult("Conversion to PDFA failed. System returns code: " + exitStateStr);			
+		}else if(pRunner.getExitStateStr() != null && !pRunner.getExitStateStr().equals("0")){
+			response.setResult("Conversion to PDFA failed. System returns code: " + pRunner.getExitStateStr());			
 		}else{
 			response.setResult("System returns unknown state, please contact staff");			
 		}
 		return response;
 	}
 	
-
-		
-	/**
-	 * <p><em>Title: </em></p>
-	 * <p>Description: Method creates the command line string with all parameters given. 
-	 * Then executes the shell command </p>
-	 * 
-	 * @param paramString
-	 * @param fileName 
-	 */
-	private void executePdfATool(String paramString, String fileName){
-		// call to execute PDFA-Tool
-		
-		// Complete execute String 
-		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
-		String defaultParams = new String("--noprogress --nohits --substitute  " 
-				 + "--linkpath=http://nyx.hbz-nrw.de:8080/axis2/temp/reporttemplate "
-				 + "--fontfolder=/opt/pdfapilot/fontfolder "
-				);
-		String executeString = new String(programPath + " " 
-				+ defaultParams 
-				+ paramString 
-				+ " --outputfile=" + Configuration.getTempfiledir() + "result/" + fileName 
-				+ " " + Configuration.getTempfiledir() + fileName); 
-
-		log.info("The execute String: " + executeString);
-		try{
-			//Process proc = java.lang.Runtime.getRuntime().exec("echo " + executeString);
-			Process proc = java.lang.Runtime.getRuntime().exec(executeString);
-			int exitState = proc.waitFor();
-			InputStream stout = proc.getInputStream();
-            InputStreamReader isr = new InputStreamReader(stout);
-            BufferedReader br = new BufferedReader(isr);
-            String line = null;
-            StringBuffer lineBuffer = new StringBuffer();
-            while ((line = br.readLine()) != null){
-                lineBuffer.append(line + "\n");
-            }
-            log.info("STOUT: " + lineBuffer.toString());
-            log.info("Exit State: " + exitState);
-            exitStateStr = Integer.toString(exitState);
-		}catch(Exception Exc){
-			log.error(Exc);
-		}	
-		// TODO: das Ausführen des PDFA Tools kann etwas dauern... was mache
-		// ich um festzustellen, dass Tool seine Arbeit beendet hat? 		
-	}
-
 }

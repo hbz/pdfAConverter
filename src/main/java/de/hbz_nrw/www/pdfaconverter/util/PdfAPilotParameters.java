@@ -91,9 +91,6 @@ public class PdfAPilotParameters {
 		if(paramProp.containsKey("createEpub")){
 			param.setCreateEpub(paramProp.getProperty("createEpub").matches("true"));
 		}
-		if(paramProp.containsKey("createEpub")){
-			param.setCreateEpub(paramProp.getProperty("createEpub").matches("true"));
-		}
 		if(paramProp.containsKey("forceConversionReconvert")){
 			param.setForceConversionReconvert(paramProp.getProperty("forceConversionReconvert").matches("true"));
 		}

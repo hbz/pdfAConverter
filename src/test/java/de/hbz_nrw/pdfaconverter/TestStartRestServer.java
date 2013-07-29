@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import com.sun.net.httpserver.*;
 
-import de.hbz_nrw.www.pdfaconverter.ServerImpl.JerseyServerImpl;
+import de.hbz_nrw.www.pdfaconverter.ServerImpl.JerseyServiceImpl;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -56,7 +56,7 @@ public class TestStartRestServer {
 			HttpServer server = HttpServer.create(new InetSocketAddress(InetAddress.getLocalHost(), 8081), 3);
 			server.start();
 		
-			JerseyServerImpl sImpl = new JerseyServerImpl();
+			JerseyServiceImpl sImpl = new JerseyServiceImpl();
 			log.info(server.getAddress());
 
 			
