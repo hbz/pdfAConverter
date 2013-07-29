@@ -31,10 +31,10 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
-import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
-import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
+import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Class JerseyServerImpl
@@ -46,21 +46,56 @@ import javax.ws.rs.*;
  * creation date: 26.07.2013
  *
  */
-@Path("PdfAConverter")
+@Path("convertFromUrl")
 public class JerseyServerImpl {
 
 	// Initiate Logger for JerseyServerImpl
 	private static Logger log = Logger.getLogger(JerseyServerImpl.class);
 
-	@Path("convertFromUrl")
-	@PUT
+	@GET
 	@Consumes
-	
-	public void convertFromUrl(@QueryParam("PdfFileUrl") String PdfFileUrl, 
+	@Produces({MediaType.TEXT_HTML})
+	public String convertFromUrl(@QueryParam("fileUrl") String PdfFileUrl, 
 			@QueryParam("ParamFileUrl") String ParamFileUrl){
-		//create a unique temporary file prefix 
+
+		String pdfFileUrl = PdfFileUrl;
+		//create a unique temporary file prefix
+		String fileIdent = TimePrefix.getTimePrefix();
+		String fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", pdfFileUrl);
 		
+		
+		
+		return "<html> " + "<title>" + "Access to converted file" + "</title>"
+		        + "<body><h1>" + "Converted file:" + "</h1>" +
+		        	"<ul>" +
+		        	"<li>Result: " + fileName + "</li>" +
+		        	"<li>From :" + pdfFileUrl + "</li>" +
+		        	"</ul></body>" + "</html> ";
 
 	}
+	
+	/*
+	// This method is called if TEXT_PLAIN is request
+	  @GET
+	  @Produces(MediaType.TEXT_PLAIN)
+	  public String sayPlainTextHello() {
+	    return "Hello Jersey";
+	  }
+
+	  // This method is called if XML is request
+	  @GET
+	  @Produces(MediaType.TEXT_XML)
+	  public String sayXMLHello() {
+	    return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
+	  }
+
+	  // This method is called if HTML is request
+	  @GET
+	  @Produces(MediaType.TEXT_HTML)
+	  public String sayHtmlHello() {
+	    return "<html> " + "<title>" + "Hello Jersey" + "</title>"
+	        + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
+	  }
+	*/
 
 }
