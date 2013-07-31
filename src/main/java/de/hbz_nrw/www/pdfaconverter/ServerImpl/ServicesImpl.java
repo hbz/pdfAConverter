@@ -195,7 +195,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			e.printStackTrace();
 		}
 		
-
+		float countJobs = documentList.size();
+		float countSuccess = 0;
 		StringBuffer resultBuffer = new StringBuffer();
 
 		log.info("Starting Batch Job");
@@ -228,7 +229,14 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
 			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + pRunner.getExitStateStr() +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
+			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
+				countSuccess++;
+			}			
+
 		}
+		
+		float percentSuccess = countSuccess/countJobs;
+
 		log.info(resultBuffer.toString());
 		FileUtil.saveStreamToFile(new File(Configuration.getTempfiledir() + "result" + fileName + ".result"), resultBuffer.toString());
 		batchResponse.setResultsFile(Configuration.getTempdirurl() + "result" + fileName + ".result");
