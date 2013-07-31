@@ -23,6 +23,19 @@
 package de.hbz_nrw.pdfaconverter;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
+
+
+import java.net.URI;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriBuilder;
+
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 /**
  * Class TestRestClient
@@ -38,7 +51,29 @@ public class TestRestClient {
 
 	// Initiate Logger for TestRestClient
 	private static Logger log = Logger.getLogger(TestRestClient.class);
-
+	
+	private String uri = "http://nyx.hbz-nrw.de:8080/PdfAConverter/api/batchConvert";
+	
+	@Test public void callRestFulService(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri);
+		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/pdfFedoraUrls.txt");
+		
+		log.info(wResource);
+		log.info(wResource.get(String.class).toString());
+		
+		
+		
+	}
+	
+	
+	private Client createClient(){
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		return client;
+	}
+	
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -46,7 +81,8 @@ public class TestRestClient {
 	 * @param args 
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		TestRestClient trClient= new TestRestClient();
+		trClient.callRestFulService();
 
 	}
 }

@@ -93,6 +93,41 @@ public class FileUtil {
 		return inputFile.getName();
 	}
 
+
+	public static String saveStringToTempFile(String fileName, String contentString){
+		FileOutputStream fos = null;
+		BufferedOutputStream bos = null;
+		try{
+			//System.out.println("Base64 kodierter Stream: " + stream.length());
+			inputFile = new File(Configuration.getTempfiledir() + fileName);
+			log.info(Configuration.getTempfiledir());
+			fos = new FileOutputStream(inputFile);
+			bos = new BufferedOutputStream(fos);			
+			bos.write(contentString.getBytes("UTF-8"));
+			
+		}catch(IOException ioExc){
+			log.error(ioExc);
+		}finally{
+			if(bos != null){
+				try{
+					bos.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+			if(fos != null){
+				try{
+					fos.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+		}
+		log.info("File-Size, Ergebnis: " + inputFile.length());
+		return inputFile.getName();
+	}
+
+	
 	/**
 	 * <p><em>Title: Create a File from byteStream</em></p>
 	 * <p>Description: Method creates a file from the bytestream 
