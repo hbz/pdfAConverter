@@ -20,7 +20,20 @@ public class PilotResult {
 	private String inputFileUrl = null;
 	private String resultFileUrl = null;
 	private String exitState = null;
+	private String recordFileUrl = null;
 	
+	/**
+	 * @return the recordFileUrl
+	 */
+	public String getRecordFileUrl() {
+		return recordFileUrl;
+	}
+	/**
+	 * @param recordFileUrl the recordFileUrl to set
+	 */
+	public void setRecordFileUrl(String recordFileUrl) {
+		this.recordFileUrl = recordFileUrl;
+	}
 	public String getInputFileUrl() {
 		return inputFileUrl;
 	}

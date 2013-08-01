@@ -29,6 +29,7 @@ import de.hbz_nrw.www.pdfaconverter.ServerImpl.*;
 import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.types.*;
+import de.hbz_nrw.www.pdfaconverter.types.ConvertFromUrl;
 
 import org.apache.commons.codec.binary.Base64;
 

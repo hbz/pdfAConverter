@@ -52,27 +52,7 @@ public class PdfAPilotParameters {
 	private static ParameterType defaultParam = new ParameterType();
 	private static Properties paramProp = new Properties();
 
-	
-	/**
-	 * @deprecated
-	 */
-	public static void createDefaultParam(){
 		
-		// create ParameterType with default values
-		defaultParam.setReturnOnlyValidPDFA(true);
-		defaultParam.setQuickProcessing(true);
-
-		defaultParam.setCompliancyLevel(CompliancyLevelType.value2);
-		defaultParam.setReportTrigger(ReportTriggerType.ALWAYS);
-		defaultParam.setReportLang(ReportLangType.DE);
-
-		defaultParam.setReportFormat(new ReportFormatType[]{ReportFormatType.HTML});
-
-		defaultParam.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.OPENRESULT});
-		
-
-	}
-	
 	public static ParameterType createParamType(Properties prop){
 		
 		paramProp = prop;
@@ -202,7 +182,7 @@ public class PdfAPilotParameters {
 		}
 
 		if(paramProp.containsKey("htmlNoCorrection")){
-			if(paramProp.getProperty("htmlNoCorrestion").matches("true")){
+			if(paramProp.getProperty("htmlNoCorrection").matches("true")){
 				param.setHtmlReportOptions(new HtmlOptionType[]{HtmlOptionType.NOCORRECTION});
 			}
 		}
@@ -237,6 +217,7 @@ public class PdfAPilotParameters {
 		
 	}
 	
+
 	/**
 	 * <p><em>Title: Parse the ParameterType Object</em></p>
 	 * <p>Description: method generates an String output from all Callas Parameters given 
@@ -329,15 +310,6 @@ public class PdfAPilotParameters {
 	 */
 	public static void setDefaultParam(ParameterType defaultParam) {
 		PdfAPilotParameters.defaultParam = defaultParam;
-	}
-
-	/**
-	 * @return the defaultParam
-	 * @deprecated
-	 */
-	public static ParameterType getDefaultParam() {
-		createDefaultParam();
-		return defaultParam;
 	}
 
 	/**
