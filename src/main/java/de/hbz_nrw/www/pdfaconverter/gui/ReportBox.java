@@ -252,10 +252,10 @@ public class ReportBox {
 	    	String filename = getFileName();
 	    	//find out which report format was created
 	    	if(new String(Base64.decodeBase64(stream)).startsWith("<!DOCTYPE HTML PUBLIC")){
-	    		BrowserLauncher.setUrl(Configuration.getTempdirurl() + "result/" + filename + ".html");
+	    		BrowserLauncher.setUrl(Configuration.getTempDirUrl() + "result/" + filename + ".html");
 	    	}
 	    	if(new String(Base64.decodeBase64(stream)).startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>")){
-	    		BrowserLauncher.setUrl(Configuration.getTempdirurl() + "result/"+ filename + ".xml");
+	    		BrowserLauncher.setUrl(Configuration.getTempDirUrl() + "result/"+ filename + ".xml");
 	    	}
 	    	
 	    	BrowserLauncher.launch();

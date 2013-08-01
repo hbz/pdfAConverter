@@ -60,16 +60,16 @@ public class PilotRunner {
 		// Complete execute String 
 		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
 		String defaultParams = new String("--noprogress --nohits --substitute  " 
-				 + "--linkpath=http://nyx.hbz-nrw.de:8080/axis2/temp/reporttemplate "
+				 + "--linkpath=http://nyx.hbz-nrw.de/pdfa/reporttemplate "
 				 + "--fontfolder=/opt/pdfapilot/fontfolder "
 				);
 		String executeString = new String(programPath + " " 
 				+ defaultParams 
 				+ paramString 
-				+ " --outputfile=" + Configuration.getTempfiledir() + "result/" + fileName 
-				+ " " + Configuration.getTempfiledir() + fileName); 
+				+ " --outputfile=" + Configuration.getResultFileDir() + fileName 
+				+ " " + Configuration.getTempFileDir() + fileName); 
 
-		log.info("The execute String: " + executeString);
+		log.debug("The execute String: " + executeString);
 		try{
 			//Process proc = java.lang.Runtime.getRuntime().exec("echo " + executeString);
 			Process proc = java.lang.Runtime.getRuntime().exec(executeString);
@@ -82,7 +82,7 @@ public class PilotRunner {
             while ((line = br.readLine()) != null){
                 lineBuffer.append(line + "\n");
             }
-            log.info("STOUT: " + lineBuffer.toString());
+            log.debug("STOUT: " + lineBuffer.toString());
             log.info("Exit State: " + exitState);
             stoutStr = lineBuffer.toString();
             exitStateStr = Integer.toString(exitState);

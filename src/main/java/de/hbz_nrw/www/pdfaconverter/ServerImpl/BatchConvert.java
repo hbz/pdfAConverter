@@ -1,24 +1,5 @@
 /**
- * JerseyServiceImpl.java - This file is part of the DiPP Project by hbz
- * Library Service Center North Rhine Westfalia, Cologne 
- *
- * -----------------------------------------------------------------------------
- *
- * <p><b>License and Copyright: </b>The contents of this file are subject to the
- * D-FSL License Version 1.0 (the "License"); you may not use this file
- * except in compliance with the License. You may obtain a copy of the License
- * at <a href="http://www.dipp.nrw.de/dfsl/">http://www.dipp.nrw.de/dfsl/.</a></p>
- *
- * <p>Software distributed under the License is distributed on an "AS IS" basis,
- * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for
- * the specific language governing rights and limitations under the License.</p>
- *
- * <p>Portions created for the Fedora Repository System are Copyright &copy; 2002-2005
- * by The Rector and Visitors of the University of Virginia and Cornell
- * University. All rights reserved."</p>
- *
- * -----------------------------------------------------------------------------
- *
+ * 
  */
 package de.hbz_nrw.www.pdfaconverter.ServerImpl;
 
@@ -32,6 +13,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.fileUtil.BatchFileUtil;
@@ -42,52 +30,46 @@ import de.hbz_nrw.www.pdfaconverter.util.PilotResult;
 import de.hbz_nrw.www.pdfaconverter.util.PilotResultList;
 import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
- * Class JerseyServiceImpl
- * 
- * <p><em>Title: </em></p>
- * <p>Description: </p>
- * 
- * @author aquast, email
- * creation date: 26.07.2013
+ * @author aquast
  *
  */
-@Path("/api/alt")
-public class JerseyServiceImpl {
+@Path("/api")
+public class BatchConvert {
 
-	// Initiate Logger for JerseyServiceImpl
-	private static Logger log = Logger.getLogger(JerseyServiceImpl.class);
-
-	@GET
-	@Path("/convertFromUrl")
-	@Produces({MediaType.TEXT_HTML})
-	public String convertFromUrl(@QueryParam("fileUrl") String PdfFileUrl, 
-			@QueryParam("parameter") String param){
-
-		String pdfFileUrl = PdfFileUrl;
-		String paramString = null;
-		//create a unique temporary file prefix
-		String fileIdent = TimePrefix.getTimePrefix();
-		String fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", pdfFileUrl);
-		
-		PilotRunner pRunner = new PilotRunner();
-		//pRunner.executePdfATool(paramString, fileName);
-		
-		return "<html> " + "<title>" + "Access to converted file" + "</title>"
-		        + "<body><h1>" + "Converted file:" + "</h1>" +
-		        	"<ul>" +
-		        	"<li>Result: " + fileName + "</li>" +
-		        	"<li>From :" + pdfFileUrl + "</li>" +
-		        	"</ul></body>" + "</html> ";
-
-	}
+	// Initiate Logger for PilotRunner
+	private static Logger log = Logger.getLogger(BatchConvert.class);
 	
+	//  Jersey annotated Methods 
+	
+	@Path("/batchConvert")
+	@POST
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
+			@QueryParam("parameterFile") String inputFileUrl){
+		PilotResultList response = null;
+		
+		response = batchConvert(batchFileUrl, inputFileUrl);
+		
+		return response;
+	}
+
+	@Path("/batchConvert")
+	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public PilotResultList getBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
+			@QueryParam("parameterFile") String inputFileUrl){
+		PilotResultList response = null;
+		
+		response = batchConvert(batchFileUrl, inputFileUrl);
+		
+		return response;
+	}
+
+
 	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
+		
+		log.info("User Dir: " + System.getProperty("user.dir"));
 
 		String batchFileUrl = BatchFileUrl;
 		String paramFileUrl = ParamFileUrl;
@@ -136,7 +118,7 @@ public class JerseyServiceImpl {
 
 			String reportType = null;
 			try {
-				//paramString = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
+				//Read parameters from File
 				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
 				log.info("Reading Parameters File");
 	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
@@ -152,13 +134,13 @@ public class JerseyServiceImpl {
 			// we may should run threads? 
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
-			resultBuffer.append(Configuration.getTempDirUrl() + "result" 
+			resultBuffer.append(Configuration.getResultDirUrl() 
 					+ fileName + " Status-Meldung: " 
-					+ pRunner.getExitStateStr() +  " " + Configuration.getTempDirUrl() + "result/" +fileIdent + "." + reportType +"\n" );
+					+ pRunner.getExitStateStr() +  " " + Configuration.getResultDirUrl() +fileIdent + "." + reportType +"\n" );
 			lineResult.setExitState(pRunner.getExitStateStr());
 
 			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
-				lineResult.setResultFileUrl(Configuration.getTempDirUrl() + "result/" + fileName);
+				lineResult.setResultFileUrl(Configuration.getResultDirUrl() + fileName);
 				countSuccess++;
 			}
 			rList.add(lineResult);
@@ -173,31 +155,18 @@ public class JerseyServiceImpl {
 
 		log.info(resultBuffer.toString());
 		// Save results to file 
-		String resultLogUrl = FileUtil.saveStringToResultFile("result/" + fileIdent + ".result", resultBuffer.toString());
+		String resultLogFile = FileUtil.saveStringToResultFile(fileIdent + ".log", resultBuffer.toString());
 		
 		PilotResultList prList = new PilotResultList();
 		prList.setPilotResultList(rList);
 		prList.setCountSuccess(NumberFormat.getIntegerInstance().format(countSuccess));
 		prList.setTotalNumberOfJobs(NumberFormat.getIntegerInstance().format(countJobs));
 		prList.setPercentSuccess(NumberFormat.getPercentInstance().format(percentSuccess));
-		prList.setResultLogFileUrl(Configuration.getTempDirUrl() + "result/" + resultLogUrl);
+		prList.setResultLogFileUrl(Configuration.getResultDirUrl()  + resultLogFile);
 
-		//log.info(prList.toString());
 		return prList;
 
 		
 	}
-
-	@Path("/batchConvert")
-	@POST
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
-			@QueryParam("parameterFile") String inputFileUrl){
-		PilotResultList response = null;
-		
-		response = batchConvert(batchFileUrl, inputFileUrl);
-		
-		return response;
-	}
-			  
+	
 }

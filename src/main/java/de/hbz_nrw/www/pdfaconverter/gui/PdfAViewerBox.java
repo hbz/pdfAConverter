@@ -89,7 +89,7 @@ public class PdfAViewerBox {
 	    public void actionPerformed(ActionEvent e) {
 	    	
 	    	String filename = remoteFileName;
-	    	ReaderLauncher.setUrl(Configuration.getTempdirurl() + "result/" + filename);
+	    	ReaderLauncher.setUrl(Configuration.getTempDirUrl() + "result/" + filename);
 	    	ReaderLauncher.launch();
 	    }
 	}

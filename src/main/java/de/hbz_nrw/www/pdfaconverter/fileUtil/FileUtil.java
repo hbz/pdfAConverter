@@ -65,8 +65,8 @@ public class FileUtil {
 		BufferedOutputStream bos = null;
 		try{
 			//System.out.println("Base64 kodierter Stream: " + stream.length());
-			inputFile = new File(Configuration.getTempfiledir() + fileName);
-			log.info(Configuration.getTempfiledir());
+			inputFile = new File(Configuration.getTempFileDir() + fileName);
+			log.info(Configuration.getTempFileDir());
 			fos = new FileOutputStream(inputFile);
 			bos = new BufferedOutputStream(fos);			
 			bos.write(Base64.decodeBase64(stream.getBytes("UTF-8")));
@@ -94,13 +94,13 @@ public class FileUtil {
 	}
 
 
-	public static String saveStringToTempFile(String fileName, String contentString){
+	public static String saveStringToResultFile(String fileName, String contentString){
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
 		try{
 			//System.out.println("Base64 kodierter Stream: " + stream.length());
-			inputFile = new File(Configuration.getTempfiledir() + fileName);
-			log.info(Configuration.getTempfiledir());
+			inputFile = new File(Configuration.getResultFileDir() + fileName);
+			log.info(Configuration.getResultFileDir());
 			fos = new FileOutputStream(inputFile);
 			bos = new BufferedOutputStream(fos);			
 			bos.write(contentString.getBytes("UTF-8"));
@@ -203,7 +203,7 @@ public class FileUtil {
 	 * @return 
 	 */
 	public static String saveUrlToFile(String fileName, String url){
-		File inputFile = new File(Configuration.getTempfiledir() + fileName);
+		File inputFile = new File(Configuration.getTempFileDir() + fileName);
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;

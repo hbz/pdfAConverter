@@ -80,7 +80,7 @@ public class UrlUtil {
 	}
 
 	public String getTempDirUrl(){
-		return Configuration.getTempdirurl() + "result/" + fileName;
+		return Configuration.getTempDirUrl() + "result/" + fileName;
 	}
 
 }

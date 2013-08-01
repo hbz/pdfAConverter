@@ -136,8 +136,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		//now create Response from temp dir content
 		byte[] stream = null;
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName).isFile()){
-			stream = FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName));
+		if(new File(Configuration.getTempFileDir() + "result/" + fileName).isFile()){
+			stream = FileUtil.loadFileIntoStream(new File(Configuration.getTempFileDir() + "result/" + fileName));
 
 			try{
 				response.setResponseDocumentStream(new String(stream, "UTF-8"));
@@ -148,14 +148,14 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		}
 
 		List<byte[]> reportStreams = new Vector<byte[]>();
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".html")).isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".html"))));
+		if(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".html")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".html"))));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".xml")).isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".xml"))));
+		if(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".xml")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".xml"))));
 		}
-		if(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".mht")).isFile()){
-			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempfiledir() + "result/" + fileName.replace(".pdf", ".mht"))));
+		if(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".mht")).isFile()){
+			reportStreams.add(FileUtil.loadFileIntoStream(new File(Configuration.getTempFileDir() + "result/" + fileName.replace(".pdf", ".mht"))));
 		}
 		
 		Iterator<byte[]> it = reportStreams.iterator();
@@ -189,7 +189,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		
 		try {
 			log.info("Reading Batch File");
-			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
+			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempFileDir() + batchFileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -215,7 +215,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 				//paramString = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
 				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
 				log.info("Reading Parameters File");
-	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempfiledir() + paramFileName));
+	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
 	            BufferedInputStream bis = new BufferedInputStream(fis);
 				paramProp.load(bis);
 				paramType = PdfAPilotParameters.createParamType(paramProp);
@@ -228,7 +228,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 			// we may should run threads? 
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
-			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + pRunner.getExitStateStr() +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
+			resultBuffer.append(Configuration.getTempDirUrl() + "result" + fileName + " Status-Meldung: " + pRunner.getExitStateStr() +  " " + Configuration.getTempDirUrl() + "result" +fileIdent + "." + reportType +"\n" );
 			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
 				countSuccess++;
 			}			
@@ -238,8 +238,8 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		float percentSuccess = countSuccess/countJobs;
 
 		log.info(resultBuffer.toString());
-		FileUtil.saveStreamToFile(new File(Configuration.getTempfiledir() + "result" + fileName + ".result"), resultBuffer.toString());
-		batchResponse.setResultsFile(Configuration.getTempdirurl() + "result" + fileName + ".result");
+		FileUtil.saveStreamToFile(new File(Configuration.getTempFileDir() + "result" + fileName + ".result"), resultBuffer.toString());
+		batchResponse.setResultsFile(Configuration.getTempDirUrl() + "result" + fileName + ".result");
 		return batchResponse;
 	}
 
@@ -270,13 +270,13 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 
 		URI documentUri = null;
 		try {
-			documentUri = new URI(Configuration.getTempdirurl() + "result/" + fileName);
+			documentUri = new URI(Configuration.getTempDirUrl() + "result/" + fileName);
 		} catch (MalformedURIException e) {
 			e.printStackTrace();
 		}
 		URI reportUri = null;
 		try {
-			reportUri = new URI(Configuration.getTempdirurl() + "result/" + fileName.replace(".pdf", "." + convertFromUrl.getReportType().toLowerCase()));
+			reportUri = new URI(Configuration.getTempDirUrl() + "result/" + fileName.replace(".pdf", "." + convertFromUrl.getReportType().toLowerCase()));
 		} catch (MalformedURIException e) {
 			e.printStackTrace();
 		}

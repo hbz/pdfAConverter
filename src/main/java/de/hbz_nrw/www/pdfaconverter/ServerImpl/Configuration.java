@@ -20,7 +20,9 @@ public class Configuration {
 	private static Logger log = null;
 
 	private static final String host = "nyx.hbz-nrw.de";
-	private static final String tempDirUrl = "http://" + host + ":8080/axis2/temp/";
+	private static final String tempDirUrl = "http://" + host + "/pdfa/temp/";
+	private static final String resultDirUrl = "http://" + host + "/pdfa/result/";
+	private static final String resultFileDir = "/srv/www/htdocs/pdfa/result/";
 	
 	// Directory for Configuration files
 	private static final String configFileDir(){
@@ -41,16 +43,11 @@ public class Configuration {
 	private static final String tempFileDir(){
 		String tempDir = null;
 
-		if(System.getProperty("os.name").equals("SunOS")){
-			System.setProperty("user.dir", "/var/tomcat6/webapps");
-		}
-		else{
-			System.setProperty("user.dir", "/srv/tomcat6/webapps/axis2");
-		}
-		
-		tempDir = System.getProperty("user.dir") + "/temp/";
+		tempDir = "/srv/www/htdocs/pdfa/temp/";
+		//tempDir = System.getProperty("user.dir") + "../temp/";
 		return tempDir;
 	}
+
 
 	
 	/**
@@ -80,16 +77,23 @@ public class Configuration {
 		log.info("Logging System activated,");
 	}
 
-	public static String getConfigfiledir() {
+	public static String getConfigFileDir() {
 		return configFileDir();
 	}
 
-	public static String getTempfiledir() {
+	public static String getTempFileDir() {
 		return tempFileDir();
 	}
 
-	public static String getTempdirurl() {
+	public static String getResultFileDir() {
+		return resultFileDir;
+	}
+
+	public static String getTempDirUrl() {
 		return tempDirUrl;
 	}
 
+	public static String getResultDirUrl() {
+		return resultDirUrl;
+	}
 }
