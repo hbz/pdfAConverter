@@ -54,20 +54,45 @@ public class TestRestClient {
 	
 	private String uri = "http://nyx.hbz-nrw.de:8080/PdfAConverter/api/batchConvert";
 	
-	@Test public void callRestFulService(){
+	@Test public void callRestFulServicePlain(){
 		Client client = createClient();
 		WebResource wResource = client.resource(uri);
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
-			.queryParam("batchFile", "http://131.220.138.195/pdfATests/pdfFedoraUrls.txt");
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
 		
 		log.info(wResource);
-		log.info(wResource.get(String.class).toString());
+		log.info(wResource.post(String.class).toString());
 		
 		
 		
 	}
 	
+	@Test public void callRestFulServiceJson(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri);
+		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
+		;
+		log.info(wResource);
+		log.info(wResource.accept(MediaType.APPLICATION_JSON).post(String.class).toString());
+		
+		
+		
+	}
 	
+	@Test public void callRestFulServiceXml(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri);
+		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
+		;
+		log.info(wResource);
+		log.info(wResource.accept(MediaType.APPLICATION_XML).post(String.class).toString());
+		
+		
+		
+	}
+
 	private Client createClient(){
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
@@ -82,7 +107,8 @@ public class TestRestClient {
 	 */
 	public static void main(String[] args) {
 		TestRestClient trClient= new TestRestClient();
-		trClient.callRestFulService();
+		trClient.callRestFulServicePlain();
+		trClient.callRestFulServiceJson();
 
 	}
 }

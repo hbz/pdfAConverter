@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -37,10 +38,14 @@ import de.hbz_nrw.www.pdfaconverter.fileUtil.BatchFileUtil;
 import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
 import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
+import de.hbz_nrw.www.pdfaconverter.util.PilotResult;
+import de.hbz_nrw.www.pdfaconverter.util.PilotResultList;
 import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Class JerseyServiceImpl
@@ -82,11 +87,7 @@ public class JerseyServiceImpl {
 
 	}
 	
-	@Path("/batchConvert")
-	@GET
-	@Produces({MediaType.TEXT_HTML})
-	public String batchConvert(@QueryParam("batchFile") String BatchFileUrl, 
-			@QueryParam("parameterFile") String ParamFileUrl){
+	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
 
 		String batchFileUrl = BatchFileUrl;
 		String paramFileUrl = ParamFileUrl;
@@ -96,6 +97,7 @@ public class JerseyServiceImpl {
 		String fileIdent = TimePrefix.getTimePrefix();
 		String fileName = null;
 		String paramString = null;
+		ArrayList<PilotResult> rList = new ArrayList<PilotResult>();
 
 
 		String batchFileName = FileUtil.saveUrlToFile(fileIdent + "_batch.txt", batchFileUrl);
@@ -122,12 +124,16 @@ public class JerseyServiceImpl {
 		while(it.hasNext()){
 			String fileUrl = it.next();
 			log.info("File :" + fileUrl);
-
+			
+			PilotResult lineResult = new PilotResult();
+			
 			//create unique directory identifier
 			fileIdent = TimePrefix.getTimePrefix();
 			
 			// Load File to temp dir
 			fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", fileUrl);
+			lineResult.setInputFileUrl(fileUrl);
+
 			String reportType = null;
 			try {
 				//paramString = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
@@ -146,46 +152,51 @@ public class JerseyServiceImpl {
 			// we may should run threads? 
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
-			resultBuffer.append(Configuration.getTempdirurl() + "result" + fileName + " Status-Meldung: " + pRunner.getExitStateStr() +  " " + Configuration.getTempdirurl() + "result" +fileIdent + "." + reportType +"\n" );
-			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
-				countSuccess++;
-			}			
+			resultBuffer.append(Configuration.getTempdirurl() + "result" 
+					+ fileName + " Status-Meldung: " 
+					+ pRunner.getExitStateStr() +  " " + Configuration.getTempdirurl() + "result/" +fileIdent + "." + reportType +"\n" );
+			lineResult.setExitState(pRunner.getExitStateStr());
 
+			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
+				lineResult.setResultFileUrl(Configuration.getTempdirurl() + "result/" + fileName);
+				countSuccess++;
+			}
+			rList.add(lineResult);
 		}
 		
 		float percentSuccess = countSuccess/countJobs;
-		resultBuffer.append(NumberFormat.getPercentInstance().format(percentSuccess) + " of Batch Jobs executed successfully. All Jobs : " + countJobs + " successful Jobs:  " + countSuccess + "\n");
+		resultBuffer.append(NumberFormat.getPercentInstance().format(percentSuccess) 
+				+ " of Batch Jobs executed successfully. All Jobs : " 
+				+ NumberFormat.getIntegerInstance().format(countJobs) 
+				+ " successful Jobs:  " 
+				+ NumberFormat.getIntegerInstance().format(countSuccess) + "\n");
 
 		log.info(resultBuffer.toString());
+		// Save results to file 
 		FileUtil.saveStringToTempFile("result/" + fileIdent + ".result", resultBuffer.toString());
-		return Configuration.getTempdirurl() + "result/" + fileIdent + ".result";
+		
+		PilotResultList prList = new PilotResultList();
+		prList.setPilotResultList(rList);
+		prList.setCountSuccess(NumberFormat.getIntegerInstance().format(countSuccess));
+		prList.setTotalNumberOfJobs(NumberFormat.getIntegerInstance().format(countJobs));
+		prList.setPercentSuccess(NumberFormat.getPercentInstance().format(percentSuccess));
+
+		//log.info(prList.toString());
+		return prList;
 
 		
 	}
 
-	
-	
-	// This method is called if TEXT_PLAIN is request
-	  @GET
-	  @Produces(MediaType.TEXT_PLAIN)
-	  public String sayPlainTextHello() {
-	    return "Hello Jersey";
-	  }
-
-	  // This method is called if XML is request
-	  @GET
-	  @Produces(MediaType.TEXT_XML)
-	  public String sayXMLHello() {
-	    return "<?xml version=\"1.0\"?>" + "<hello> Hello Jersey" + "</hello>";
-	  }
-
-	  // This method is called if HTML is request
-	  @GET
-	  @Produces(MediaType.TEXT_HTML)
-	  public String sayHtmlHello() {
-	    return "<html> " + "<title>" + "Hello Jersey" + "</title>"
-	        + "<body><h1>" + "Hello Jersey" + "</body></h1>" + "</html> ";
-	  }
-	
-
+	@Path("/batchConvert")
+	@POST
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
+			@QueryParam("parameterFile") String inputFileUrl){
+		PilotResultList response = null;
+		
+		response = batchConvert(batchFileUrl, inputFileUrl);
+		
+		return response;
+	}
+			  
 }
