@@ -35,7 +35,7 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import de.hbz_nrw.www.pdfaconverter.clientImpl.ClientImpl;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse;
 import de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType;

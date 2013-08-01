@@ -11,7 +11,7 @@ import javax.swing.JTextPane;
 import org.apache.commons.codec.binary.Base64;
 
 
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.gui.ReportViewer;
 
 /**

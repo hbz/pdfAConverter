@@ -26,7 +26,7 @@ import org.apache.axis2.builder.DiskFileDataSource;
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.ServerImpl.*;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.types.*;
 

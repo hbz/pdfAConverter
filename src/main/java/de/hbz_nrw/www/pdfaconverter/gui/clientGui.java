@@ -22,7 +22,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.clientImpl.ClientImpl;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromStream_faultMsg;
 import de.hbz_nrw.www.pdfaconverter.types.CompliancyLevelType;
 import de.hbz_nrw.www.pdfaconverter.types.ConvertFromAttachment;

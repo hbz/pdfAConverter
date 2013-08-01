@@ -33,8 +33,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import de.hbz_nrw.www.pdfaconverter.fileUtils.BatchFileUtil;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.BatchFileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.types.ParameterType;
 import de.hbz_nrw.www.pdfaconverter.util.PdfAPilotParameters;
 import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;

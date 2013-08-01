@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import de.hbz_nrw.www.pdfaconverter.ServerImpl.Configuration;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.*;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.*;
 
 
 /**

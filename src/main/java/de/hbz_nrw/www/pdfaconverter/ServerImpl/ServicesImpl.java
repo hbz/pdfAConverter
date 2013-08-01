@@ -49,8 +49,8 @@ import org.apache.axis2.databinding.types.URI.MalformedURIException;
 import javax.activation.DataHandler;
 import javax.servlet.ServletException;
 
-import de.hbz_nrw.www.pdfaconverter.fileUtils.BatchFileUtil;
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.BatchFileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvertResponse;
 import de.hbz_nrw.www.pdfaconverter.services.ConvertFromAttachment_faultMsg;

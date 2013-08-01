@@ -19,7 +19,7 @@ import javax.swing.*;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
-import de.hbz_nrw.www.pdfaconverter.fileUtils.FileUtil;
+import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
 
 public class ReportViewer {
 
