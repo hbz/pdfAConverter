@@ -23,6 +23,7 @@
 package de.hbz_nrw.www.pdfaconverter.ServerImpl;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -88,7 +89,12 @@ public class PilotRunner {
             exitStateStr = Integer.toString(exitState);
 		}catch(Exception Exc){
 			log.error(Exc);
-		}	
+		}
+		
+		//unlink temp file
+		if(new File(Configuration.getTempFileDir() + fileName).isFile()){
+			new File(Configuration.getTempFileDir() + fileName).delete();
+		}
 		// TODO: das Ausführen des PDFA Tools kann etwas dauern... was mache
 		// ich um festzustellen, dass Tool seine Arbeit beendet hat? 		
 	}

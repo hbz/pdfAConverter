@@ -37,7 +37,7 @@ import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
  * @author aquast
  *
  */
-@Path("/api")
+@Path("/test")
 public class ConvertFromUrl {
 
 	// Initiate Logger for PilotRunner
