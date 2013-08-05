@@ -19,7 +19,6 @@ public class guiStart {
 	
 	public guiStart(){
 		Configuration.initLog();
-		log.info(Configuration.getConfigFileDir());
 	}
 	/**
 	 * @param args

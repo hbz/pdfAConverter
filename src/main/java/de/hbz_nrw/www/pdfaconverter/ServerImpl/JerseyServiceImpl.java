@@ -109,7 +109,7 @@ public class JerseyServiceImpl {
 		
 		try {
 			log.info("Reading Batch File");
-			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempFileDir() + batchFileName));
+			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempDirPath() + batchFileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,7 +139,7 @@ public class JerseyServiceImpl {
 				//paramString = BatchFileUtil.readBatchFile(new File(Configuration.getTempfiledir() + batchFileName));
 				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
 				log.info("Reading Parameters File");
-	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
+	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
 	            BufferedInputStream bis = new BufferedInputStream(fis);
 				paramProp.load(bis);
 				paramType = PdfAPilotParameters.createParamType(paramProp);

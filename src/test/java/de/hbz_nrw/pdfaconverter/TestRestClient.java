@@ -22,6 +22,7 @@
  */
 package de.hbz_nrw.pdfaconverter;
 
+import de.hbz_nrw.www.pdfaconverter.ServerImpl.Configuration;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -52,7 +53,7 @@ public class TestRestClient {
 	// Initiate Logger for TestRestClient
 	private static Logger log = Logger.getLogger(TestRestClient.class);
 	
-	private String uri = "http://nyx.hbz-nrw.de:8080/PdfAConverter/api/batchConvert";
+	private String uri = Configuration.getServiceUrl() + "api/batchConvert";
 	
 	@Test public void callRestFulServicePlain(){
 		Client client = createClient();
@@ -67,12 +68,12 @@ public class TestRestClient {
 		
 	}
 	
-	@Test public void callRestFulServiceJson(){
+	@Test public void callBatchConvertServiceJson(){
 		Client client = createClient();
 		WebResource wResource = client.resource(uri);
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
 			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
-		;
+
 		log.info(wResource);
 		log.info(wResource.accept(MediaType.APPLICATION_JSON).post(String.class).toString());
 		
@@ -80,7 +81,7 @@ public class TestRestClient {
 		
 	}
 	
-	@Test public void callRestFulServiceXml(){
+	@Test public void callBatchConvertServiceXml(){
 		Client client = createClient();
 		WebResource wResource = client.resource(uri);
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
@@ -106,8 +107,9 @@ public class TestRestClient {
 	 * @param args 
 	 */
 	public static void main(String[] args) {
+		Configuration.initLog();
 		TestRestClient trClient= new TestRestClient();
-		trClient.callRestFulServiceXml();
+		trClient.callBatchConvertServiceXml();
 		//trClient.callRestFulServiceJson();
 
 	}

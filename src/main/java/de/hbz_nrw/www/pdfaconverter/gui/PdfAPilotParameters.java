@@ -301,7 +301,7 @@ public class PdfAPilotParameters {
 						paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
 					}
 				}
-				paramBuffer.append(",PATH="+ Configuration.getTempFileDir() + "result/" + fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
+				paramBuffer.append(",PATH="+ Configuration.getTempDirPath() + "result/" + fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
 			}
 		}
 		
