@@ -84,7 +84,7 @@ public class TestRestClient {
 		Client client = createClient();
 		WebResource wResource = client.resource(uri);
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
-			.queryParam("batchFile", "http://131.220.138.195/pdfATests/pdfFedoraUrls.txt");
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
 		;
 		log.info(wResource);
 		log.info(wResource.accept(MediaType.APPLICATION_XML).post(String.class).toString());

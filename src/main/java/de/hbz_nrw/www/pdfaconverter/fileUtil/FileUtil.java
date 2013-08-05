@@ -94,6 +94,12 @@ public class FileUtil {
 	}
 
 
+	/**
+	 * Method saves a String to File
+	 * @param fileName
+	 * @param contentString
+	 * @return
+	 */
 	public static String saveStringToResultFile(String fileName, String contentString){
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
@@ -127,6 +133,35 @@ public class FileUtil {
 		return inputFile.getName();
 	}
 
+	/**
+	 * Method appends a String to File
+	 * @param fileName
+	 * @param contentString
+	 * @return
+	 */
+	public static String appendStringToResultFile(String fileName, String contentString){
+		FileWriter fw = null;
+		try{
+			inputFile = new File(Configuration.getResultFileDir() + fileName);
+			fw = new FileWriter(inputFile, true);
+			log.info(Configuration.getResultFileDir());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.append(contentString);
+			bw.flush();
+		}catch(IOException ioExc){
+			log.error(ioExc);
+		}finally{
+			if(fw != null){
+				try{
+					fw.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+		}
+		log.info("File-Size, Ergebnis: " + inputFile.length());
+		return inputFile.getName();
+	}
 	
 	/**
 	 * <p><em>Title: Create a File from byteStream</em></p>

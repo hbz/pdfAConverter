@@ -21,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.apache.tools.ant.taskdefs.Definer.Format;
 
 import de.hbz_nrw.www.pdfaconverter.fileUtil.BatchFileUtil;
 import de.hbz_nrw.www.pdfaconverter.fileUtil.FileUtil;
@@ -99,13 +100,20 @@ public class BatchConvert {
 		
 		float countJobs = documentList.size();
 		float countSuccess = 0;
+		int countProgress = 0;
+		int count4 = 0;
+		int count105 = 0;
+		int count10x = 0;
+		
 		StringBuffer resultBuffer = new StringBuffer();
 
 		log.info("Starting Batch Job");
 		Iterator<String> it = documentList.iterator();
 		while(it.hasNext()){
+			countProgress++;
 			String fileUrl = it.next();
-			log.info("File :" + fileUrl);
+			log.info("Job " + countProgress + " of " + NumberFormat.getIntegerInstance().format(countJobs) + " File: " + fileUrl);
+			StringBuffer lineBuffer = new StringBuffer();
 			
 			PilotResult lineResult = new PilotResult();
 			
@@ -120,7 +128,8 @@ public class BatchConvert {
 			try {
 				//Read parameters from File
 				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
-				log.info("Reading Parameters File");
+				log.debug("Reading Parameters File");
+				
 	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
 	            BufferedInputStream bis = new BufferedInputStream(fis);
 				paramProp.load(bis);
@@ -134,15 +143,39 @@ public class BatchConvert {
 			// we may should run threads? 
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
+			
+			lineBuffer.append(fileUrl + ", Status: " + pRunner.getExitStateStr() + ", "); 
+			
+			//append report if report exists
+			if(new File(Configuration.getResultDirUrl() +fileIdent + "." + reportType).isFile()){
+				lineBuffer.append(Configuration.getResultDirUrl() +fileIdent + "." + reportType);
+			}
+			
 			resultBuffer.append(Configuration.getResultDirUrl() 
-					+ fileName + " Status-Meldung: " 
+					+ fileName + " Status: " 
 					+ pRunner.getExitStateStr() +  " " + Configuration.getResultDirUrl() +fileIdent + "." + reportType +"\n" );
+			
 			lineResult.setExitState(pRunner.getExitStateStr());
 
+			// prepare some additional information
 			if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
+				// append result pdf
 				lineResult.setResultFileUrl(Configuration.getResultDirUrl() + fileName);
+				lineBuffer.append(Configuration.getResultDirUrl() + fileName);
 				countSuccess++;
+			}else if(pRunner.getExitStateStr() != null && !pRunner.getExitStateStr().equals("0")){
+				log.info("hier");
+				String errorLogFile = FileUtil.appendStringToResultFile("error" + ".log", lineBuffer.toString()+ "\n");
+				if(pRunner.getExitStateStr().equals("4")){
+					count4++;
+				}else if(pRunner.getExitStateStr().equals("105")){
+					count105++;
+				}else{
+					count10x++;
+
+				}
 			}
+			
 			rList.add(lineResult);
 		}
 		
@@ -151,7 +184,9 @@ public class BatchConvert {
 				+ " of Batch Jobs executed successfully. All Jobs : " 
 				+ NumberFormat.getIntegerInstance().format(countJobs) 
 				+ " successful Jobs:  " 
-				+ NumberFormat.getIntegerInstance().format(countSuccess) + "\n");
+				+ NumberFormat.getIntegerInstance().format(countSuccess) + "\n"
+				+ "Number of unknown errors: " + count10x
+				+ ", Number of encrypted Files: " + count105);
 
 		log.info(resultBuffer.toString());
 		// Save results to file 
