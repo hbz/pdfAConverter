@@ -72,13 +72,13 @@ public class Configuration {
 	}
 
 	private void setResultDirPath(){
-		resultDirPath = System.getProperty("user.dir") + sysProp.getProperty("resultDir");
-		resultDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("resultDir");
+		//resultDirPath = System.getProperty("user.dir") + sysProp.getProperty("resultDir") + "/";
+		resultDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("resultDir") + "/";
 	}
 
 	private void setTempDirPath(){
-		//tempDirPath = System.getProperty("user.dir") + sysProp.getProperty("tempDir");
-		tempDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("tempDir");
+		//tempDirPath = System.getProperty("user.dir") + sysProp.getProperty("tempDir") + "/";
+		tempDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("tempDir") + "/";
 	}
 
 	public void loadConfigurationFile(){

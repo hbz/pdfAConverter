@@ -71,6 +71,7 @@ public class BatchConvert {
 	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
 		
 		log.info("User Dir: " + System.getProperty("user.dir"));
+		Configuration.initLog();
 
 		String batchFileUrl = BatchFileUrl;
 		String paramFileUrl = ParamFileUrl;
