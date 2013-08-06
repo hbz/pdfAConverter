@@ -23,6 +23,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class Configuration {
 	
 	// constructor loads config properties if accessible
+	//FIXME: Constructor must be called by each Method!
 	private Configuration(){
 		setDefaultProp();
 		loadConfigurationFile();
