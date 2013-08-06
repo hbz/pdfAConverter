@@ -22,17 +22,6 @@ import org.apache.log4j.PropertyConfigurator;
  */
 public class Configuration {
 	
-	// constructor loads config properties if accessible
-	//FIXME: Constructor must be called by each Method!
-	static{
-		setDefaultProp();
-		loadConfigurationFile();
-		setResultDirUrl();
-		setTempDirUrl();
-		setResultDirPath();
-		setTempDirPath();
-		setServiceUrl();
-	}
 
 	// Initialize logger object 
 	private static Logger log = Logger.getLogger(Configuration.class);
@@ -47,6 +36,16 @@ public class Configuration {
 	static String resultDirPath = null;
 	static String tempDirPath = null;
 
+	static{
+		setDefaultProp();
+		loadConfigurationFile();
+		setResultDirPath();
+		setTempDirPath();
+		setServiceUrl();
+		setResultDirUrl();
+		setTempDirUrl();
+	}
+
 	private static void setDefaultProp(){
 		defProp.setProperty("host", "nyx.hbz-nrw.de");
 		defProp.setProperty("port", "8080");
@@ -54,10 +53,8 @@ public class Configuration {
 		defProp.setProperty("tempDir", "temp");
 		defProp.setProperty("resultDir", "result");
 		defProp.setProperty("userDir", "ulbm");
-		
 		defProp.setProperty("workingDir", "/srv/tomcat6/webapps/");
 		
-		loadConfigurationFile();
 		
 	}
 
@@ -86,10 +83,10 @@ public class Configuration {
 		tempDirPath = sysProp.getProperty("workingDir") + sysProp.getProperty("tempDir") + "/";
 	}
 
-	public void loadConfigurationFile(){
+	public static void loadConfigurationFile(){
         sysProp = new Properties(defProp);
         try {
-            InputStream propStream = this.getClass().getResourceAsStream("/conf/pdfaService.cfg");
+            InputStream propStream = new Configuration().getClass().getResourceAsStream("/conf/pdfaService.cfg");
             if (propStream == null) {
                 throw new IOException("Error loading configuration: /conf/pdfa.conf not found in classpath");
             }else{
@@ -155,4 +152,7 @@ public class Configuration {
 		return resultDirUrl;
 	}
 
+	public static String getWorkingDir(){
+		return sysProp.getProperty("workingDir");
+	}
 }
