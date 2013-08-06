@@ -71,6 +71,7 @@ public class BatchConvert {
 	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
 		
 		log.info("User Dir: " + System.getProperty("user.dir"));
+		Configuration.initLog();
 
 		String batchFileUrl = BatchFileUrl;
 		String paramFileUrl = ParamFileUrl;
@@ -92,7 +93,7 @@ public class BatchConvert {
 		
 		try {
 			log.info("Reading Batch File");
-			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempFileDir() + batchFileName));
+			documentList = BatchFileUtil.readBatchFile(new File(Configuration.getTempDirPath() + batchFileName));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,7 +131,7 @@ public class BatchConvert {
 				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
 				log.debug("Reading Parameters File");
 				
-	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
+	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
 	            BufferedInputStream bis = new BufferedInputStream(fis);
 				paramProp.load(bis);
 				paramType = PdfAPilotParameters.createParamType(paramProp);

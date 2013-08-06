@@ -279,7 +279,7 @@ public class PdfAPilotParameters {
 						paramBuffer.append("," + paramType.getHtmlReportOptions()[j]);
 					}
 				}
-				paramBuffer.append(",PATH="+ Configuration.getResultFileDir()+ fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
+				paramBuffer.append(",PATH="+ Configuration.getResultDirPath()+ fileIdent.replace(".pdf", "." + paramType.getReportFormat()[i].toString().toLowerCase()));
 			}
 		}
 		

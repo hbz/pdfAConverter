@@ -67,8 +67,8 @@ public class PilotRunner {
 		String executeString = new String(programPath + " " 
 				+ defaultParams 
 				+ paramString 
-				+ " --outputfile=" + Configuration.getResultFileDir() + fileName 
-				+ " " + Configuration.getTempFileDir() + fileName); 
+				+ " --outputfile=" + Configuration.getResultDirPath() + fileName 
+				+ " " + Configuration.getTempDirPath() + fileName); 
 
 		log.debug("The execute String: " + executeString);
 		try{
@@ -92,8 +92,8 @@ public class PilotRunner {
 		}
 		
 		//unlink temp file
-		if(new File(Configuration.getTempFileDir() + fileName).isFile()){
-			new File(Configuration.getTempFileDir() + fileName).delete();
+		if(new File(Configuration.getTempDirPath() + fileName).isFile()){
+			new File(Configuration.getTempDirPath() + fileName).delete();
 		}
 		// TODO: das Ausführen des PDFA Tools kann etwas dauern... was mache
 		// ich um festzustellen, dass Tool seine Arbeit beendet hat? 		

@@ -4,7 +4,13 @@
 package de.hbz_nrw.www.pdfaconverter.ServerImpl;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
+import javax.servlet.ServletException;
+
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -15,40 +21,81 @@ import org.apache.log4j.PropertyConfigurator;
  *
  */
 public class Configuration {
+	
+	// constructor loads config properties if accessible
+	private Configuration(){
+		setDefaultProp();
+		loadConfigurationFile();
+		setResultDirUrl();
+		setTempDirUrl();
+		setResultDirPath();
+		setTempDirPath();
+		setServiceUrl();
+	}
 
 	// Initialize logger object 
-	private static Logger log = null;
+	private static Logger log = Logger.getLogger(Configuration.class);
 
-	private static final String host = "nyx.hbz-nrw.de";
-	private static final String tempDirUrl = "http://" + host + "/pdfa/temp/";
-	private static final String resultDirUrl = "http://" + host + "/pdfa/result/";
-	private static final String resultFileDir = "/srv/www/htdocs/pdfa/result/";
+	private static Properties defProp = new Properties();
+	private static Properties sysProp = null;
 	
-	// Directory for Configuration files
-	private static final String configFileDir(){
-		String confDir = null;
+	private static String serviceUrl = null;
+	private static String tempDirUrl = null;
+	private static String resultDirUrl = null;
 
-		if(System.getProperty("os.name").equals("SunOS")){
-			System.setProperty("user.dir", "/var/tomcat6/webapps");
-		}
+	static String resultDirPath = null;
+	static String tempDirPath = null;
 
-		System.out.println("active Dir: " + System.getProperty("user.dir"));
-		System.out.println("OS: " + System.getProperty("os.name"));
-
-		confDir = System.getProperty("user.dir") + "/conf/";
-		return confDir;
-	}
-	
-	// Directory for temporary stored PDF Files
-	private static final String tempFileDir(){
-		String tempDir = null;
-
-		tempDir = "/srv/www/htdocs/pdfa/temp/";
-		//tempDir = System.getProperty("user.dir") + "../temp/";
-		return tempDir;
+	private void setDefaultProp(){
+		defProp.setProperty("host", "nyx.hbz-nrw.de");
+		defProp.setProperty("port", "8080");
+		defProp.setProperty("path", "PdfAConverter");
+		defProp.setProperty("tempDir", "temp");
+		defProp.setProperty("resultDir", "result");
+		defProp.setProperty("userDir", "ulbm");
+		
 	}
 
+	private void setTempDirUrl(){
+		 tempDirUrl = serviceUrl + sysProp.getProperty("tempDir") + "/";
+	}
+	
+	private void setResultDirUrl(){
+		resultDirUrl = serviceUrl + sysProp.getProperty("resultDir")  + "/";
+		
+	}
+	
+	private void setServiceUrl(){
+		serviceUrl = "http://" + sysProp.getProperty("host") + ":" 
+				+ sysProp.getProperty("port") + "/"
+				+ sysProp.getProperty("path") + "/"; 
+	}
 
+	private void setResultDirPath(){
+		//resultDirPath = System.getProperty("user.dir") + sysProp.getProperty("resultDir") + "/";
+		resultDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("resultDir") + "/";
+	}
+
+	private void setTempDirPath(){
+		//tempDirPath = System.getProperty("user.dir") + sysProp.getProperty("tempDir") + "/";
+		tempDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("tempDir") + "/";
+	}
+
+	public void loadConfigurationFile(){
+        sysProp = new Properties(defProp);
+        try {
+            InputStream propStream = this.getClass().getResourceAsStream("/conf/pdfaService.cfg");
+            if (propStream == null) {
+                throw new IOException("Error loading configuration: /conf/pdfa.conf not found in classpath");
+            }else{
+                sysProp.load(propStream);
+            }
+        } catch (Exception e) {
+        	log.warn(e);
+        }
+
+	}
+	
 	
 	/**
 	 *  Method for initiate Logging System which include Logger 
@@ -56,37 +103,43 @@ public class Configuration {
 	 *  @author Andres Quast 
 	 */
 	public static void initLog() {
-		
-		
-		File logConfiguration = new File(configFileDir() + "log4j.properties");		
-		logConfiguration = new File("log4j.properties");		
-		
-		if (logConfiguration.isFile()) {
-			try {
-				PropertyConfigurator.configure(logConfiguration.getAbsolutePath());
-				System.out.println("read log4j-configuration file at: " + logConfiguration.getAbsolutePath());
-			}
-			catch (Exception e) {
-				System.out.println(e);
-			}
+		try {
+			PropertyConfigurator.configure(new Configuration().readLogProperties());
+			
+		} catch (IOException e) {
+			log.info(e);
 		}
-		else{
-			System.out.println("cannot read log4j-configuration file at: " + configFileDir() + "log4j.properties");
-		}
-		log = Logger.getLogger(Configuration.class);
-		log.info("Logging System activated,");
+	}
+	
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: Method loads log properties from file if accessible</p>
+	 * 
+	 * @return
+	 * @throws IOException 
+	 */
+	private Properties readLogProperties() throws IOException {
+		Properties logProps = new Properties();
+        InputStream propStream = this.getClass().getResourceAsStream("/conf/log4j.properties");
+        if (propStream == null) {
+             throw new IOException("failed to load log4j.properties: file not found");
+            }else{
+                logProps.load(propStream);
+                System.out.println("read log4j-configuration");
+            }
+        return logProps;       
 	}
 
-	public static String getConfigFileDir() {
-		return configFileDir();
+	public static String getTempDirPath() {
+		return tempDirPath;
 	}
 
-	public static String getTempFileDir() {
-		return tempFileDir();
+	public static String getResultDirPath() {
+		return resultDirPath;
 	}
 
-	public static String getResultFileDir() {
-		return resultFileDir;
+	public static String getServiceUrl() {
+		return serviceUrl;
 	}
 
 	public static String getTempDirUrl() {
@@ -96,4 +149,5 @@ public class Configuration {
 	public static String getResultDirUrl() {
 		return resultDirUrl;
 	}
+
 }

@@ -37,7 +37,6 @@ import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
  * @author aquast
  *
  */
-@Path("/test")
 public class ConvertFromUrl {
 
 	// Initiate Logger for PilotRunner
@@ -61,7 +60,7 @@ public class ConvertFromUrl {
         try {
     		log.info("Reading Parameters File");
             FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
+			fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
 	        BufferedInputStream bis = new BufferedInputStream(fis);
 			paramProp.load(bis);
 		} catch (Exception e) {
@@ -91,7 +90,7 @@ public class ConvertFromUrl {
         try {
     		log.info("Reading Parameters File");
             FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempFileDir() + paramFileName));
+			fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
 	        BufferedInputStream bis = new BufferedInputStream(fis);
 			paramProp.load(bis);
 		} catch (Exception e) {
@@ -130,12 +129,14 @@ public class ConvertFromUrl {
 		PilotRunner pRunner = new PilotRunner();
 		pRunner.executePdfATool(paramString, fileName);
 
+		/*
 		URI documentUri = null;
 		try {
 			documentUri = new URI(Configuration.getResultDirUrl() + fileName);
 		} catch (MalformedURIException e) {
 			e.printStackTrace();
 		}
+		*/
 
 		pResult.setInputFileUrl(inputFileUrl);
 		pResult.setRecordFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
