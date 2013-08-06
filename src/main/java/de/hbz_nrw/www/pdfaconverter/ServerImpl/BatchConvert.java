@@ -79,6 +79,7 @@ public class BatchConvert {
 		log.info(paramFileUrl);
 		//create a unique temporary file prefix
 		String fileIdent = TimePrefix.getTimePrefix();
+		String jobIdent = fileIdent;
 		String fileName = null;
 		String paramString = null;
 		ArrayList<PilotResult> rList = new ArrayList<PilotResult>();
@@ -165,8 +166,7 @@ public class BatchConvert {
 				lineBuffer.append(Configuration.getResultDirUrl() + fileName);
 				countSuccess++;
 			}else if(pRunner.getExitStateStr() != null && !pRunner.getExitStateStr().equals("0")){
-				log.info("hier");
-				String errorLogFile = FileUtil.appendStringToResultFile("error" + ".log", lineBuffer.toString()+ "\n");
+				String errorLogFile = FileUtil.appendStringToResultFile("error_" + jobIdent + ".log", lineBuffer.toString()+ "\n");
 				if(pRunner.getExitStateStr().equals("4")){
 					count4++;
 				}else if(pRunner.getExitStateStr().equals("105")){
@@ -191,7 +191,7 @@ public class BatchConvert {
 
 		log.info(resultBuffer.toString());
 		// Save results to file 
-		String resultLogFile = FileUtil.saveStringToResultFile(fileIdent + ".log", resultBuffer.toString());
+		String resultLogFile = FileUtil.saveStringToResultFile(jobIdent + ".log", resultBuffer.toString());
 		
 		PilotResultList prList = new PilotResultList();
 		prList.setPilotResultList(rList);

@@ -54,6 +54,8 @@ public class Configuration {
 		defProp.setProperty("resultDir", "result");
 		defProp.setProperty("userDir", "ulbm");
 		
+		defProp.setProperty("workingDir", "/srv/tomcat6/webapps/");
+		
 	}
 
 	private void setTempDirUrl(){
@@ -73,12 +75,12 @@ public class Configuration {
 
 	private void setResultDirPath(){
 		//resultDirPath = System.getProperty("user.dir") + sysProp.getProperty("resultDir") + "/";
-		resultDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("resultDir") + "/";
+		resultDirPath = sysProp.getProperty("workingDir") + sysProp.getProperty("resultDir") + "/";
 	}
 
 	private void setTempDirPath(){
 		//tempDirPath = System.getProperty("user.dir") + sysProp.getProperty("tempDir") + "/";
-		tempDirPath = "/srv/www/htdocs/pdfa/" + sysProp.getProperty("tempDir") + "/";
+		tempDirPath = sysProp.getProperty("workingDir") + sysProp.getProperty("tempDir") + "/";
 	}
 
 	public void loadConfigurationFile(){
