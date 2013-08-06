@@ -24,7 +24,7 @@ public class Configuration {
 	
 	// constructor loads config properties if accessible
 	//FIXME: Constructor must be called by each Method!
-	private Configuration(){
+	static{
 		setDefaultProp();
 		loadConfigurationFile();
 		setResultDirUrl();
@@ -47,7 +47,7 @@ public class Configuration {
 	static String resultDirPath = null;
 	static String tempDirPath = null;
 
-	private void setDefaultProp(){
+	private static void setDefaultProp(){
 		defProp.setProperty("host", "nyx.hbz-nrw.de");
 		defProp.setProperty("port", "8080");
 		defProp.setProperty("path", "PdfAConverter");
@@ -57,29 +57,31 @@ public class Configuration {
 		
 		defProp.setProperty("workingDir", "/srv/tomcat6/webapps/");
 		
+		loadConfigurationFile();
+		
 	}
 
-	private void setTempDirUrl(){
+	private static void setTempDirUrl(){
 		 tempDirUrl = serviceUrl + sysProp.getProperty("tempDir") + "/";
 	}
 	
-	private void setResultDirUrl(){
+	private static void setResultDirUrl(){
 		resultDirUrl = serviceUrl + sysProp.getProperty("resultDir")  + "/";
 		
 	}
 	
-	private void setServiceUrl(){
+	private static void setServiceUrl(){
 		serviceUrl = "http://" + sysProp.getProperty("host") + ":" 
 				+ sysProp.getProperty("port") + "/"
 				+ sysProp.getProperty("path") + "/"; 
 	}
 
-	private void setResultDirPath(){
+	private static void setResultDirPath(){
 		//resultDirPath = System.getProperty("user.dir") + sysProp.getProperty("resultDir") + "/";
 		resultDirPath = sysProp.getProperty("workingDir") + sysProp.getProperty("resultDir") + "/";
 	}
 
-	private void setTempDirPath(){
+	private static void setTempDirPath(){
 		//tempDirPath = System.getProperty("user.dir") + sysProp.getProperty("tempDir") + "/";
 		tempDirPath = sysProp.getProperty("workingDir") + sysProp.getProperty("tempDir") + "/";
 	}
