@@ -37,6 +37,7 @@ import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
  * @author aquast
  *
  */
+@Path("/api/convertFromUrl")
 public class ConvertFromUrl {
 
 	// Initiate Logger for PilotRunner
@@ -44,14 +45,13 @@ public class ConvertFromUrl {
 	
 	//  Jersey annotated Methods 
 	
-	@Path("/convertFromUrl")
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PilotResult postBatchConvert(@QueryParam("batchFile") String inputFileUrl, 
+	public PilotResult postBatchConvert(@QueryParam("inputFile") String inputFileUrl, 
 			@QueryParam("parameterFile") String paramFileUrl){
 		PilotResult response = null;
 
-		String fileIdent = TimePrefix.getTimePrefix() + ".pdf";
+		String fileIdent = TimePrefix.getTimePrefix();
 		Properties prop = PdfAPilotParameters.getDefaultProperties();
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
 
@@ -72,38 +72,9 @@ public class ConvertFromUrl {
 		
 		return response;
 	}
+
 
 	
-	@Path("/convertFromUrl")
-	@GET
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PilotResult getBatchConvert(@QueryParam("batchFile") String inputFileUrl, 
-			@QueryParam("parameterFile") String paramFileUrl){
-		PilotResult response = null;
-		
-		String fileIdent = TimePrefix.getTimePrefix() + ".pdf";
-		Properties prop = PdfAPilotParameters.getDefaultProperties();
-		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
-
-		Properties paramProp = PdfAPilotParameters.getDefaultProperties();
-		
-        try {
-    		log.info("Reading Parameters File");
-            FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
-	        BufferedInputStream bis = new BufferedInputStream(fis);
-			paramProp.load(bis);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		response = convertFromUrl(prop, inputFileUrl);
-		
-		return response;
-	}
-
-
 	public PilotResult convertFromUrl(Properties paramProp, String inputFileUrl){
 		
 		
@@ -118,7 +89,6 @@ public class ConvertFromUrl {
 		// read line parameters
 		ParameterType paramType = PdfAPilotParameters.createParamType(paramProp);
 		paramString = PdfAPilotParameters.createParameterString(fileIdent, paramType);
-		System.out.println(paramString);
 		log.info(paramString);
 		
 		// copy remote Object to temporary Directory
@@ -129,17 +99,9 @@ public class ConvertFromUrl {
 		PilotRunner pRunner = new PilotRunner();
 		pRunner.executePdfATool(paramString, fileName);
 
-		/*
-		URI documentUri = null;
-		try {
-			documentUri = new URI(Configuration.getResultDirUrl() + fileName);
-		} catch (MalformedURIException e) {
-			e.printStackTrace();
-		}
-		*/
-
 		pResult.setInputFileUrl(inputFileUrl);
-		pResult.setRecordFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
+		log.info(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
+		pResult.setReportFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
 		pResult.setExitState(pRunner.getExitStateStr());
 		
 		if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){

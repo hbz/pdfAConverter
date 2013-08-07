@@ -23,6 +23,7 @@
 package de.hbz_nrw.pdfaconverter;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 
 import de.hbz_nrw.www.pdfaconverter.ServerImpl.Configuration;
 
@@ -41,6 +42,19 @@ public class TestConfiguration {
 	// Initiate Logger for TestConfiguration
 	private static Logger log = Logger.getLogger(TestConfiguration.class);
 
+	@Test
+	public void testConfiguration(){
+
+		//Configuration conf = new Configuration();
+		//Configuration.initLog();
+		log.info(Configuration.getTempDirUrl());
+		log.info(Configuration.getResultDirUrl());
+		log.info(Configuration.getTempDirPath());
+		log.info(Configuration.getResultDirPath());
+		log.info(Configuration.getWorkingDir());
+		log.info(System.getProperty("user.dir"));
+	}
+	
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: </p>
@@ -49,15 +63,9 @@ public class TestConfiguration {
 	 */
 	public static void main(String[] args) {
 
-		//Configuration conf = new Configuration();
-		Configuration.initLog();
-		log.info(Configuration.getTempDirUrl());
-		log.info(Configuration.getResultDirUrl());
-		log.info(Configuration.getTempDirPath());
-		log.info(Configuration.getResultDirPath());
-		log.info(Configuration.getWorkingDir());
+		TestConfiguration testConf = new TestConfiguration();
+		testConf.testConfiguration();
 		
-		log.info(System.getProperty("user.dir"));
 		
 		
 	}

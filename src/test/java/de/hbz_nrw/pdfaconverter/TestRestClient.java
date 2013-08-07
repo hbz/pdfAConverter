@@ -53,7 +53,7 @@ public class TestRestClient {
 	// Initiate Logger for TestRestClient
 	private static Logger log = Logger.getLogger(TestRestClient.class);
 	
-	private String uri = Configuration.getServiceUrl() + "api/batchConvert";
+	private String uri = Configuration.getServiceUrl() + "api/convertFromUrl";
 	
 	@Test public void callRestFulServicePlain(){
 		Client client = createClient();
@@ -94,6 +94,19 @@ public class TestRestClient {
 		
 	}
 
+	@Test public void callConvertFromUrlServiceJson(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri);
+		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
+			.queryParam("inputFile", "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
+
+		log.info(wResource);
+		log.info(wResource.accept(MediaType.APPLICATION_JSON).post(String.class).toString());
+		
+		
+		
+	}
+
 	private Client createClient(){
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
@@ -109,7 +122,8 @@ public class TestRestClient {
 	public static void main(String[] args) {
 		Configuration.initLog();
 		TestRestClient trClient= new TestRestClient();
-		trClient.callBatchConvertServiceXml();
+		//trClient.callBatchConvertServiceXml();
+		trClient.callConvertFromUrlServiceJson();
 		//trClient.callRestFulServiceJson();
 
 	}

@@ -37,6 +37,7 @@ public class Configuration {
 	static String tempDirPath = null;
 
 	static{
+		initLog();
 		setDefaultProp();
 		loadConfigurationFile();
 		setResultDirPath();

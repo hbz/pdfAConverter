@@ -225,6 +225,7 @@ public class PdfAPilotParameters {
 	 * 
 	 * @param paramType <code>parameterType</code> a complex Data Type that provides all needed parameters for 
 	 * the Callas PDF A Tool 
+	 * @param fileIdent <code>String</code> fileIdentis required to give reportFile an unique file name 
 	 * @return <code>String</code> with all given parameters parsed from xml
 	 */
 	public static String createParameterString(String fileIdent, ParameterType paramType){

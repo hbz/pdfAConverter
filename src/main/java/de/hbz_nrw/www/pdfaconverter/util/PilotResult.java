@@ -31,7 +31,7 @@ public class PilotResult {
 	/**
 	 * @param recordFileUrl the recordFileUrl to set
 	 */
-	public void setRecordFileUrl(String recordFileUrl) {
+	public void setReportFileUrl(String recordFileUrl) {
 		this.recordFileUrl = recordFileUrl;
 	}
 	public String getInputFileUrl() {
