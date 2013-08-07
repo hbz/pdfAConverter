@@ -149,6 +149,7 @@ public class BatchConvert {
 			//append report if report exists
 			if(new File(Configuration.getResultDirUrl() +fileIdent + "." + reportType).isFile()){
 				lineBuffer.append(Configuration.getResultDirUrl() +fileIdent + "." + reportType);
+				lineResult.getReportFileUrl();
 			}
 			
 			resultBuffer.append(Configuration.getResultDirUrl() 

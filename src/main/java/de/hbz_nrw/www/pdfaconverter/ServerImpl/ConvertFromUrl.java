@@ -100,8 +100,15 @@ public class ConvertFromUrl {
 		pRunner.executePdfATool(paramString, fileName);
 
 		pResult.setInputFileUrl(inputFileUrl);
-		log.info(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
-		pResult.setReportFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramProp.getProperty("reportType").toLowerCase()));
+
+		String reportFile = Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase());
+
+		log.info(reportFile);
+		//append report if report exists
+		if(new File(reportFile).isFile()){
+			pResult.setReportFileUrl(reportFile);
+		}
+
 		pResult.setExitState(pRunner.getExitStateStr());
 		
 		if(pRunner.getExitStateStr() != null && pRunner.getExitStateStr().equals("0")){
