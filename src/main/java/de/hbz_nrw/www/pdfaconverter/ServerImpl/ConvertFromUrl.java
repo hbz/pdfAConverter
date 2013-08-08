@@ -101,13 +101,16 @@ public class ConvertFromUrl {
 
 		pResult.setInputFileUrl(inputFileUrl);
 
-		String reportFile = Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase());
+		String reportFile = Configuration.getResultDirPath() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase());
 
 		log.info(reportFile);
 		//append report if report exists
 		if(new File(reportFile).isFile()){
-			pResult.setReportFileUrl(reportFile);
+			pResult.setReportFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase()));
+		}else{
+			pResult.setReportFileUrl("no report file generated");
 		}
+		
 
 		pResult.setExitState(pRunner.getExitStateStr());
 		
