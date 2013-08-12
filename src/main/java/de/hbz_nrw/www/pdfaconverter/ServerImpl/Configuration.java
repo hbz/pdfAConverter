@@ -156,4 +156,9 @@ public class Configuration {
 	public static String getWorkingDir(){
 		return sysProp.getProperty("workingDir");
 	}
+
+	public static String getUserDir(){
+		return sysProp.getProperty("userDir");
+	}
+
 }

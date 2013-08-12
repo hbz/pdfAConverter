@@ -31,6 +31,13 @@ public class PilotResultList {
 		this.pilotResultList = pilotResultList;
 	}
 	/**
+	 * @param pilotResultList the pilotResultList to set
+	 */
+	public void addPilotResultList(ArrayList<PilotResult> pilotResultList) {
+		this.pilotResultList.addAll(pilotResultList);
+	}
+
+	/**
 	 * @return the totalNumberOfJobs
 	 */
 	public String getTotalNumberOfJobs() {
