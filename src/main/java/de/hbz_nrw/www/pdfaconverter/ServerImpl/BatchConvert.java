@@ -59,14 +59,30 @@ public class BatchConvert {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PilotResultList getBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
-			@QueryParam("parameterFile") String inputFileUrl){
+			@QueryParam("parameterFile") String paramFileUrl){
 		PilotResultList response = null;
 		
-		response = batchConvert(batchFileUrl, inputFileUrl);
+		response = batchConvert(batchFileUrl, paramFileUrl);
 		
 		return response;
 	}
 
+	@Path("/batchConvert/autoConf")
+	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public PilotResultList getBatchConvert(@QueryParam("batchFile") String batchFileUrl){
+		PilotResultList response = null;
+		String paramFileUrl = Configuration.getWorkingDir() + "/conf/defaultParam1.txt";
+		response = batchConvert(batchFileUrl, paramFileUrl);
+
+		PilotResultList response2 = null;
+		paramFileUrl = Configuration.getWorkingDir() + "/conf/defaultParam2.txt";
+		response2 = batchConvert(batchFileUrl, paramFileUrl);
+		
+		ArrayList<PilotResult> r2List = response2.getPilotResultList();
+		response.addPilotResultList(r2List);
+		return response;
+	}
 
 	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
 		
@@ -86,7 +102,6 @@ public class BatchConvert {
 		String batchFileName = FileUtil.saveUrlToFile(fileIdent + "_batch.txt", batchFileUrl);
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
 		List<String> documentList = null;
-		ParameterType paramType = null;
 		
 		log.info("Batch File URL: " + batchFileName);
 		
@@ -117,29 +132,19 @@ public class BatchConvert {
 			
 			PilotResult lineResult = new PilotResult();
 			
-			//create unique directory identifier
+			//create unique file identifier
 			fileIdent = TimePrefix.getTimePrefix();
 			
 			// Load File to temp dir
 			fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", fileUrl);
 			lineResult.setInputFileUrl(fileUrl);
 
-			String reportType = null;
-			try {
-				//Read parameters from File
-				Properties paramProp = PdfAPilotParameters.getDefaultProperties();
-				log.debug("Reading Parameters File");
-				
-	            FileInputStream fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
-	            BufferedInputStream bis = new BufferedInputStream(fis);
-				paramProp.load(bis);
-				paramType = PdfAPilotParameters.createParamType(paramProp);
-				paramString = PdfAPilotParameters.createParameterString(fileName, paramType);
-				reportType = paramType.getReportFormat()[0].getValue().toLowerCase();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			String reportType = null;			
+			ParameterType paramType = readParamFile(paramFileName, fileName);
+			
+			paramString = PdfAPilotParameters.createParameterString(fileName, paramType);
+			reportType = paramType.getReportFormat()[0].getValue().toLowerCase();
+
 			// we may should run threads? 
 			PilotRunner pRunner = new PilotRunner();
 			pRunner.executePdfATool(paramString, fileName);
@@ -163,6 +168,7 @@ public class BatchConvert {
 				// append result pdf
 				lineResult.setResultFileUrl(Configuration.getResultDirUrl() + fileName);
 				lineBuffer.append(Configuration.getResultDirUrl() + fileName);
+				lineResult.setCompliancyLevel(paramType.getCompliancyLevel().toString());
 				countSuccess++;
 			}else if(pRunner.getExitStateStr() != null && !pRunner.getExitStateStr().equals("0")){
 				String errorLogFile = FileUtil.appendStringToResultFile("error_" + jobIdent + ".log", lineBuffer.toString()+ "\n");
@@ -204,4 +210,21 @@ public class BatchConvert {
 		
 	}
 	
+	private ParameterType readParamFile(String paramFileName, String fileName){
+		ParameterType paramType = null;
+		try {
+			//Read parameters from File
+			Properties paramProp = PdfAPilotParameters.getDefaultProperties();
+			log.debug("Reading Parameters File");
+			
+            FileInputStream fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
+            BufferedInputStream bis = new BufferedInputStream(fis);
+			paramProp.load(bis);
+			paramType = PdfAPilotParameters.createParamType(paramProp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return paramType;
+	}
 }

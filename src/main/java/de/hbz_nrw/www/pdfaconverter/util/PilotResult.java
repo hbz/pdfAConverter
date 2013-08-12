@@ -21,6 +21,7 @@ public class PilotResult {
 	private String resultFileUrl = null;
 	private String exitState = null;
 	private String reportFileUrl = null;
+	private String compliancyLevel = null;
 	
 	/**
 	 * @return the recordFileUrl
@@ -51,6 +52,12 @@ public class PilotResult {
 	}
 	public void setExitState(String exitState) {
 		this.exitState = exitState;
+	}
+	public String getCompliancyLevel() {
+		return compliancyLevel;
+	}
+	public void setCompliancyLevel(String compliancyLevel) {
+		this.compliancyLevel = compliancyLevel;
 	}
 		  
 		  
