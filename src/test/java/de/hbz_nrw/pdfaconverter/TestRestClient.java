@@ -53,11 +53,11 @@ public class TestRestClient {
 	// Initiate Logger for TestRestClient
 	private static Logger log = Logger.getLogger(TestRestClient.class);
 	
-	private String uri = Configuration.getServiceUrl() + "api/convertFromUrl";
+	private String uri = Configuration.getServiceUrl() + "api/";
 	
 	@Test public void callRestFulServicePlain(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri);
+		WebResource wResource = client.resource(uri + "batchConvert");
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
 			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
 		
@@ -70,7 +70,7 @@ public class TestRestClient {
 	
 	@Test public void callBatchConvertServiceJson(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri);
+		WebResource wResource = client.resource(uri + "batchConvert");
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
 			.queryParam("batchFile", "http://131.220.138.195/pdfATests/batch.txt");
 
@@ -83,9 +83,9 @@ public class TestRestClient {
 	
 	@Test public void callBatchConvertServiceXml(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri);
+		WebResource wResource = client.resource(uri + "batchConvert");
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
-			.queryParam("batchFile", "http://131.220.138.195/pdfATests/edoweb_part00");
+			.queryParam("batchFile", "http://131.220.138.195/pdfATests/pdfFedoraUrls.txt");
 		;
 		log.info(wResource);
 		log.info(wResource.accept(MediaType.APPLICATION_XML).post(String.class).toString());
@@ -96,7 +96,7 @@ public class TestRestClient {
 
 	@Test public void callConvertFromUrlServiceJson(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri);
+		WebResource wResource = client.resource(uri + "convertFromUrl");
 		wResource = wResource.queryParam("parameterFile", "http://131.220.138.195/pdfATests/param.txt")
 			.queryParam("inputFile", "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf");
 
@@ -122,8 +122,8 @@ public class TestRestClient {
 	public static void main(String[] args) {
 		Configuration.initLog();
 		TestRestClient trClient= new TestRestClient();
-		//trClient.callBatchConvertServiceXml();
-		trClient.callConvertFromUrlServiceJson();
+		trClient.callBatchConvertServiceXml();
+		//trClient.callConvertFromUrlServiceJson();
 		//trClient.callRestFulServiceJson();
 
 	}
