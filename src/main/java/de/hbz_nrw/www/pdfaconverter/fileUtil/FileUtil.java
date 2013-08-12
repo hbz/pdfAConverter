@@ -53,7 +53,7 @@ public class FileUtil {
 	private static File inputFile = null;
 
 	/**
-	 * <p><em>Title: Create a temporary File from byteStream</em></p>
+	 * <p><em>Title: Create a temporary File from a Base64 encoded byteStream</em></p>
 	 * <p>Description: Method creates a temporary file from the bytestream 
 	 * representing the orginal PDF, that should be converted</p>
 	 * 
@@ -104,7 +104,6 @@ public class FileUtil {
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
 		try{
-			//System.out.println("Base64 kodierter Stream: " + stream.length());
 			inputFile = new File(Configuration.getResultDirPath() + fileName);
 			log.info(Configuration.getResultDirPath());
 			fos = new FileOutputStream(inputFile);
@@ -129,7 +128,7 @@ public class FileUtil {
 				}
 			}
 		}
-		log.info("File-Size, Ergebnis: " + inputFile.length());
+		log.debug("File-Size: " + inputFile.length());
 		return inputFile.getName();
 	}
 
@@ -164,7 +163,7 @@ public class FileUtil {
 	}
 	
 	/**
-	 * <p><em>Title: Create a File from byteStream</em></p>
+	 * <p><em>Title: Create a File from a Base64 encoded byteStream</em></p>
 	 * <p>Description: Method creates a file from the bytestream 
 	 * representing the original PDF, that should be converted</p>
 	 * 
@@ -202,6 +201,13 @@ public class FileUtil {
 		return outputFile.getName();
 	}
 
+	/**
+	 * <p><em>Title: Loads File into an Base64 encoded Stream</em></p>
+	 * <p>Description: </p>
+	 * 
+	 * @param origPidfFile
+	 * @return 
+	 */
 	public static byte[] loadFileIntoStream(File origPidfFile){
 		FileInputStream fis = null;
 		byte[] pdfStream = null;
@@ -289,6 +295,62 @@ public class FileUtil {
 			}
 		}
 		return inputFile.getName();
+	}
+	
+	/**
+	 * <p><em>Title: Save InputSream to an temporary File</em></p>
+	 * <p>Description: </p>
+	 * 
+	 * @return 
+	 */
+	public static void saveInputStreamToTempFile(InputStream is, String fileName){
+
+		File outputFile = new File(Configuration.getTempDirPath() + fileName);
+		BufferedInputStream bis = new BufferedInputStream(is);
+		BufferedOutputStream bos = null;
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(outputFile);
+			bos = new BufferedOutputStream(fos);
+			int i = -1;
+			while((i = bis.read()) != -1){
+				bos.write(i);
+			}
+
+		}catch(Exception e){
+			log.error(e);
+		}finally{
+			if(bos != null){
+				try{
+					bos.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+			if(fos != null){
+				try{
+					fos.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+			if(bis != null){
+				try{
+					bis.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+			if(is != null){
+				try{
+					is.close();
+				}catch(IOException ioExc){
+					log.error(ioExc);
+				}
+			}
+
+		}
+		
 	}
 
 }

@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,10 +48,14 @@ public class BatchConvert {
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl, 
-			@QueryParam("parameterFile") String inputFileUrl){
+			@QueryParam("parameterFile") String paramFileUrl){
 		PilotResultList response = null;
 		
-		response = batchConvert(batchFileUrl, inputFileUrl);
+		String jobIdent = TimePrefix.getTimePrefix();
+		String batchFileName = FileUtil.saveUrlToFile(jobIdent + "_batch.txt", batchFileUrl);
+		String paramFileName = FileUtil.saveUrlToFile(jobIdent + "_param.txt", paramFileUrl);
+
+		response = batchConvert(batchFileName, paramFileName);
 		
 		return response;
 	}
@@ -62,45 +67,48 @@ public class BatchConvert {
 			@QueryParam("parameterFile") String paramFileUrl){
 		PilotResultList response = null;
 		
-		response = batchConvert(batchFileUrl, paramFileUrl);
-		
+		String jobIdent = TimePrefix.getTimePrefix();
+		String batchFileName = FileUtil.saveUrlToFile(jobIdent + "_batch.txt", batchFileUrl);
+		String paramFileName = FileUtil.saveUrlToFile(jobIdent + "_param.txt", paramFileUrl);
+
+		response = batchConvert(batchFileName, paramFileName);
 		return response;
 	}
 
 	@Path("/batchConvert/autoConf")
-	@GET
+	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PilotResultList getBatchConvert(@QueryParam("batchFile") String batchFileUrl){
+	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl){
 		PilotResultList response = null;
-		String paramFileUrl = Configuration.getWorkingDir() + "/conf/defaultParam1.txt";
-		response = batchConvert(batchFileUrl, paramFileUrl);
+		
+		InputStream is = this.getClass().getResourceAsStream("/conf/defaultParam1.txt");
+		
+		FileUtil.saveInputStreamToTempFile(is, Configuration.getTempDirPath() + "/defaultParam1.txt");
+
+		String jobIdent = TimePrefix.getTimePrefix();
+		String batchFileName = FileUtil.saveUrlToFile(jobIdent + "_batch.txt", batchFileUrl);
+
+		response = batchConvert(batchFileName, Configuration.getTempDirPath() + "/defaultParam1.txt");
 
 		PilotResultList response2 = null;
-		paramFileUrl = Configuration.getWorkingDir() + "/conf/defaultParam2.txt";
-		response2 = batchConvert(batchFileUrl, paramFileUrl);
+		FileUtil.saveInputStreamToTempFile(is, Configuration.getTempDirPath() + "/defaultParam2.txt");
+		response2 = batchConvert(batchFileName, Configuration.getTempDirPath() + "/defaultParam2.txt");
 		
 		ArrayList<PilotResult> r2List = response2.getPilotResultList();
 		response.addPilotResultList(r2List);
 		return response;
 	}
 
-	public PilotResultList batchConvert( String BatchFileUrl, String ParamFileUrl){
+	public PilotResultList batchConvert( String batchFileName, String paramFileName){
 		
-		log.info("User Dir: " + System.getProperty("user.dir"));
-		String batchFileUrl = BatchFileUrl;
-		String paramFileUrl = ParamFileUrl;
-		log.info(batchFileUrl);
-		log.info(paramFileUrl);
 		//create a unique temporary file prefix
-		String fileIdent = TimePrefix.getTimePrefix();
-		String jobIdent = fileIdent;
+		String jobIdent = TimePrefix.getTimePrefix();
+
 		String fileName = null;
 		String paramString = null;
-		ArrayList<PilotResult> rList = new ArrayList<PilotResult>();
 
 
-		String batchFileName = FileUtil.saveUrlToFile(fileIdent + "_batch.txt", batchFileUrl);
-		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
+		ArrayList<PilotResult> rList = new ArrayList<PilotResult>();		
 		List<String> documentList = null;
 		
 		log.info("Batch File URL: " + batchFileName);
@@ -133,7 +141,7 @@ public class BatchConvert {
 			PilotResult lineResult = new PilotResult();
 			
 			//create unique file identifier
-			fileIdent = TimePrefix.getTimePrefix();
+			String fileIdent = TimePrefix.getTimePrefix();
 			
 			// Load File to temp dir
 			fileName = FileUtil.saveUrlToFile(fileIdent + ".pdf", fileUrl);
@@ -225,6 +233,8 @@ public class BatchConvert {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return paramType;
 	}
+	
 }
