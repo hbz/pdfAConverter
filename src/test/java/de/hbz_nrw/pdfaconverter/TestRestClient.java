@@ -134,9 +134,9 @@ public class TestRestClient {
 	public static void main(String[] args) {
 		Configuration.initLog();
 		TestRestClient trClient= new TestRestClient();
-		//trClient.callBatchConvertServiceXml();
-		trClient.callBatchConvertAutoServiceXml();
-		//trClient.callConvertFromUrlServiceJson();
+		trClient.callBatchConvertServiceXml();
+		//trClient.callBatchConvertAutoServiceXml();
+		trClient.callConvertFromUrlServiceJson();
 		//trClient.callRestFulServiceJson();
 
 	}
