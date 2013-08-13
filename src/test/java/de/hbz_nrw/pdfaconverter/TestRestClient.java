@@ -94,6 +94,18 @@ public class TestRestClient {
 		
 	}
 
+	@Test public void callBatchConvertAutoServiceXml(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri + "api/batchConvert/autoConf");
+		wResource = wResource.queryParam("batchFile", "http://131.220.138.195/pdfATests/physbatch.txt");
+		;
+		log.info(wResource);
+		log.info(wResource.accept(MediaType.APPLICATION_XML).post(String.class).toString());
+		
+		
+		
+	}
+
 	@Test public void callConvertFromUrlServiceJson(){
 		Client client = createClient();
 		WebResource wResource = client.resource(uri + "api/convertFromUrl");
@@ -122,7 +134,8 @@ public class TestRestClient {
 	public static void main(String[] args) {
 		Configuration.initLog();
 		TestRestClient trClient= new TestRestClient();
-		trClient.callBatchConvertServiceXml();
+		//trClient.callBatchConvertServiceXml();
+		trClient.callBatchConvertAutoServiceXml();
 		//trClient.callConvertFromUrlServiceJson();
 		//trClient.callRestFulServiceJson();
 

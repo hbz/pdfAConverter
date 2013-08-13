@@ -238,7 +238,7 @@ public class ServicesImpl implements PdfAConverterSkeletonInterface {
 		float percentSuccess = countSuccess/countJobs;
 
 		log.info(resultBuffer.toString());
-		FileUtil.saveStreamToFile(new File(Configuration.getTempDirPath() + "result" + fileName + ".result"), resultBuffer.toString());
+		FileUtil.saveBase64ByteStringToFile(new File(Configuration.getTempDirPath() + "result" + fileName + ".result"), resultBuffer.toString());
 		batchResponse.setResultsFile(Configuration.getTempDirUrl() + "result" + fileName + ".result");
 		return batchResponse;
 	}

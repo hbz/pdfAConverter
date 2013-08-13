@@ -686,7 +686,7 @@ public class clientGui{
 	        int returnVal = chooser.showSaveDialog(guiFrame);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File saveFile = chooser.getSelectedFile();
-				FileUtil.saveStreamToFile(saveFile, oString);
+				FileUtil.saveBase64ByteStringToFile(saveFile, oString);
 	            dir = chooser.getCurrentDirectory();
 	        }
 	        showLoadPdf.setEnabled(true);
