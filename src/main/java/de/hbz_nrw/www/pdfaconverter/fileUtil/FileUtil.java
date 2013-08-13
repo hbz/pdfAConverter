@@ -315,12 +315,11 @@ public class FileUtil {
 			bos = new BufferedOutputStream(fos);
 			int i = -1;
 			while((i = bis.read()) != -1){
-				log.info(i);
 				bos.write(i);
 			}
 			bos.flush();
 		}catch(Exception e){
-			log.error("Problem with InputStream: " + e);
+			log.error(e);
 		}finally{
 			if(bos != null){
 				try{

@@ -79,36 +79,41 @@ public class BatchConvert {
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl){
-		PilotResultList response = null;
+		PilotResultList response = new PilotResultList();
 		
 		// first run
-		InputStream is = this.getClass().getResourceAsStream("/conf/defaultParam1.txt");
-		
-		/*try {
-			log.info("stream: " + is.available());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		InputStream paramStream =  this.getClass().getResourceAsStream("/conf/defaultParam1.cfg");
+
+		if(paramStream == null){
+			log.error("Failed loading defaultParams: not found in classpath");
 		}
-		*/
-		FileUtil.saveInputStreamToTempFile(is, "defaultParam1.txt");
+		FileUtil.saveInputStreamToTempFile(paramStream, "defaultParam1.txt");
 
 		String jobIdent = TimePrefix.getTimePrefix();
 		String batchFileName = FileUtil.saveUrlToFile(jobIdent + "_batch.txt", batchFileUrl);
 
-		response = batchConvert(batchFileName, "defaultParam1.txt");
+		PilotResultList response1 = batchConvert(batchFileName, "defaultParam1.txt");
 
 		// second run
-		PilotResultList response2 = null;
 		
-		is = this.getClass().getResourceAsStream("/conf/defaultParam2.txt");
-		FileUtil.saveInputStreamToTempFile(is, "defaultParam2.txt");
+		paramStream = this.getClass().getResourceAsStream("/conf/defaultParam2.cfg");
+		FileUtil.saveInputStreamToTempFile(paramStream, "defaultParam2.txt");
 		
-		batchFileName =  FileUtil.saveUrlToFile(jobIdent + "_batch2.txt", refineObjList(response));
-		response2 = batchConvert(batchFileName, "defaultParam2.txt");
+		batchFileName =  FileUtil.saveUrlToFile(jobIdent + "_batch2.txt", refineObjList(response1));
+		PilotResultList response2 = batchConvert(batchFileName, "defaultParam2.txt");
 		
-		ArrayList<PilotResult> r2List = response2.getPilotResultList();
-		response.addPilotResultList(r2List);
+		response.setPilotResultList(response1.getPilotResultList());
+		response.addPilotResultList(response2.getPilotResultList());
+		
+		float totalNumber = Integer.parseInt(response1.getTotalNumberOfJobs()); 
+		float countSuc = Integer.parseInt(response1.getCountSuccess()) +
+				Integer.parseInt(response2.getCountSuccess());
+		float percSuc = countSuc/totalNumber;
+		
+		
+		response.setTotalNumberOfJobs(response1.getTotalNumberOfJobs());
+		response.setCountSuccess(NumberFormat.getIntegerInstance().format(countSuc));
+		response.setPercentSuccess(NumberFormat.getPercentInstance().format(percSuc));
 		return response;
 	}
 
