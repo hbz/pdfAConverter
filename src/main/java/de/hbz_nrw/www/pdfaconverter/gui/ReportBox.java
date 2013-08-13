@@ -187,7 +187,7 @@ public class ReportBox {
 	        int returnVal = chooser.showSaveDialog(resultBox);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File saveFile = chooser.getSelectedFile();
-				FileUtil.saveStreamToFile(saveFile, saveString);
+				FileUtil.saveBase64ByteStringToFile(saveFile, saveString);
 	        }
 	    }
 	}
@@ -209,7 +209,7 @@ public class ReportBox {
 	        int returnVal = chooser.showSaveDialog(resultBox);
 	        if(returnVal == JFileChooser.APPROVE_OPTION) {
 	            File saveFile = chooser.getSelectedFile();
-				FileUtil.saveStreamToFile(saveFile, saveString);
+				FileUtil.saveBase64ByteStringToFile(saveFile, saveString);
 	        }
 	    }
 	}

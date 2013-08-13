@@ -52,7 +52,7 @@ public class GetResources {
 	private ArrayList<PilotResult> rList = new ArrayList<PilotResult>();;
 	
 	@GET
-	public void getResourceList(){
+	public ArrayList<PilotResult> getResourceList(){
 		File dir = new File(Configuration.getResultDirPath() + "/" + Configuration.getUserDir() + "/");
 		String[] resultList = dir.list(new FileFilter(".pdf"));
 		for(int i = 0; i < resultList.length; i++){
@@ -64,7 +64,7 @@ public class GetResources {
 		
 		PilotResultList result = new PilotResultList();
 		result.setPilotResultList(rList);
-		
+		return rList;
 	}
 	
 	class FileFilter implements FilenameFilter{

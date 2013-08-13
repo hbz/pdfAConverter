@@ -81,18 +81,31 @@ public class BatchConvert {
 	public PilotResultList postBatchConvert(@QueryParam("batchFile") String batchFileUrl){
 		PilotResultList response = null;
 		
+		// first run
 		InputStream is = this.getClass().getResourceAsStream("/conf/defaultParam1.txt");
 		
-		FileUtil.saveInputStreamToTempFile(is, Configuration.getTempDirPath() + "/defaultParam1.txt");
+		/*try {
+			log.info("stream: " + is.available());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		FileUtil.saveInputStreamToTempFile(is, "defaultParam1.txt");
 
 		String jobIdent = TimePrefix.getTimePrefix();
 		String batchFileName = FileUtil.saveUrlToFile(jobIdent + "_batch.txt", batchFileUrl);
 
-		response = batchConvert(batchFileName, Configuration.getTempDirPath() + "/defaultParam1.txt");
+		response = batchConvert(batchFileName, "defaultParam1.txt");
 
+		// second run
 		PilotResultList response2 = null;
-		FileUtil.saveInputStreamToTempFile(is, Configuration.getTempDirPath() + "/defaultParam2.txt");
-		response2 = batchConvert(batchFileName, Configuration.getTempDirPath() + "/defaultParam2.txt");
+		
+		is = this.getClass().getResourceAsStream("/conf/defaultParam2.txt");
+		FileUtil.saveInputStreamToTempFile(is, "defaultParam2.txt");
+		
+		batchFileName =  FileUtil.saveUrlToFile(jobIdent + "_batch2.txt", refineObjList(response));
+		response2 = batchConvert(batchFileName, "defaultParam2.txt");
 		
 		ArrayList<PilotResult> r2List = response2.getPilotResultList();
 		response.addPilotResultList(r2List);
@@ -237,4 +250,17 @@ public class BatchConvert {
 		return paramType;
 	}
 	
+	private String refineObjList(PilotResultList response){
+		String batchFileName = null;
+		StringBuffer refinedList = new StringBuffer();
+		ArrayList<PilotResult> rList = response.getPilotResultList();
+		for(int i = 0; i< rList.size(); i++){
+			if(rList.get(i).getExitState().equals("4")){
+				refinedList.append(rList.get(i).getInputFileUrl() + "\n");
+			}
+		}
+		batchFileName = FileUtil.saveStringToResultFile("refinedBatch.txt" , refinedList.toString());
+		return Configuration.getResultDirUrl() + "/" +  batchFileName;
+		
+	}
 }

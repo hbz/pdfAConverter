@@ -66,7 +66,7 @@ public class FileUtil {
 		try{
 			//System.out.println("Base64 kodierter Stream: " + stream.length());
 			inputFile = new File(Configuration.getTempDirPath() + fileName);
-			log.info(Configuration.getTempDirPath());
+			log.debug(Configuration.getTempDirPath());
 			fos = new FileOutputStream(inputFile);
 			bos = new BufferedOutputStream(fos);			
 			bos.write(Base64.decodeBase64(stream.getBytes("UTF-8")));
@@ -89,7 +89,7 @@ public class FileUtil {
 				}
 			}
 		}
-		log.info("File-Size, Ergebnis: " + inputFile.length());
+		log.debug("File-Size: " + inputFile.length());
 		return inputFile.getName();
 	}
 
@@ -105,7 +105,6 @@ public class FileUtil {
 		BufferedOutputStream bos = null;
 		try{
 			inputFile = new File(Configuration.getResultDirPath() + fileName);
-			log.info(Configuration.getResultDirPath());
 			fos = new FileOutputStream(inputFile);
 			bos = new BufferedOutputStream(fos);			
 			bos.write(contentString.getBytes("UTF-8"));
@@ -163,14 +162,14 @@ public class FileUtil {
 	}
 	
 	/**
-	 * <p><em>Title: Create a File from a Base64 encoded byteStream</em></p>
+	 * <p><em>Title: Create a File from a Base64 encoded String</em></p>
 	 * <p>Description: Method creates a file from the bytestream 
 	 * representing the original PDF, that should be converted</p>
 	 * 
 	 * @param stream <code>String</code> 
 	 * @return <code>String</code> Filename of newly created temporary File
 	 */
-	public static String saveStreamToFile(File outputFile, String stream){
+	public static String saveBase64ByteStringToFile(File outputFile, String stream){
 		FileOutputStream fos = null;
 		BufferedOutputStream bos = null;
 		try{
@@ -244,7 +243,8 @@ public class FileUtil {
 	 * @return 
 	 */
 	public static String saveUrlToFile(String fileName, String url){
-		File inputFile = new File(Configuration.getTempDirPath() + fileName);
+		File inputFile = new File(Configuration.getTempDirPath() +"/" + fileName);
+		log.debug(inputFile.getAbsolutePath());
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
@@ -262,6 +262,7 @@ public class FileUtil {
 			while((i = bis.read()) != -1){
 				bos.write(i);
 			}
+			bos.flush();
 		}catch(Exception e){
 			log.error(e);
 		}finally{
@@ -314,11 +315,12 @@ public class FileUtil {
 			bos = new BufferedOutputStream(fos);
 			int i = -1;
 			while((i = bis.read()) != -1){
+				log.info(i);
 				bos.write(i);
 			}
-
+			bos.flush();
 		}catch(Exception e){
-			log.error(e);
+			log.error("Problem with InputStream: " + e);
 		}finally{
 			if(bos != null){
 				try{
