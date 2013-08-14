@@ -31,7 +31,7 @@ als XML oder Json
 
 h4. Beispielaufruf 
 
-@curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"@ 
+@curl \-v \-H "Accept: application/json" \-X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"@ 
 
 
 h3. Service batchConvert/autoConf 
