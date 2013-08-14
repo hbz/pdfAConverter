@@ -18,7 +18,7 @@ h4. Kurzbeschreibung
 
 h4. Beispielaufruf 
 
-{code}curl -v -H "Accept: application/json" -X POST --url http://nyx.hbz-nrw.de/pdfa/api/convertFromUrl?inputFile=http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf&paramFile=http://131.220.138.195/pdfATests/param.txt{code} 
+@curl -v -H "Accept: application/json" -X POST --url http://nyx.hbz-nrw.de/pdfa/api/convertFromUrl?inputFile=http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf&paramFile=http://131.220.138.195/pdfATests/param.txt@ 
 
 h3. Service batchConvert 
 
@@ -31,7 +31,7 @@ als XML oder Json
 
 h4. Beispielaufruf 
 
-{code}curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"{code} 
+@curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"@ 
 
 
 h3. Service batchConvert/autoConf 
@@ -45,7 +45,7 @@ als XML oder Json
 
 h4. Beispielaufruf 
 
-{code}curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert/autoConf?batchFile=http://131.220.138.195/pdfATests/physbatch.txt"{code} 
+@curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert/autoConf?batchFile=http://131.220.138.195/pdfATests/physbatch.txt"@ 
 
 h5. Besonderheit 
 
@@ -53,7 +53,6 @@ Dieser Service nutzt zwei defaultParameter-Dateien der Application nacheinander.
 
 h2. Beispiel Parameter-Datei 
 
-{code} 
 #Callas pdfaPilot Configuration File 
 #Thu Jul 25 07:23:01 CEST 2013 
 analyseOnly=false 
@@ -71,7 +70,6 @@ quickProcessing=true
 forceConversionDocToImages=false 
 mhtReport=false 
 returnOnlyValidPdfA=true 
-reportLang=DE 
-{code} 
+reportLang=DE
 
 Beschreibung der Parameter: http://www.callassoftware.com/manuals/callas_pdfaPilot_CLI.pdf
