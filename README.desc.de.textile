@@ -1,49 +1,58 @@
-h1. Service 
+h1. Service
+
 Es wird über eine RestFul-API ein Service für die Konvertierung von PDF-Dokumenten zu PDF-A angeboten. Im Unterschied zur Axis-SOAP-Schnitstelle *müssen* bei der RestFul Schnittstelle sowohl das/die zu konvertierdnen PDF als auch die optionale Parameterdatei über eine URL erreichbar sein. 
 
 Derzeit werden Einzelkonvertierungen und batch-Konvertierungen angeboten 
 
 h2. Service Url: 
+
 http://nyx.hbz-nrw.de/pdfa/api 
 
 h3. Service convertFromUrl 
 
 h4. Kurzbeschreibung 
+
 * POST 
 * Aufruf: /convertFromUrl?inputFile=<URL des zu konvertierenden Pdf-Files>&paramFile=<URL des ParameterFiles> 
 * Antwort: InputFileUrl, Ergebnis der Konvertierung ggf. OutPutFileUrl als XML oder Json 
 
 h4. Beispielaufruf 
-{code}curl -v -H "Accept: application/json" -X POST --url http://nyx.hbz-nrw.de/pdfa/api/convertFromUrl?inputFile=http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf&paramFile=http://131.220.138.195/pdfATests/param.txt{code} 
+
+@curl -v -H "Accept: application/json" -X POST --url http://nyx.hbz-nrw.de/pdfa/api/convertFromUrl?inputFile=http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf&paramFile=http://131.220.138.195/pdfATests/param.txt@ 
 
 h3. Service batchConvert 
 
 h4. Kurzbeschreibung 
+
 * POST 
 * Aufruf: /batchConvert?batchFile=<URL Liste von zu konvertierenden PDF-Dateien>&parameterFile=<URL einer Parameter-Datei> 
 * Antwort: Liste mit Ergebnis-Objekten: InputFileUrl, Ergebnis der Konvertierung, PDF/A compliancyLevel, ggf. OutPutFileUrl 
 als XML oder Json 
 
 h4. Beispielaufruf 
-{code}curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"{code} 
+
+@curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert?batchFile=http://131.220.138.195/pdfATests/physbatch.txt&parameterFile=http://131.220.138.195/pdfATests/param.txt"@ 
 
 
 h3. Service batchConvert/autoConf 
 
 h4. Kurzbeschreibung 
+
 * POST 
 * Aufruf: /batchConvert/autoConf?batchFile=<URL Liste von zu konvertierenden PDF-Dateien> 
 * Antwort: Liste mit Ergebnis-Objekten: InputFileUrl, Ergebnis der Konvertierung, PDF/A compliancyLevel, ggf. OutPutFileUrl 
 als XML oder Json 
 
 h4. Beispielaufruf 
-{code}curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert/autoConf?batchFile=http://131.220.138.195/pdfATests/physbatch.txt"{code} 
+
+@curl -v -H "Accept: application/json" -X POST --url "http://nyx.hbz-nrw.de/pdfa/api/batchConvert/autoConf?batchFile=http://131.220.138.195/pdfATests/physbatch.txt"@ 
 
 h5. Besonderheit 
+
 Dieser Service nutzt zwei defaultParameter-Dateien der Application nacheinander. Zunächste wird versucht, PDF-A Version 1b zu erstellen, anschließend wird versucht aus allen PDFs, die so nicht konvertiert werden konnten und bei denen kein grundsätzliches Problem besteht, PDF/A- Version 2b zu erstellen. 
 
 h2. Beispiel Parameter-Datei 
-{code} 
+
 #Callas pdfaPilot Configuration File 
 #Thu Jul 25 07:23:01 CEST 2013 
 analyseOnly=false 
@@ -61,7 +70,6 @@ quickProcessing=true
 forceConversionDocToImages=false 
 mhtReport=false 
 returnOnlyValidPdfA=true 
-reportLang=DE 
-{code} 
+reportLang=DE
 
 Beschreibung der Parameter: http://www.callassoftware.com/manuals/callas_pdfaPilot_CLI.pdf
