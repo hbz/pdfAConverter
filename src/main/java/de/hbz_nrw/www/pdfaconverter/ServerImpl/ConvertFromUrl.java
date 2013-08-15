@@ -74,6 +74,7 @@ public class ConvertFromUrl {
 		return response;
 	}
 
+	@Path("/autoConf")
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PilotResult postConvertFromUrl(@QueryParam("inputFile") String inputFileUrl){
