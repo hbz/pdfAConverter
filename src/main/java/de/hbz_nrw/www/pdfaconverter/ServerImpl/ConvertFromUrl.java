@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,7 +48,7 @@ public class ConvertFromUrl {
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PilotResult postBatchConvert(@QueryParam("inputFile") String inputFileUrl, 
+	public PilotResult postConvertFromUrl(@QueryParam("inputFile") String inputFileUrl, 
 			@QueryParam("parameterFile") String paramFileUrl){
 		PilotResult response = null;
 
@@ -73,6 +74,57 @@ public class ConvertFromUrl {
 		return response;
 	}
 
+	@POST
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public PilotResult postConvertFromUrl(@QueryParam("inputFile") String inputFileUrl){
+		PilotResult response = null;
+
+		// first run
+		InputStream paramStream =  this.getClass().getResourceAsStream("/conf/defaultParam1.cfg");
+
+		if(paramStream == null){
+			log.error("Failed loading defaultParams: not found in classpath");
+		}
+		FileUtil.saveInputStreamToTempFile(paramStream, "defaultParam1.txt");
+
+		String jobIdent = TimePrefix.getTimePrefix();
+
+		Properties paramProp = PdfAPilotParameters.getDefaultProperties();
+		
+        try {
+    		log.info("Reading Parameters File");
+            FileInputStream fis;
+			fis = new FileInputStream(new File(Configuration.getTempDirPath() + "defaultParam1.txt"));
+	        BufferedInputStream bis = new BufferedInputStream(fis);
+			paramProp.load(bis);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response = convertFromUrl(paramProp, inputFileUrl);
+		
+		// second run only if required
+		if(!response.getExitState().equals("0") && !response.getExitState().equals("105") ){
+			paramStream = this.getClass().getResourceAsStream("/conf/defaultParam2.cfg");
+			FileUtil.saveInputStreamToTempFile(paramStream, "defaultParam2.txt");
+	        try {
+	    		log.info("Reading Parameters File");
+	            FileInputStream fis;
+				fis = new FileInputStream(new File(Configuration.getTempDirPath() + "defaultParam2.txt"));
+		        BufferedInputStream bis = new BufferedInputStream(fis);
+				paramProp.load(bis);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			response = convertFromUrl(paramProp, inputFileUrl);
+			
+		}
+		
+		return response;
+	}
 
 	
 	public PilotResult convertFromUrl(Properties paramProp, String inputFileUrl){
