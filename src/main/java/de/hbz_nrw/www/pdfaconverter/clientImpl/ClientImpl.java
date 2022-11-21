@@ -24,9 +24,6 @@ package de.hbz_nrw.www.pdfaconverter.clientImpl;
 
 import java.rmi.RemoteException;
 
-import org.apache.axis2.client.Options;
-import org.apache.axis2.client.ServiceClient;
-import org.apache.axis2.context.ConfigurationContext;
 import org.apache.log4j.Logger;
 
 import de.hbz_nrw.www.pdfaconverter.services.BatchConvert;
@@ -65,7 +62,7 @@ public class ClientImpl implements PdfAConverter {
 				PdfAConverterStub stub = null;
 		try{
 			//stub = new PdfAConverterStub("http://nyx.hbz-nrw.de/pfda");
-			stub = new PdfAConverterStub("http://nyx.hbz-nrw.de:8080/axis2/services/PdfAConverter");
+			stub = new PdfAConverterStub("https://pdfa.hbz-nrw.de/soap/api");
 			//stub = new PdfAConverterStub("http://melpomene.hbz-nrw.de:8081/axis2/services/PdfAConverter");
 			
 			// batchConverter needs a lot of time...

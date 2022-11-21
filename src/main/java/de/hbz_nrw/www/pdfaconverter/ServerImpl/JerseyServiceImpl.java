@@ -45,7 +45,7 @@ import de.hbz_nrw.www.pdfaconverter.util.TimePrefix;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * Class JerseyServiceImpl

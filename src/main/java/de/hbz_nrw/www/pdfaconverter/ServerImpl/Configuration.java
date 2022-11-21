@@ -3,14 +3,10 @@
  */
 package de.hbz_nrw.www.pdfaconverter.ServerImpl;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
@@ -48,13 +44,13 @@ public class Configuration {
 	}
 
 	private static void setDefaultProp(){
-		defProp.setProperty("host", "nyx.hbz-nrw.de");
-		defProp.setProperty("port", "8080");
-		defProp.setProperty("path", "PdfAConverter");
+		defProp.setProperty("host", "pdfa.hbz-nrw.de");
+		defProp.setProperty("port", "443");
+		defProp.setProperty("path", "soap");
 		defProp.setProperty("tempDir", "temp");
 		defProp.setProperty("resultDir", "result");
 		defProp.setProperty("userDir", "ulbm");
-		defProp.setProperty("workingDir", "/srv/tomcat6/webapps/");
+		defProp.setProperty("workingDir", "/srv/tomcat/webapps/");
 		
 		
 	}

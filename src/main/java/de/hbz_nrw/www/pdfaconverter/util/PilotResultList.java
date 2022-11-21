@@ -5,7 +5,7 @@ package de.hbz_nrw.www.pdfaconverter.util;
 
 import java.util.ArrayList;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class PilotResultList {

@@ -61,7 +61,7 @@ public class PilotRunner {
 		// Complete execute String 
 		String programPath = new String("/opt/pdfapilot/callas_pdfaPilot_CLI_4_x64/pdfaPilot"); 
 		String defaultParams = new String("--noprogress --nohits --substitute  " 
-				 + "--linkpath=http://nyx.hbz-nrw.de/pdfa/reporttemplate "
+				 + "--linkpath=http://pdfa.hbz-nrw.de/pdfa/reporttemplate "
 				 + "--fontfolder=/opt/pdfapilot/fontfolder --cachefolder=temp"
 				);
 		String executeString = new String(programPath + " " 

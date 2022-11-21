@@ -36,7 +36,7 @@
   				</descriptorRefs>
   				<archive>
   					<manifest>
-  						<mainClass>de.hbz_nrw.www.pdfconverter.Servermpl.ServiceImpl</mainClass>
+  						<mainClass>de.hbz_nrw.www.pdfaconverter.gui.guiStart</mainClass>
   					</manifest>
   				</archive>
   			</configuration>
@@ -66,7 +66,7 @@
   		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
   			<artifactId>maven-war-plugin</artifactId>
-  			<version>2.3</version>
+  			<version>3.3.2</version>
   			<configuration>
 				<webXml>src/main/resources/WEB-INF/web.xml</webXml>
 				<packagingExcludes>WEB-INF/lib/servlet-api-2.3.jar</packagingExcludes>				
@@ -138,6 +138,11 @@
 		<groupId>asm</groupId>
 		<artifactId>asm</artifactId>
 		<version>3.3</version>
+	</dependency>
+	<dependency>
+		<groupId>jakarta.xml.bind</groupId>
+		<artifactId>jakarta.xml.bind-api</artifactId>
+		<version>4.0.0</version>
 	</dependency>
   </dependencies>
 </project>
